@@ -1,0 +1,1 @@
+https://api.hypixel.net/player?name=PLAYER_NAME&key=API_KEY
