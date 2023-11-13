@@ -1,4 +1,4 @@
-package org.src;
+package org.Main;
 
 public class Main {
     public static void main(String[] args) {
