@@ -1,5 +1,6 @@
 package org.Player;
 
+import org.Game.GamesContainer;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -21,7 +22,9 @@ public class Player {
     String rank;
     String hypixelLevel;
     URL skin;
+    String guildName;
     boolean online;
+    GamesContainer games;
     public Player(String Name)
     {
         this.name = Name;
@@ -38,6 +41,10 @@ public class Player {
         this.online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
 
         this.skin = fetchSkin(this.uuid);
+
+        this.guildName = fetchGuildName(this.uuid,apikey);
+
+        this.games = new GamesContainer(jsonObjectPlayer.getJSONObject("player").getJSONObject("stats") , jsonObjectPlayer.getJSONObject("player").getJSONObject("achievements"));
     }
     public static JSONObject fetchPlayer(String Name,String apikey)
     {
@@ -65,6 +72,12 @@ public class Player {
         return null;
     }
 
+    public static String fetchGuildName(String uuid, String apikey)
+    {
+        String url = "https://api.hypixel.net/v2/guild?player=" + uuid + "&key=" + apikey;
+        JSONObject object = new JSONObject(fetch(url));
+        return object.getJSONObject("guild").getString("name");
+    }
     public static String fetch(String _url)
     {
         try
@@ -102,6 +115,7 @@ public class Player {
         System.out.println("Online : " + this.online);
         System.out.println("First Login : " + this.firstLogin);
         System.out.println("Last Login : " + this.lastLogin);
+        System.out.println("Guild Name : " + this.guildName);
         System.out.println("Skin at : " + this.skin);
     }
 
