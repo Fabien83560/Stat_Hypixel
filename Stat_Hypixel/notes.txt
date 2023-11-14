@@ -1,1 +1,4 @@
 https://api.hypixel.net/player?name=PLAYER_NAME&key=API_KEY
+
+Vérifiez si la requete renvoie que le player a été consulter récemment
+Vérifiez que le player existe 
