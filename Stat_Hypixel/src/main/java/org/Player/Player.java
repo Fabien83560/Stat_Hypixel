@@ -12,39 +12,44 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Player {
-
-    String name;
-    String uuid;
-    String firstLogin;
-    String lastLogin;
-    String rank;
-    String hypixelLevel;
-    URL skin;
-    String guildName;
+    Map<String,String> statistics = new HashMap<>();
     boolean online;
     GamesContainer games;
     public Player(String Name)
     {
-        this.name = Name;
         String apikey = org.Config.ConfigReader.getApiKey();
-        JSONObject jsonObjectPlayer = fetchPlayer(this.name,apikey);
-        this.uuid = jsonObjectPlayer.getJSONObject("player").getString("uuid");
-        this.lastLogin = String.valueOf(jsonObjectPlayer.getJSONObject("player").getLong("lastLogin"));
-        this.firstLogin = String.valueOf(jsonObjectPlayer.getJSONObject("player").getLong("firstLogin"));
-        this.rank = jsonObjectPlayer.getJSONObject("player").getString("newPackageRank");
-        long exp = jsonObjectPlayer.getJSONObject("player").getLong("networkExp");
-        this.hypixelLevel = String.format("%.2f", Math.sqrt((2 * exp) + 30625) / 50 - 2.5);
+        JSONObject jsonObjectPlayer = fetchPlayer(Name,apikey);
 
-        JSONObject jsonObjectStatus = fetchStatus(this.uuid,apikey);
+        addStatistics("name", Name);
+        addStatistics("uuid", jsonObjectPlayer.getJSONObject("player").getString("uuid"));
+        addStatistics("lastLogin", String.valueOf(jsonObjectPlayer.getJSONObject("player").getLong("lastLogin")));
+        addStatistics("firstLogin", String.valueOf(jsonObjectPlayer.getJSONObject("player").getLong("firstLogin")));
+        addStatistics("rank", jsonObjectPlayer.getJSONObject("player").getString("newPackageRank"));
+        addStatistics("skin", String.valueOf(getSkinURL(getStatistics("uuid"))));
+        addStatistics("guildName", fetchGuildName(getStatistics("uuid"),apikey));
+
+        long exp = jsonObjectPlayer.getJSONObject("player").getLong("networkExp");
+        addStatistics("hypixelLevel", String.format("%.2f", Math.sqrt((2 * exp) + 30625) / 50 - 2.5));
+
+        JSONObject jsonObjectStatus = fetchStatus(getStatistics("uuid"),apikey);
         this.online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
 
-        this.skin = fetchSkin(this.uuid);
-
-        this.guildName = fetchGuildName(this.uuid,apikey);
-
         this.games = new GamesContainer(jsonObjectPlayer.getJSONObject("player").getJSONObject("stats") , jsonObjectPlayer.getJSONObject("player").getJSONObject("achievements"));
+        display();
+    }
+
+    public void addStatistics(String key, String value)
+    {
+        this.statistics.putIfAbsent(key, value);
+    }
+
+    public String getStatistics(String key)
+    {
+        return this.statistics.get(key);
     }
     public static JSONObject fetchPlayer(String Name,String apikey)
     {
@@ -58,7 +63,7 @@ public class Player {
         return  new JSONObject(fetch(url));
     }
 
-    public static URL fetchSkin(String uuid)
+    public static URL getSkinURL(String uuid)
     {
         try
         {
@@ -108,23 +113,16 @@ public class Player {
     }
     public void display()
     {
-        System.out.println("Name : " + this.name);
-        System.out.println("Uuid : " + this.uuid);
-        System.out.println("Rank : " + this.rank);
-        System.out.println("Hypixel Level : " + this.hypixelLevel);
+        System.out.println("Name : " + getStatistics("name"));
+        System.out.println("Uuid : " + getStatistics("uuid"));
+        System.out.println("Rank : " + getStatistics("rank"));
+        System.out.println("Hypixel Level : " + getStatistics("hypixelLevel"));
         System.out.println("Online : " + this.online);
-        System.out.println("First Login : " + this.firstLogin);
-        System.out.println("Last Login : " + this.lastLogin);
-        System.out.println("Guild Name : " + this.guildName);
-        System.out.println("Skin at : " + this.skin);
+        System.out.println("First Login : " + getStatistics("firstLogin"));
+        System.out.println("Last Login : " + getStatistics("lastLogin"));
+        System.out.println("Guild Name : " + getStatistics("guildName"));
+        System.out.println("Skin at : " + getStatistics("skin"));
+        System.out.println();
+        this.games.display();
     }
-
-    public String getName() {return this.name;}
-    public String getUuid() {return this.uuid;}
-    public String getRank() {return this.rank;}
-    public String getHypixelLevel() {return this.hypixelLevel;}
-    public boolean isOnline() {return this.online;}
-    public String getFirstLogin() {return this.firstLogin;}
-    public String getLastLogin() {return this.lastLogin;}
-    public URL getSkin() {return this.skin;}
 }
