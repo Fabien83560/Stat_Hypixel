@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Player {
+    static final String[] statsList = {"displayname" , "uuid" , "lastLogin" , "firstLogin" , "newPackageRank"};
     Map<String,String> statistics = new HashMap<>();
     boolean online;
     GamesContainer games;
@@ -24,11 +25,9 @@ public class Player {
         String apikey = org.Config.ConfigReader.getApiKey();
         JSONObject jsonObjectPlayer = fetchPlayer(Name,apikey);
 
-        addStatistics("name", Name);
-        addStatistics("uuid", jsonObjectPlayer.getJSONObject("player").getString("uuid"));
-        addStatistics("lastLogin", String.valueOf(jsonObjectPlayer.getJSONObject("player").getLong("lastLogin")));
-        addStatistics("firstLogin", String.valueOf(jsonObjectPlayer.getJSONObject("player").getLong("firstLogin")));
-        addStatistics("rank", jsonObjectPlayer.getJSONObject("player").getString("newPackageRank"));
+        for(String stat : statsList)
+            addStatistics(stat, String.valueOf(jsonObjectPlayer.getJSONObject("player").get(stat)));
+
         addStatistics("skin", String.valueOf(getSkinURL(getStatistics("uuid"))));
         addStatistics("guildName", fetchGuildName(getStatistics("uuid"),apikey));
 
@@ -79,9 +78,14 @@ public class Player {
 
     public static String fetchGuildName(String uuid, String apikey)
     {
-        String url = "https://api.hypixel.net/v2/guild?player=" + uuid + "&key=" + apikey;
-        JSONObject object = new JSONObject(fetch(url));
-        return object.getJSONObject("guild").getString("name");
+        try {
+            String url = "https://api.hypixel.net/v2/guild?player=" + uuid + "&key=" + apikey;
+            JSONObject object = new JSONObject(fetch(url));
+            return object.getJSONObject("guild").getString("name");
+        }
+        catch (Exception e) {
+            return "N/A";
+        }
     }
     public static String fetch(String _url)
     {
@@ -113,9 +117,9 @@ public class Player {
     }
     public void display()
     {
-        System.out.println("Name : " + getStatistics("name"));
+        System.out.println("Name : " + getStatistics("displayname"));
         System.out.println("Uuid : " + getStatistics("uuid"));
-        System.out.println("Rank : " + getStatistics("rank"));
+        System.out.println("Rank : " + getStatistics("newPackageRank"));
         System.out.println("Hypixel Level : " + getStatistics("hypixelLevel"));
         System.out.println("Online : " + this.online);
         System.out.println("First Login : " + getStatistics("firstLogin"));

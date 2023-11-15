@@ -10,7 +10,7 @@ public class GamesContainer {
     public GamesContainer(JSONObject stats,JSONObject achievements)
     {
         this.bedwars = new Bedwars(stats.getJSONObject("Bedwars"), achievements);
-        this.skywars = new Skywars(stats.getJSONObject("Skywars"), achievements);
+        this.skywars = new Skywars(stats.getJSONObject("SkyWars"));
     }
 
     public Bedwars getBedwars()

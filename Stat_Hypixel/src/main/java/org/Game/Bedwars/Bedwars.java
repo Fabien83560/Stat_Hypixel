@@ -1,6 +1,5 @@
 package org.Game.Bedwars;
 
-import org.eclipse.jetty.util.ajax.JSON;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -9,15 +8,21 @@ import java.util.Map;
 public class Bedwars {
     static final String[] statsList = {"wins_bedwars" , "kills_bedwars" , "beds_broken_bedwars" , "beds_lost_bedwars" , "final_kills_bedwars" , "games_played_bedwars" , "deaths_bedwars" , "coins"};
     Map<String, String> statistics = new HashMap<>();
-    ModeContainer modes;
+    BedwarsModeContainer modes;
     public Bedwars(JSONObject stats, JSONObject achievements)
     {
-        addStatistics("level", String.valueOf(achievements.getLong("bedwars_level")));
+        addStatistics("level", String.valueOf(achievements.get("bedwars_level")));
 
-        for(String stat : statsList)
-            addStatistics(stat,String.valueOf(stats.getLong(stat)));
+        for(String stat : statsList) {
+            try {
+                addStatistics(stat, String.valueOf(stats.get(stat)));
+            }
+            catch (Exception e) {
+                addStatistics(stat, "N/A");
+            }
+        }
 
-        this.modes = new ModeContainer(stats);
+        this.modes = new BedwarsModeContainer(stats);
     }
     public void addStatistics(String key, String value)
     {
