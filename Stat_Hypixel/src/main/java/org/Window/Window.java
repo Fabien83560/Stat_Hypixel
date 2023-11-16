@@ -1,13 +1,14 @@
 package org.Window;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Window extends JFrame{
     private JButton quitButton;
     private JPanel mainPanel;
-    private JButton compare2Players;
+    private JButton compare2PlayersButton;
     private JButton onePlayerButton;
     private JPanel panelLeft;
     private JScrollPane panelRight;
@@ -23,8 +24,10 @@ public class Window extends JFrame{
     private JScrollPane globalStatsPanel;
     private JLabel selectedModeLabel;
     private JScrollPane selectedModePanel;
+    private JButton addNewPlayerButton;
 
     public Window(){
+        setMinimumSize(new Dimension(800, 600));
         setTitle("Hypixel Statistics");
         setSize(1400, 1000);
         add(mainPanel);
@@ -34,17 +37,20 @@ public class Window extends JFrame{
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getActionCommand().equals("quit")){
-                    if( JOptionPane.showConfirmDialog(null,
-                            "Do you want to quit ?",
-                            "Quit",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.ERROR_MESSAGE) == JOptionPane.YES_OPTION )
-                    {
-                        System.exit(0);
-                    }
-                }
+                if(e.getActionCommand().equals("quit"))
+                    quit();
             }
         });
+    }
+
+    public void quit(){
+        if( JOptionPane.showConfirmDialog(null,
+                "Do you want to quit ?",
+                "Quit",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.ERROR_MESSAGE) == JOptionPane.YES_OPTION )
+        {
+            System.exit(0);
+        }
     }
 }
