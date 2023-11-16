@@ -37,7 +37,13 @@ public class Player {
                 System.out.println("Player " + Name + " is unknown");
             } else {
                 for (String stat : statsList) {
-                    addStatistics(stat, String.valueOf(jsonObjectPlayer.getJSONObject("player").get(stat)));
+                    try {
+                        addStatistics(stat, String.valueOf(jsonObjectPlayer.getJSONObject("player").get(stat)));
+                    }
+                    catch (Exception e)
+                    {
+                        addStatistics(stat, "N/A");
+                    }
                 }
 
                 addStatistics("skin", String.valueOf(getSkinURL(getStatistics("uuid"))));
