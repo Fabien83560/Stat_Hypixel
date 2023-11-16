@@ -29,13 +29,13 @@ public class Player {
     public Player(String Name) {
         String apikey = org.Config.ConfigReader.getApiKey();
         JSONObject jsonObjectPlayer = fetchPlayer(Name, apikey);
-
         try {
             Object playerObject = jsonObjectPlayer.get("player");
             if (playerObject == null || playerObject.equals(JSONObject.NULL)) {
                 // Le joueur est inconnu
                 System.out.println("Player " + Name + " is unknown");
-            } else {
+            }
+            else {
                 for (String stat : statsList) {
                     try {
                         addStatistics(stat, String.valueOf(jsonObjectPlayer.getJSONObject("player").get(stat)));
@@ -64,15 +64,21 @@ public class Player {
         }
     }
 
-    private void handleException(JSONObject jsonObjectPlayer)
+    public static void handleException(JSONObject jsonObject)
     {
         try {
-            if (jsonObjectPlayer.get("errorState").equals("429")) {
+            String errorState = jsonObject.getString("errorState");
+            if (errorState.equals("429")) {
                 System.out.println("You have already looked up this name recently");
             }
-            else if (jsonObjectPlayer.get("errorState").equals("403")) {
+            else if (errorState.equals("403")) {
                 System.out.println("Invalid API key");
             }
+            else if (errorState.equals("STATUS")) {
+                System.out.println("Unable to get Status of this Player");
+            }
+            else if (errorState.equals("SKIN"))
+                System.out.println("Unable to get Skin of this Player");
             else {
                 System.out.println("Unknown Error");
             }
@@ -125,7 +131,16 @@ public class Player {
     public static JSONObject fetchStatus(String uuid,String apikey)
     {
         String url = "https://api.hypixel.net/v2/status?uuid=" + uuid + "&key=" + apikey;
-        return  new JSONObject(fetch(url));
+        String data = fetch(url);
+        try {
+            return new JSONObject(data);
+        }
+        catch (Exception e) {
+
+            JSONObject jsonError = new JSONObject();
+            jsonError.put("errorState" , "STATUS");
+            return jsonError;
+        }
     }
 
     public static URL getSkinURL(String uuid)
@@ -137,7 +152,9 @@ public class Player {
         }
         catch(IOException | URISyntaxException e)
         {
-            System.out.println("Unable to create Skin URL : " + e.toString());
+            JSONObject jsonError = new JSONObject();
+            jsonError.put("errorState" , "SKIN");
+            handleException(jsonError);
         }
         return null;
     }
