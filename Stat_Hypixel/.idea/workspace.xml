@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4221b94-cfcf-490c-8444-31ad3a2633c8" name="Changes" comment="Change Project Structure">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/Config/Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/Config/ConfigReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Tests/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Tests/Tests.java" afterDir="false" />
-    </list>
+    <list default="true" id="f4221b94-cfcf-490c-8444-31ad3a2633c8" name="Changes" comment="Change Project Structure" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,7 +18,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -49,9 +40,10 @@
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.STATE&quot;: &quot;left&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE&quot;: &quot;right&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/fabien/Bureau/GIT/sae-s3.a.01-2023-sujet04&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/COURS/S3/Qualité de développement/Java/Stat_Hypixel/Stat_Hypixel&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -60,21 +52,34 @@
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\COURS\S3\Qualité de développement\Java\Stat_Hypixel\Stat_Hypixel\img" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib/junit" />
-      <recent name="$PROJECT_DIR$/src/main/java/org" />
+      <recent name="C:\COURS\S3\Qualité de développement\Java\Stat_Hypixel\Stat_Hypixel" />
+      <recent name="C:\COURS\S3\Qualité de développement\Java\Stat_Hypixel\Stat_Hypixel\src\main\resources\img" />
+      <recent name="C:\COURS\S3\Qualité de développement\Java\Stat_Hypixel\Stat_Hypixel\src\main\java\org\Window" />
+      <recent name="C:\COURS\S3\Qualité de développement\Java\Stat_Hypixel\Stat_Hypixel\src" />
+      <recent name="C:\COURS\S3\Qualité de développement\Java\Stat_Hypixel\Stat_Hypixel\src\main\java\org" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="org.Main.Main" />
       <module name="Stat_Hypixel" />
       <method v="2">
@@ -97,6 +102,9 @@
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\evanm\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f4221b94-cfcf-490c-8444-31ad3a2633c8" name="Changes" comment="" />
@@ -119,6 +127,27 @@
       <workItem from="1699893106633" duration="2051000" />
       <workItem from="1699897715627" duration="192000" />
       <workItem from="1699897950424" duration="338000" />
+      <workItem from="1699898871913" duration="468000" />
+      <workItem from="1699899554054" duration="634000" />
+      <workItem from="1699958098976" duration="758000" />
+      <workItem from="1699968875187" duration="833000" />
+      <workItem from="1699972649602" duration="131000" />
+      <workItem from="1699973067247" duration="3000" />
+      <workItem from="1699975823319" duration="231000" />
+      <workItem from="1699979247219" duration="6778000" />
+      <workItem from="1699986309369" duration="45000" />
+      <workItem from="1699995924503" duration="429000" />
+      <workItem from="1700083110327" duration="593000" />
+      <workItem from="1700093062513" duration="27000" />
+      <workItem from="1700093322348" duration="536000" />
+      <workItem from="1700127060314" duration="858000" />
+      <workItem from="1700127927082" duration="3217000" />
+      <workItem from="1700131388167" duration="18000" />
+      <workItem from="1700139740048" duration="462000" />
+      <workItem from="1700147366674" duration="1384000" />
+      <workItem from="1700148909080" duration="126000" />
+      <workItem from="1700156785718" duration="82000" />
+      <workItem from="1700157622426" duration="3000" />
     </task>
     <task id="LOCAL-00001" summary="Change Project Structure">
       <option name="closed" value="true" />
@@ -135,7 +164,15 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
     <MESSAGE value="Change Project Structure" />
     <option name="LAST_COMMIT_MESSAGE" value="Change Project Structure" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
