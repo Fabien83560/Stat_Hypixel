@@ -21,4 +21,49 @@ public class ConfigReader {
         }
         return "";
     }
+    public static String getUrlDataBase()
+    {
+        File configFile = new File("config.yml");
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        try
+        {
+            Config config = objectMapper.readValue(configFile, Config.class);
+            return config.getUrlDataBase();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    public static String getUsernameDataBase()
+    {
+        File configFile = new File("config.yml");
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        try
+        {
+            Config config = objectMapper.readValue(configFile, Config.class);
+            return config.getUsernameDataBase();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    public static String getPasswordDataBase()
+    {
+        File configFile = new File("config.yml");
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        try
+        {
+            Config config = objectMapper.readValue(configFile, Config.class);
+            return config.getPasswordDataBase();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }

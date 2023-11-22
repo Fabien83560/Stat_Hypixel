@@ -61,7 +61,9 @@
             <children>
               <component id="e9a38" class="javax.swing.JList" binding="friendList">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <model/>
+                </properties>
               </component>
             </children>
           </scrollpane>

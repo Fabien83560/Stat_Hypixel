@@ -1,1 +1,7 @@
+# CONFIG HYPIXEL DEV API KEY
 apikey: ""
+
+# CONFIGURATION DATA BASE
+urlDataBase: "jdbc:mysql://mysql-iitzwolfyy.alwaysdata.net:3306/iitzwolfyy_stats_hypixel"
+usernameDataBase: "333319"
+passwordDataBase: "}ZVZe7tECD+h>_&"
