@@ -33,7 +33,7 @@ public class Database {
                 JOptionPane.showMessageDialog(null,
                         "Player " + name + " has been correctly added",
                         "Player added",
-                        JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.INFORMATION_MESSAGE);
         }
         catch (SQLException e) {
             e.printStackTrace();
