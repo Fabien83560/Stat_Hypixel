@@ -3,6 +3,7 @@ package org.Window;
 import org.DataBase.Database;
 import org.Player.Player;
 import org.PlayerList.PlayerList;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -46,6 +47,30 @@ public class Window extends JFrame {
         add(mainPanel);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        /*
+        if (org.Config.ConfigReader.getApiKey().isEmpty()) {
+            boolean apiKeyValid = false;
+
+            while (!apiKeyValid) {
+                String testUUID = "055db3693e1e4431a3204d586be92a37";
+
+                try {
+                    String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
+                    Object object = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").get("online");
+
+                    if (object.equals("true") || object.equals("false")) {
+                        apiKeyValid = true;
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
+                    }
+                } catch (JSONException e) {
+
+                }
+            }
+        }
+         */
 
         friendListModel = new DefaultListModel<>();
         this.dataBase = new Database();
@@ -98,7 +123,17 @@ public class Window extends JFrame {
     public String addPlayer(String name) {
 
         JSONObject jsonObjectStatus;
-        String uuid = Player.fetchPlayer(name,org.Config.ConfigReader.getApiKey()).getJSONObject("player").getString("uuid");
+        String uuid;
+        try {
+            uuid = Player.fetchPlayer(name, org.Config.ConfigReader.getApiKey()).getJSONObject("player").getString("uuid");
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "This player is Unknown",
+                    "Unknown Player",
+                    JOptionPane.ERROR_MESSAGE);
+            return "";
+        }
         jsonObjectStatus = Player.fetchStatus(uuid , org.Config.ConfigReader.getApiKey());
         boolean online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
         String recentGame;
