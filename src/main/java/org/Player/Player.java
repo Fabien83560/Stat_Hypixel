@@ -1,5 +1,6 @@
 package org.Player;
 
+import org.DataBase.Database;
 import org.Game.GamesContainer;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +33,6 @@ public class Player {
         try {
             Object playerObject = jsonObjectPlayer.get("player");
             if (playerObject == null || playerObject.equals(JSONObject.NULL)) {
-                // Le joueur est inconnu
                 System.out.println("Player " + Name + " is unknown");
             }
             else {
@@ -56,6 +56,7 @@ public class Player {
                 this.online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
 
                 this.games = new GamesContainer(jsonObjectPlayer.getJSONObject("player").getJSONObject("stats"), jsonObjectPlayer.getJSONObject("player").getJSONObject("achievements"));
+                display();
             }
         }
         catch (JSONException e) {
@@ -117,7 +118,18 @@ public class Player {
         String url = "https://api.hypixel.net/v2/player?name=" + Name + "&key=" + apikey;
         String data = fetch(url);
         try {
-            return new JSONObject(data);
+            JSONObject jsonObject = new JSONObject(data);
+            try {
+                jsonObject.getJSONObject("player").get("uuid");
+                Database dataBase = new Database();
+                dataBase.addPlayerToDataBase(jsonObject);
+            }
+            catch (JSONException e) {
+                JSONObject jsonError = new JSONObject();
+                jsonError.put("errorState" , match(data));
+                return jsonError;
+            }
+            return jsonObject;
         }
         catch (Exception e) {
 
