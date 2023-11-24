@@ -64,6 +64,27 @@ public class Player {
             handleException(jsonObjectPlayer);
         }
     }
+    public Player(JSONObject jsonObject) {
+        try {
+            JSONObject playerObject = jsonObject.getJSONObject("player");
+            for (String stat : statsList) {
+                try {
+                    addStatistics(stat, String.valueOf(playerObject.get(stat)));
+                } catch (Exception e) {
+                    addStatistics(stat, "N/A");
+                }
+            }
+            addStatistics("skin", String.valueOf(playerObject.get("skin")));
+            addStatistics("guildName", String.valueOf(playerObject.get("guildName")));
+            addStatistics("hypixelLevel", String.valueOf(playerObject.get("hypixelLevel")));
+            addStatistics("online",String.valueOf(playerObject.get("online")));
+            this.games = new GamesContainer(playerObject.getJSONObject("stats"),playerObject.getJSONObject("achievements"));
+        }
+        catch(JSONException e) {
+            e.printStackTrace();
+            handleException(jsonObject);
+        }
+    }
 
     public static void handleException(JSONObject jsonObject)
     {
