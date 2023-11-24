@@ -47,7 +47,6 @@ public class Window extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        /*
         if (org.Config.ConfigReader.getApiKey().isEmpty()) {
             boolean apiKeyValid = false;
 
@@ -56,10 +55,11 @@ public class Window extends JFrame {
 
                 try {
                     String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
-                    Object object = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").get("online");
+                    boolean b = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
 
-                    if (object.equals("true") || object.equals("false")) {
+                    if (b == true || b == false) {
                         apiKeyValid = true;
+                        org.Config.ConfigReader.setApiKey(newApiKey);
                     }
                     else {
                         JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
@@ -69,7 +69,6 @@ public class Window extends JFrame {
                 }
             }
         }
-         */
 
         friendListModel = new DefaultListModel<>();
         this.dataBase = new Database();
@@ -96,15 +95,18 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String newPlayer = JOptionPane.showInputDialog("Enter the new player's name:");
-                if(playerList.getList().get(newPlayer) == null) {
-                    friendListModel.addElement(addPlayer(newPlayer));
-                }
-                else
+                if(newPlayer != null)
                 {
-                    JOptionPane.showMessageDialog(null,
-                            "This Player already exists in the friend list!",
-                            "Player already exists",
-                            JOptionPane.ERROR_MESSAGE);
+                    if(playerList.getList().get(newPlayer) == null) {
+                        friendListModel.addElement(addPlayer(newPlayer));
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,
+                                "This Player already exists in the friend list!",
+                                "Player already exists",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
