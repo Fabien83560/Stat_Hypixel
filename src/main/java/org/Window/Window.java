@@ -3,16 +3,16 @@ package org.Window;
 import org.DataBase.Database;
 import org.Player.Player;
 import org.PlayerList.PlayerList;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.Set;
 
 public class Window extends JFrame {
@@ -22,21 +22,20 @@ public class Window extends JFrame {
     private JButton compare2PlayersButton;
     private JButton onePlayerButton;
     private JPanel panelLeft;
-    private JScrollPane panelRight;
     private JScrollPane friendListPanel;
     private JTextField searchAPlayerHereTextField;
-    private JButton TODOButton;
     private JButton bedWarsButton;
-    private JButton skyWarsButton;
-    private JButton TODOButton1;
-    private JButton TODOButton2;
     private DefaultListModel<String> friendListModel;
     private JList<String> friendList;
-    private JLabel globalStatsLabel;
     private JScrollPane globalStatsPanel;
-    private JLabel selectedModeLabel;
-    private JScrollPane selectedModePanel;
     private JButton addNewPlayerButton;
+    private JPanel panelRight;
+    private JButton skyWarsButton;
+    private JButton skyBlockButton;
+    private JButton searchButton;
+    private JPanel buttonsPanel;
+    private JLabel globalStatsLabel;
+    private JLabel currentModeLabel;
     PlayerList playerList;
     Database dataBase;
 
@@ -109,6 +108,71 @@ public class Window extends JFrame {
                 }
             }
         });
+        skyWarsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        bedWarsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        skyBlockButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    String search = searchAPlayerHereTextField.getText();
+                    if(search.isEmpty()){
+                        JOptionPane.showMessageDialog(null,
+                                "Please enter a player's name.",
+                                "No name entered",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        Player player = new Player(search);
+                        displayGlobalStats(player);
+                        //We'll have to display the other stats
+                    }
+                }
+                catch(NullPointerException exception){
+                    System.out.println("Error trying to do a research in \"searchButton.addActionListener\".");
+                }
+            }
+        });
+        searchAPlayerHereTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(searchAPlayerHereTextField.getText().equals("Search a player's name here")){
+                    searchAPlayerHereTextField.setText(null);
+                }
+            }
+        });
+    }
+
+    public void displayGlobalStats(Player player){
+        Map<String, String> globalStats = player.getAllStatistics();
+        try{
+            for(Map.Entry<String, String> stat : globalStats.entrySet()){
+                System.out.println(stat.getKey() + ": " + stat.getValue());
+                JLabel lab = new JLabel(stat.getKey() + ": " + stat.getValue());
+                globalStatsPanel.add(lab);
+                globalStatsPanel.validate();
+            }
+        }
+        catch(IllegalStateException e){
+            System.out.println("Can't display the global statistics of the researched player:\n");
+            e.printStackTrace();
+        }
+
     }
 
     public void quit() {

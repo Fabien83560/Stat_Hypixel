@@ -3,13 +3,14 @@ package org.Player;
 import org.Game.GamesContainer;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.Window.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -97,6 +98,8 @@ public class Player {
     {
         return this.statistics.get(key);
     }
+
+    public Map<String, String> getAllStatistics() {return this.statistics;}
 
     public static String match(String str) {
         Pattern error_429 = Pattern.compile("[Server returned HTTP response code: 429 for URL:]");
