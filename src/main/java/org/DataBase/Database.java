@@ -74,7 +74,7 @@ public class Database {
             statement.setString(9,String.format("%.2f", Math.sqrt((2 * jsonObject.getJSONObject("player").getLong("networkExp")) + 30625) / 50 - 2.5));
             int modify = statement.executeUpdate();
 
-            sql = "INSERT INTO `Skywars`(`player_uuid`, `wins`, `deaths`, `losses`, `kills`, `solo_wins`, `solo_deaths`, `solo_losses`, `solo_kills`, `team_wins`, `team_deaths`, `team_losses`, `team_kills`, `solo_normal_wins`, `solo_normal_deaths`, `solo_normal_losses`, `solo_normal_kills`, `solo_insane_wins`, `solo_insane_deaths`, `solo_insane_losses`, `solo_insane_kills`, `team_normal_wins`, `team_normal_deaths`, `team_normal_losses`, `team_normal_kills`, `team_insane_wins`, `team_insane_deaths`, `team_insane_losses`, `team_insane_kills`, `lastModified`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,DEFAULT)";
+            sql = "INSERT INTO `Skywars`(`player_uuid`, `wins`, `deaths`, `losses`, `kills`, `wins_solo`, `deaths_solo`, `losses_solo`, `kills_solo`, `wins_team`, `deaths_team`, `losses_team`, `kills_team`, `wins_solo_normal`, `deaths_solo_normal`, `losses_solo_normal`, `kills_solo_normal`, `wins_solo_insane`, `deaths_solo_insane`, `losses_solo_insane`, `kills_solo_insane`, `wins_team_normal`, `deaths_team_normal`, `losses_team_normal`, `kills_team_normal`, `wins_team_insane`, `deaths_team_insane`, `losses_team_insane`, `kills_team_insane`, `lastModified`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,DEFAULT)";
             statement = dataBase.prepareStatement(sql);
 
             statement.setString(1,String.valueOf(jsonObject.getJSONObject("player").get("uuid")));
@@ -173,7 +173,7 @@ public class Database {
 
             while (result2.next())
             {
-                String [] skywarsList = {"wins", "deaths", "losses", "kills", "solo_wins", "solo_deaths", "solo_losses", "solo_kills", "team_wins", "team_deaths", "team_losses", "team_kills", "solo_normal_wins", "solo_normal_deaths", "solo_normal_losses", "solo_normal_kills", "solo_insane_wins", "solo_insane_deaths", "solo_insane_losses", "solo_insane_kills", "team_normal_wins", "team_normal_deaths", "team_normal_losses", "team_normal_kills", "team_insane_wins", "team_insane_deaths", "team_insane_losses", "team_insane_kills"};
+                String [] skywarsList = {"wins", "deaths", "losses", "kills", "wins_solo", "deaths_solo", "losses_solo", "kills_solo", "wins_team", "deaths_team", "losses_team", "kills_team", "wins_solo_normal", "deaths_solo_normal", "losses_solo_normal", "kills_solo_normal", "wins_solo_insane", "deaths_solo_insane", "losses_solo_insane", "kills_solo_insane", "wins_team_normal", "deaths_team_normal", "losses_team_normal", "kills_team_normal", "wins_team_insane", "deaths_team_insane", "losses_team_insane", "kills_team_insane"};
                 for(String element : skywarsList)
                     jsonObjectSkyWars.put(element,result2.getString(element));
             }

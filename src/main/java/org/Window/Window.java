@@ -82,7 +82,7 @@ public class Window extends JFrame {
         }
 
         friendList.setModel(friendListModel);
-
+        
         quitButton.setActionCommand("quit");
         quitButton.addActionListener(new ActionListener() {
             @Override
