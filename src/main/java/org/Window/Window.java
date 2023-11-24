@@ -96,15 +96,18 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String newPlayer = JOptionPane.showInputDialog("Enter the new player's name:");
-                if(playerList.getList().get(newPlayer) == null) {
-                    friendListModel.addElement(addPlayer(newPlayer));
-                }
-                else
+                if(newPlayer != null)
                 {
-                    JOptionPane.showMessageDialog(null,
-                            "This Player already exists in the friend list!",
-                            "Player already exists",
-                            JOptionPane.ERROR_MESSAGE);
+                    if(playerList.getList().get(newPlayer) == null) {
+                        friendListModel.addElement(addPlayer(newPlayer));
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,
+                                "This Player already exists in the friend list!",
+                                "Player already exists",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
