@@ -135,7 +135,6 @@ public class Database {
             e.printStackTrace();
         }
     }
-
     public JSONObject get(String Name) {
         String uuid = "";
         try {
@@ -204,6 +203,37 @@ public class Database {
         catch (SQLException e) {
             e.printStackTrace();
             return new JSONObject("");
+        }
+    }
+    public long getLastModified(String Name) {
+        try {
+            String sql = "SELECT lastModified FROM Player WHERE displayname = ?";
+            PreparedStatement statement = dataBase.prepareStatement(sql);
+            statement.setString(1, Name);
+            ResultSet result = statement.executeQuery();
+            while(result.next())
+                return result.getTimestamp("lastModified").getTime();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return 0;
+    }
+
+    public boolean lastModified(String name,long timestamp) {
+        try {
+            long timestampPlayer = getLastModified(name);
+
+            long timeDifferenceInMilliseconds = timestamp - timestampPlayer;
+            long timeDifferenceInSeconds = timeDifferenceInMilliseconds / 1000;
+            long timeDifferenceInMinutes = timeDifferenceInSeconds / 60;
+
+            return !(timeDifferenceInMinutes > 1 || (timeDifferenceInMinutes == 1 && timeDifferenceInSeconds % 60 > 30));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

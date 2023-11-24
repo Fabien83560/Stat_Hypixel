@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Set;
 
@@ -82,7 +83,7 @@ public class Window extends JFrame {
         }
 
         friendList.setModel(friendListModel);
-        
+
         quitButton.setActionCommand("quit");
         quitButton.addActionListener(new ActionListener() {
             @Override
@@ -140,8 +141,12 @@ public class Window extends JFrame {
                                 "No name entered",
                                 JOptionPane.ERROR_MESSAGE);
                     }
-                    else{
-                        Player player = new Player(search);
+                    else {
+                        Player player;
+                        if(dataBase.lastModified(search,System.currentTimeMillis()))
+                            player = new Player(dataBase.get(search));
+                        else
+                            player = new Player(search);
                         displayGlobalStats(player);
                         //We'll have to display the other stats
                     }

@@ -57,7 +57,6 @@ public class Player {
                 this.online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
 
                 this.games = new GamesContainer(jsonObjectPlayer.getJSONObject("player").getJSONObject("stats"), jsonObjectPlayer.getJSONObject("player").getJSONObject("achievements"));
-                display();
             }
         }
         catch (JSONException e) {
