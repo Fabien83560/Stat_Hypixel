@@ -1,19 +1,17 @@
-package org.PlayerList;
+package org.FriendList;
 
 import org.DataBase.Database;
 import org.Player.Player;
-import org.Window.Window;
-import org.json.JSONObject;
 
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayerList {
-    Map<String, String> playerList = new HashMap<>();
-    public PlayerList() throws SQLException {
+public class FriendList {
+    Map<String, String> friendList = new HashMap<>();
+    public FriendList() throws SQLException {
         Database dataBase = new Database();
-        String sql = "SELECT * FROM playerList";
+        String sql = "SELECT * FROM FriendList";
         try {
             PreparedStatement statement = dataBase.getDataBase().prepareStatement(sql);
             ResultSet result = statement.executeQuery();
@@ -31,25 +29,25 @@ public class PlayerList {
         }
     }
     public void addPlayer(String player,String uuid) {
-        String p = playerList.get(player);
+        String p = friendList.get(player);
         if(p == null)
-            playerList.put(player, uuid);
+            friendList.put(player, uuid);
         else
             System.out.println("This player is already in the list");
     }
     public void addPlayer(String player) {
-        String p = playerList.get(player);
+        String p = friendList.get(player);
         if(p == null)
-            playerList.put(player , Player.fetchPlayer(player,org.Config.ConfigReader.getApiKey()).getJSONObject("player").getString("uuid"));
+            friendList.put(player , Player.fetchPlayer(player,org.Config.ConfigReader.getApiKey()).getJSONObject("player").getString("uuid"));
         else
             System.out.println("This player is already in the list");
     }
     public void removePlayer(String player){
-        String p = playerList.get(player);
+        String p = friendList.get(player);
         if(p != null)
-            playerList.remove(player);
+            friendList.remove(player);
         else
             System.out.println("This player is not in the list");
     }
-    public Map<String , String> getList(){return this.playerList;}
+    public Map<String , String> getList(){return this.friendList;}
 }

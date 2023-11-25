@@ -2,7 +2,7 @@ package org.Window;
 
 import org.DataBase.Database;
 import org.Player.Player;
-import org.PlayerList.PlayerList;
+import org.FriendList.FriendList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,8 +40,7 @@ public class Window extends JFrame {
     private JLabel globalStatsLabel;
     private JLabel currentModeLabel;
     private JPanel currentModeStatsPanel;
-    FlowLayout grid, grid2;
-    PlayerList playerList;
+    FriendList friendPlayerList;
     Database dataBase;
 
     public Window() {
@@ -78,7 +77,7 @@ public class Window extends JFrame {
         friendListModel = new DefaultListModel<>();
         this.dataBase = new Database();
         try {
-            playerList = new PlayerList();
+            friendPlayerList = new FriendList();
             updateWindow();
         }
         catch (SQLException e) {
@@ -102,17 +101,20 @@ public class Window extends JFrame {
                 String newPlayer = JOptionPane.showInputDialog("Enter the new player's name:");
                 if(newPlayer != null)
                 {
-                    if(playerList.getList().get(newPlayer) == null) {
+                    if(friendPlayerList.getList().get(newPlayer) == null)
                         friendListModel.addElement(addPlayer(newPlayer));
-                    }
                     else
-                    {
                         JOptionPane.showMessageDialog(null,
                                 "This Player already exists in the friend list!",
                                 "Player already exists",
                                 JOptionPane.ERROR_MESSAGE);
-                    }
                 }
+            }
+        });
+        compare2PlayersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openWindowTwoPlayers();
             }
         });
         skyWarsButton.addActionListener(new ActionListener() {
@@ -136,25 +138,19 @@ public class Window extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
+                try {
                     String search = searchAPlayerHereTextField.getText();
-                    if(search.isEmpty()){
+                    if(search.isEmpty())
                         JOptionPane.showMessageDialog(null,
                                 "Please enter a player's name.",
                                 "No name entered",
                                 JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        Player player;
-                        if(dataBase.lastModified(search,System.currentTimeMillis()))
-                            player = new Player(dataBase.get(search));
-                        else
-                            player = new Player(search);
-                        displayGlobalStats(player);
-                        //We'll have to display the other stats
-                    }
+
+                    Player player = new Player(search);
+                    displayGlobalStats(player);
+                    //We'll have to display the other stats
                 }
-                catch(NullPointerException exception){
+                catch(NullPointerException exception) {
                     System.out.println("Error trying to do a research in \"searchButton.addActionListener\".");
                 }
             }
@@ -162,14 +158,18 @@ public class Window extends JFrame {
         searchAPlayerHereTextField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(searchAPlayerHereTextField.getText().equals("Search a player's name here")){
+                if(searchAPlayerHereTextField.getText().equals("Search a player's name here"))
                     searchAPlayerHereTextField.setText(null);
-                }
             }
         });
     }
+    public void openWindowTwoPlayers() {
+        WindowTwoPlayer windowTwoPlayer = new WindowTwoPlayer();
+        setVisible(false);
+        dispose();
+    }
 
-    public void displayGlobalStats(Player player){
+    public void displayGlobalStats(Player player) {
         Map<String, String> globalStats = player.getAllStatistics();
         try{
             for(Map.Entry<String, String> stat : globalStats.entrySet()){
@@ -199,16 +199,10 @@ public class Window extends JFrame {
     }
 
     public void quit() {
-        if (JOptionPane.showConfirmDialog(null,
-                "Do you want to quit ?",
-                "Quit",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.ERROR_MESSAGE) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Do you want to quit ?", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == JOptionPane.YES_OPTION)
             System.exit(0);
-        }
     }
     public String addPlayer(String name) {
-
         JSONObject jsonObjectStatus;
         String uuid;
         try {
@@ -221,9 +215,11 @@ public class Window extends JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return "";
         }
+
         jsonObjectStatus = Player.fetchStatus(uuid , org.Config.ConfigReader.getApiKey());
         boolean online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
         String recentGame;
+
         if(online)
             recentGame = jsonObjectStatus.getJSONObject("session").getString("gameType");
         else
@@ -231,8 +227,7 @@ public class Window extends JFrame {
 
         String element = (online ? "ONLINE - " : "OFFLINE - ") + name + (online ? " - " + recentGame : "");
 
-        playerList.getList().putIfAbsent(name,uuid);
-
+        friendPlayerList.getList().putIfAbsent(name,uuid);
         dataBase.addFriendPlayerToDataBase(uuid,name);
         return element;
     }
@@ -252,18 +247,18 @@ public class Window extends JFrame {
 
     public void updateWindow() {
         friendListModel.clear();
-        Set<String> keys = playerList.getList().keySet();
+        Set<String> keys = friendPlayerList.getList().keySet();
         JSONObject jsonObjectStatus;
         boolean online;
         String recentGame;
         for (String key : keys) {
-            jsonObjectStatus = Player.fetchStatus(playerList.getList().get(key) , org.Config.ConfigReader.getApiKey());
+            jsonObjectStatus = Player.fetchStatus(friendPlayerList.getList().get(key) , org.Config.ConfigReader.getApiKey());
             online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
             if(online)
                 recentGame = jsonObjectStatus.getJSONObject("session").getString("gameType");
             else
                 recentGame = "";
-            friendListModel.addElement(addPlayer(key,playerList.getList().get(key)));
+            friendListModel.addElement(addPlayer(key,friendPlayerList.getList().get(key)));
         }
     }
 }
