@@ -170,6 +170,9 @@ public class Window extends JFrame {
     }
 
     public void displayGlobalStats(Player player) {
+        if(globalStatsPanel.getComponentCount() != 0){
+            globalStatsPanel.removeAll();
+        }
         Map<String, String> globalStats = player.getAllStatistics();
         try{
             for(Map.Entry<String, String> stat : globalStats.entrySet()){
