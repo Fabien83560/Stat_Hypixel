@@ -12,8 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class Window extends JFrame {
     private JButton bedWarsButton;
     private DefaultListModel<String> friendListModel;
     private JList<String> friendList;
-    private JScrollPane globalStatsPanel;
+    private JPanel globalStatsPanel;
     private JButton addNewPlayerButton;
     private JPanel panelRight;
     private JButton skyWarsButton;
@@ -38,13 +39,15 @@ public class Window extends JFrame {
     private JPanel buttonsPanel;
     private JLabel globalStatsLabel;
     private JLabel currentModeLabel;
+    private JPanel currentModeStatsPanel;
+    FlowLayout grid, grid2;
     PlayerList playerList;
     Database dataBase;
 
     public Window() {
-        setMinimumSize(new Dimension(800, 600));
+        setMinimumSize(new Dimension(1450, 950));
         setTitle("Hypixel Statistics");
-        setSize(1400, 1000);
+        setSize(1450, 950);
         add(mainPanel);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -170,13 +173,25 @@ public class Window extends JFrame {
         Map<String, String> globalStats = player.getAllStatistics();
         try{
             for(Map.Entry<String, String> stat : globalStats.entrySet()){
-                System.out.println(stat.getKey() + ": " + stat.getValue());
-                JLabel lab = new JLabel(stat.getKey() + ": " + stat.getValue());
-                globalStatsPanel.add(lab);
-                globalStatsPanel.validate();
+                if(!stat.getKey().equals("skin")) {
+                    JLabel lab = new JLabel(stat.getKey() + ": " + stat.getValue());
+                    lab.setFont(new Font("Calibri", Font.PLAIN, 18));
+                    globalStatsPanel.add(lab);
+                }
             }
+            URL skinUrl = new URL(globalStats.get("skin"));
+            //System.out.println(skinUrl);
+            //ImageIcon skinIcon = new ImageIcon(skinUrl);
+            //JLabel skin = new JLabel(skinIcon);
+            //globalStatsPanel.add(skin);
+            globalStatsPanel.revalidate();
+            globalStatsPanel.repaint();
         }
-        catch(IllegalStateException e){
+        catch(IllegalStateException | MalformedURLException e){
+            JOptionPane.showMessageDialog(null,
+                    "Error displaying the global Statistics of the player.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             System.out.println("Can't display the global statistics of the researched player:\n");
             e.printStackTrace();
         }
