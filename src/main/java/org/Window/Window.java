@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Set;
 
@@ -112,6 +111,12 @@ public class Window extends JFrame {
                 }
             }
         });
+        compare2PlayersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openWindowTwoPlayers();
+            }
+        });
         skyWarsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -164,6 +169,11 @@ public class Window extends JFrame {
                 }
             }
         });
+    }
+    public void openWindowTwoPlayers() {
+        WindowTwoPlayer windowTwoPlayer = new WindowTwoPlayer();
+        setVisible(false);
+        dispose();
     }
 
     public void displayGlobalStats(Player player){
