@@ -143,9 +143,12 @@ public class Player {
         try {
             JSONObject jsonObject = new JSONObject(data);
             try {
-                jsonObject.getJSONObject("player").get("uuid");
+                String uuid = String.valueOf(jsonObject.getJSONObject("player").get("uuid"));
                 Database dataBase = new Database();
-                dataBase.addPlayerToDataBase(jsonObject);
+                if(dataBase.knowPlayer(uuid))
+                    dataBase.updatePlayer(uuid,jsonObject);
+                else
+                    dataBase.addPlayerToDataBase(jsonObject);
             }
             catch (JSONException e) {
                 JSONObject jsonError = new JSONObject();
