@@ -1,0 +1,12 @@
+-- Creating the Player table
+CREATE TABLE Player (
+    uuid VARCHAR(255) PRIMARY KEY,
+    displayName VARCHAR(255)
+);
+
+-- Creating the FriendList table
+CREATE TABLE FriendList (
+    uuid VARCHAR(255) PRIMARY KEY,
+    displayName VARCHAR(255),
+    FOREIGN KEY (uuid) REFERENCES Player(uuid)
+);
