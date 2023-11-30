@@ -9,6 +9,7 @@ import org.Window.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import javax.swing.*;
 import java.io.*;
 
 
@@ -32,9 +33,18 @@ public class Player {
         String apikey = org.Config.ConfigReader.getApiKey();
         JSONObject jsonObjectPlayer = fetchPlayer(Name, apikey);
         try {
-            Object playerObject = jsonObjectPlayer.get("player");
+            Object playerObject;
+            try {
+                 playerObject = jsonObjectPlayer.get("player");
+            }
+            catch (JSONException exeption) {
+                playerObject = null;
+            }
             if (playerObject == null || playerObject.equals(JSONObject.NULL)) {
-                System.out.println("Player " + Name + " is unknown");
+                JOptionPane.showMessageDialog(null,
+                        "Player " + Name + " is Unknown",
+                        "Unknown Player",
+                        JOptionPane.ERROR_MESSAGE);
             }
             else {
                 for (String stat : statsList) {
