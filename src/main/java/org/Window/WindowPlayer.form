@@ -63,14 +63,6 @@
           <text value="Global Statistics"/>
         </properties>
       </component>
-      <grid id="19a20" binding="globalStatsPanel" layout-manager="CardLayout" hgap="0" vgap="0">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-        <border type="none"/>
-        <children/>
-      </grid>
       <component id="d6f70" class="javax.swing.JLabel">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
@@ -79,14 +71,6 @@
           <text value="Current Mode Statistics"/>
         </properties>
       </component>
-      <grid id="aebff" binding="currentModeStatsPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-        <border type="none"/>
-        <children/>
-      </grid>
       <component id="75aa6" class="javax.swing.JButton" binding="searchButton">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -95,6 +79,36 @@
           <text value="Search"/>
         </properties>
       </component>
+      <scrollpane id="b3dcc">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="19a20" binding="globalStatsPanel" layout-manager="CardLayout" hgap="0" vgap="0">
+            <constraints/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </scrollpane>
+      <scrollpane id="a7fbb">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="aebff" binding="currentModeStatsPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

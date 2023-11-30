@@ -110,11 +110,20 @@ public class Window extends JFrame {
             }
         });
 
+        onePlayerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setPanelRight(windowPlayer);
+            }
+        });
     }
     public void openWindowTwoPlayers() {
-        WindowPlayer windowTwoPlayer = new WindowPlayer();
-        setVisible(false);
-        dispose();
+        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
+        panelRight.removeAll();
+        panelRight.add(new WindowPlayer().getMainPanel());
+        panelRight.add(new WindowPlayer().getMainPanel());
+        panelRight.revalidate();
+        panelRight.repaint();
     }
 
     public void quit() {
