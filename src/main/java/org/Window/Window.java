@@ -26,30 +26,22 @@ public class Window extends JFrame {
     private JButton onePlayerButton;
     private JPanel panelLeft;
     private JScrollPane friendListPanel;
-    private JTextField searchAPlayerHereTextField;
-    private JButton bedWarsButton;
     private DefaultListModel<String> friendListModel;
     private JList<String> friendList;
-    private JPanel globalStatsPanel;
     private JButton addNewPlayerButton;
     private JPanel panelRight;
-    private JButton skyWarsButton;
-    private JButton skyBlockButton;
-    private JButton searchButton;
-    private JPanel buttonsPanel;
-    private JLabel globalStatsLabel;
-    private JLabel currentModeLabel;
-    private JPanel currentModeStatsPanel;
     FriendList friendPlayerList;
     Database dataBase;
 
-    public Window() {
+    public Window(JPanel windowPlayer) {
         setMinimumSize(new Dimension(1450, 950));
         setTitle("Hypixel Statistics");
         setSize(1450, 950);
         add(mainPanel);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setPanelRight(windowPlayer);
 
         if (org.Config.ConfigReader.getApiKey().isEmpty()) {
             boolean apiKeyValid = false;
@@ -117,88 +109,12 @@ public class Window extends JFrame {
                 openWindowTwoPlayers();
             }
         });
-        skyWarsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
-        bedWarsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        skyBlockButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    String search = searchAPlayerHereTextField.getText();
-                    if(search.isEmpty())
-                        JOptionPane.showMessageDialog(null,
-                                "Please enter a player's name.",
-                                "No name entered",
-                                JOptionPane.ERROR_MESSAGE);
-
-                    Player player = new Player(search);
-                    displayGlobalStats(player);
-                    //We'll have to display the other stats
-                }
-                catch(NullPointerException exception) {
-                    System.out.println("Error trying to do a research in \"searchButton.addActionListener\".");
-                }
-            }
-        });
-        searchAPlayerHereTextField.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if(searchAPlayerHereTextField.getText().equals("Search a player's name here"))
-                    searchAPlayerHereTextField.setText(null);
-            }
-        });
     }
     public void openWindowTwoPlayers() {
-        WindowTwoPlayer windowTwoPlayer = new WindowTwoPlayer();
+        WindowPlayer windowTwoPlayer = new WindowPlayer();
         setVisible(false);
         dispose();
-    }
-
-    public void displayGlobalStats(Player player) {
-        if(globalStatsPanel.getComponentCount() != 0){
-            globalStatsPanel.removeAll();
-        }
-        Map<String, String> globalStats = player.getAllStatistics();
-        try{
-            for(Map.Entry<String, String> stat : globalStats.entrySet()){
-                if(!stat.getKey().equals("skin")) {
-                    JLabel lab = new JLabel(stat.getKey() + ": " + stat.getValue());
-                    lab.setFont(new Font("Calibri", Font.PLAIN, 18));
-                    globalStatsPanel.add(lab);
-                }
-            }
-            URL skinUrl = new URL(globalStats.get("skin"));
-            //System.out.println(skinUrl);
-            //ImageIcon skinIcon = new ImageIcon(skinUrl);
-            //JLabel skin = new JLabel(skinIcon);
-            //globalStatsPanel.add(skin);
-            globalStatsPanel.revalidate();
-            globalStatsPanel.repaint();
-        }
-        catch(IllegalStateException | MalformedURLException e){
-            JOptionPane.showMessageDialog(null,
-                    "Error displaying the global Statistics of the player.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            System.out.println("Can't display the global statistics of the researched player:\n");
-            e.printStackTrace();
-        }
-
     }
 
     public void quit() {
@@ -263,5 +179,13 @@ public class Window extends JFrame {
                 recentGame = "";
             friendListModel.addElement(addPlayer(key,friendPlayerList.getList().get(key)));
         }
+    }
+
+    public void setPanelRight(JPanel panel) {
+        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
+        panelRight.removeAll();
+        panelRight.add(panel);
+        panelRight.revalidate();
+        panelRight.repaint();
     }
 }

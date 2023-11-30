@@ -60,6 +60,7 @@ public class Player {
             }
         }
         catch (JSONException e) {
+            e.printStackTrace();
             handleException(jsonObjectPlayer);
         }
     }
