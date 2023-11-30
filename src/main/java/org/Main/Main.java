@@ -1,7 +1,7 @@
 package org.Main;
 
 import org.Window.Window;
-import org.Window.WindowPlayer;
+import org.Window.Player.WindowPlayer;
 
 public class Main {
     public static void main(String[] args)

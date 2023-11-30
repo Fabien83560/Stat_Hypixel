@@ -1,6 +1,9 @@
-package org.Window;
+package org.Window.Player;
 
 import org.Player.Player;
+import org.Window.Game.WindowBedWarsStats;
+import org.Window.Game.WindowSkyBlockStats;
+import org.Window.Game.WindowSkyWarsStats;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
@@ -23,24 +25,28 @@ public class WindowPlayer extends JFrame {
     private JPanel buttonPanel;
     private JPanel globalStatsPanel;
     private JPanel currentModeStatsPanel;
+    private JLabel currentModeStatisticsLabel;
 
     public WindowPlayer() {
         skyWarsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                currentModeStatisticsLabel.setText("SkyWars Statistics");
+                setCurrentModeStatsPanel(new WindowSkyWarsStats().getMainPanel());
             }
         });
         bedWarsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                currentModeStatisticsLabel.setText("BedWars Statistics");
+                setCurrentModeStatsPanel(new WindowBedWarsStats().getMainPanel());
             }
         });
         skyBlockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                currentModeStatisticsLabel.setText("SkyBlock Statistics");
+                setCurrentModeStatsPanel(new WindowSkyBlockStats().getMainPanel());
             }
         });
         searchButton.addActionListener(new ActionListener() {
@@ -102,6 +108,20 @@ public class WindowPlayer extends JFrame {
             System.out.println("Can't display the global statistics of the researched player:\n");
             e.printStackTrace();
         }
+    }
+    public void setGlobalStatsPanel(JPanel panel) {
+        globalStatsPanel.setLayout(new BoxLayout(globalStatsPanel, BoxLayout.Y_AXIS));
+        globalStatsPanel.removeAll();
+        globalStatsPanel.add(panel);
+        globalStatsPanel.revalidate();
+        globalStatsPanel.repaint();
+    }
+    public void setCurrentModeStatsPanel(JPanel panel) {
+        currentModeStatsPanel.setLayout(new BoxLayout(currentModeStatsPanel, BoxLayout.Y_AXIS));
+        currentModeStatsPanel.removeAll();
+        currentModeStatsPanel.add(panel);
+        currentModeStatsPanel.revalidate();
+        currentModeStatsPanel.repaint();
     }
     public JPanel getMainPanel() {return mainPanel;}
 }
