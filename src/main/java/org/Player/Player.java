@@ -60,8 +60,13 @@ public class Player {
                 addStatistics("skin", String.valueOf(getSkinURL(getStatistics("uuid"))));
                 addStatistics("guildName", fetchGuildName(getStatistics("uuid"), apikey));
 
-                long exp = jsonObjectPlayer.getJSONObject("player").getLong("networkExp");
-                addStatistics("hypixelLevel", String.format("%.2f", Math.sqrt((2 * exp) + 30625) / 50 - 2.5));
+                try {
+                    long exp = jsonObjectPlayer.getJSONObject("player").getLong("networkExp");
+                    addStatistics("hypixelLevel", String.format("%.2f", Math.sqrt((2 * exp) + 30625) / 50 - 2.5));
+                }
+                catch(JSONException e){
+                    addStatistics("hypixelLevel", "N/A");
+                }
 
                 JSONObject jsonObjectStatus = fetchStatus(getStatistics("uuid"), apikey);
                 this.online = jsonObjectStatus.getJSONObject("session").getBoolean("online");

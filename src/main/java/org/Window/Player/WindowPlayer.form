@@ -10,12 +10,14 @@
     <children>
       <component id="8d4d4" class="javax.swing.JTextField" binding="SearchPlayer">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="250" height="-1"/>
+            <preferred-size width="250" height="-1"/>
           </grid>
         </constraints>
         <properties>
-          <text value=""/>
+          <horizontalAlignment value="0"/>
+          <text value="Search a player's name here"/>
         </properties>
       </component>
       <grid id="2e031" binding="buttonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -23,7 +25,7 @@
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="1000" height="-1"/>
-            <maximum-size width="-1" height="50"/>
+            <maximum-size width="-1" height="70"/>
           </grid>
         </constraints>
         <properties/>
@@ -81,12 +83,14 @@
       </component>
       <scrollpane id="b3dcc">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <maximum-size width="-1" height="400"/>
+          </grid>
         </constraints>
         <properties/>
-        <border type="none"/>
+        <border type="empty"/>
         <children>
-          <grid id="19a20" binding="globalStatsPanel" layout-manager="CardLayout" hgap="0" vgap="0">
+          <grid id="19a20" binding="globalStatsPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
             <constraints/>
             <properties/>
             <border type="none"/>
