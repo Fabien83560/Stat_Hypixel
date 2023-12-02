@@ -41,17 +41,17 @@ public class Database {
             e.printStackTrace();
         }
     }
-    public void removeFriendPlayerToDataBase(String uuid) {
+    public void removeFriendPlayerToDataBase(String name) {
         try {
-            String sql = "DELETE FROM `FriendList` WHERE uuid = ?";
+            String sql = "DELETE FROM `FriendList` WHERE displayName = ?";
             PreparedStatement statement = dataBase.prepareStatement(sql);
-            statement.setString(1,uuid);
+            statement.setString(1,name);
             int modify = statement.executeUpdate();
             if(modify > 0)
                 JOptionPane.showMessageDialog(null,
                         "Player has been correctly removed",
                         "Player removed",
-                        JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.INFORMATION_MESSAGE);
         }
         catch (SQLException e) {
             e.printStackTrace();

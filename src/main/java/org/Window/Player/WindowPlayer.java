@@ -89,16 +89,8 @@ public class WindowPlayer extends JFrame {
                                 "No name entered",
                                 JOptionPane.ERROR_MESSAGE);
                     Player player = new Player(search);
-                    if(player != null) {
-                        playerStorage = true;
-                        windowGlobalStats = new WindowGlobalStats(player);
-                        windowSkyWarsStats = new WindowSkyWarsStats(player);
-                        windowBedWarsStats = new WindowBedWarsStats(player);
-                        windowSkyBlockStats = new WindowSkyBlockStats(player);
-
-                        setGlobalStatsPanel(windowGlobalStats.getMainPanel());
-                        setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
-                    }
+                    if(player != null)
+                        displayAllStats(player);
                 }
                 catch(NullPointerException exception) {
                     exception.printStackTrace();
@@ -130,4 +122,14 @@ public class WindowPlayer extends JFrame {
         currentModeStatsPanel.repaint();
     }
     public JPanel getMainPanel() {return mainPanel;}
+
+    public void displayAllStats(Player player){
+        playerStorage = true;
+        windowGlobalStats = new WindowGlobalStats(player);
+        windowSkyWarsStats = new WindowSkyWarsStats(player);
+        windowBedWarsStats = new WindowBedWarsStats(player);
+        windowSkyBlockStats = new WindowSkyBlockStats(player);
+        setGlobalStatsPanel(windowGlobalStats.getMainPanel());
+        setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
+    }
 }

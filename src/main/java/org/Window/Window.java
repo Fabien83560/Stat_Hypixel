@@ -8,8 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +26,8 @@ public class Window extends JFrame {
     private JList<String> friendList;
     private JButton addNewPlayerButton;
     private JPanel panelRight;
+    private JButton removePlayerButton;
+    private JButton displayPlayerStatisticsButton;
     FriendList friendPlayerList;
     Database dataBase;
 
@@ -85,42 +85,6 @@ public class Window extends JFrame {
             }
         });
 
-        friendList.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                try{
-                    if(!e.getValueIsAdjusting()){
-                        //Getting the name of the selected player to do a fetch with it afterward
-                        String friendSelectedFullName = friendList.getSelectedValue();
-                        String friendNameSelected = "";
-                        int startName = friendSelectedFullName.indexOf("-") + 1;
-                        //If there is the first dash in the name of the player in the friendList
-                        if (startName != -1) {
-                            int indiceDeuxiemeTiret = friendSelectedFullName.indexOf("-", startName + 1);
-                            //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
-                            if (indiceDeuxiemeTiret != -1) {
-                                //Extracting the name of the player
-                                friendNameSelected = friendSelectedFullName.substring(startName + 1, indiceDeuxiemeTiret).trim();
-                            }
-                            else{
-                                friendNameSelected = friendSelectedFullName.substring(startName + 1).trim();
-                            }
-                        }
-                        if(JOptionPane.showConfirmDialog(null,
-                                "Do you wish to display the statistics of " + friendNameSelected + " ?",
-                                "Displaying statistics",
-                                JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
-
-                            System.out.println(friendNameSelected);
-                        }
-
-                    }
-                }
-                catch(IndexOutOfBoundsException exception){
-                    exception.printStackTrace();
-                }
-            }
-        });
-
         addNewPlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -148,6 +112,94 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setPanelRight(windowPlayer);
+            }
+        });
+        displayPlayerStatisticsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    if(friendList.getSelectedValue() == null){
+                        JOptionPane.showMessageDialog(null,
+                                "Please select a player to display the statistics of.",
+                                "Select a player", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else if(!friendList.getValueIsAdjusting()){
+                        //Getting the name of the selected player to do a fetch with it afterward
+                        String friendSelectedFullName = friendList.getSelectedValue();
+                        String friendNameSelected = "";
+                        int startName = friendSelectedFullName.indexOf("-") + 1;
+                        //If there is the first dash in the name of the player in the friendList
+                        if (startName != -1) {
+                            int endName = friendSelectedFullName.indexOf("-", startName + 1);
+                            //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
+                            if (endName != -1) {
+                                //Extracting the name of the player
+                                friendNameSelected = friendSelectedFullName.substring(startName + 1, endName).trim();
+                            }
+                            else{
+                                friendNameSelected = friendSelectedFullName.substring(startName + 1).trim();
+                            }
+                        }
+                        if(JOptionPane.showConfirmDialog(null,
+                                "Do you wish to display the statistics of " + friendNameSelected + " ?",
+                                "Displaying statistics",
+                                JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
+
+                            Player player = new Player(friendNameSelected);
+                            WindowPlayer windowPlayer = new WindowPlayer();
+                            windowPlayer.displayAllStats(player);
+                            setPanelRight(windowPlayer.getMainPanel());
+                        }
+                    }
+                }
+                catch(IndexOutOfBoundsException exception){
+                    exception.printStackTrace();
+                }
+            }
+        });
+        removePlayerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    if(friendList.getSelectedValue() == null){
+                        JOptionPane.showMessageDialog(null,
+                                "Please select a player to delete from your Friend List.",
+                                "Select a player", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{
+                        String friendSelectedFullName = friendList.getSelectedValue();
+                        String friendNameSelected = "";
+                        int startName = friendSelectedFullName.indexOf("-") + 1;
+                        //If there is the first dash in the name of the player in the friendList
+                        if (startName != -1) {
+                            int endName = friendSelectedFullName.indexOf("-", startName + 1);
+                            //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
+                            if (endName != -1) {
+                                //Extracting the name of the player
+                                friendNameSelected = friendSelectedFullName.substring(startName + 1, endName).trim();
+                            }
+                            else{
+                                friendNameSelected = friendSelectedFullName.substring(startName + 1).trim();
+                            }
+                        }
+                        if(JOptionPane.showConfirmDialog(null,
+                                "Do you really want to delete " + friendNameSelected + " from your Friend List?",
+                                "Delete " + friendNameSelected,
+                                JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
+                            Database database = new Database();
+                            friendPlayerList.removePlayer(friendNameSelected);
+                            friendListModel.removeElementAt(friendList.getSelectedIndex());
+                            friendList.revalidate();
+                            friendList.repaint();
+                            database.removeFriendPlayerToDataBase(friendNameSelected);
+                            //TODO: Maybe try and clear the statistics of the player that got removed
+                        }
+                    }
+                }
+                catch(Exception exception){
+                    System.out.println("Error trying to remove a player from the Friend List:");
+                    exception.printStackTrace();
+                }
             }
         });
     }

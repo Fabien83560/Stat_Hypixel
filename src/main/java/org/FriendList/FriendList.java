@@ -29,8 +29,7 @@ public class FriendList {
         }
     }
     public void addPlayer(String player,String uuid) {
-        String p = friendList.get(player);
-        if(p == null)
+        if(friendList.get(player) == null)
             friendList.put(player, uuid);
         else
             System.out.println("This player is already in the list");
@@ -43,8 +42,7 @@ public class FriendList {
             System.out.println("This player is already in the list");
     }
     public void removePlayer(String player){
-        String p = friendList.get(player);
-        if(p != null)
+        if(friendList.get(player) != null)
             friendList.remove(player);
         else
             System.out.println("This player is not in the list");
