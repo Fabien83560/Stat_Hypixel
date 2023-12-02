@@ -8,6 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -80,6 +82,42 @@ public class Window extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("quit"))
                     quit();
+            }
+        });
+
+        friendList.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                try{
+                    if(!e.getValueIsAdjusting()){
+                        //Getting the name of the selected player to do a fetch with it afterward
+                        String friendSelectedFullName = friendList.getSelectedValue();
+                        String friendNameSelected = "";
+                        int startName = friendSelectedFullName.indexOf("-") + 1;
+                        //If there is the first dash in the name of the player in the friendList
+                        if (startName != -1) {
+                            int indiceDeuxiemeTiret = friendSelectedFullName.indexOf("-", startName + 1);
+                            //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
+                            if (indiceDeuxiemeTiret != -1) {
+                                //Extracting the name of the player
+                                friendNameSelected = friendSelectedFullName.substring(startName + 1, indiceDeuxiemeTiret).trim();
+                            }
+                            else{
+                                friendNameSelected = friendSelectedFullName.substring(startName + 1).trim();
+                            }
+                        }
+                        if(JOptionPane.showConfirmDialog(null,
+                                "Do you wish to display the statistics of " + friendNameSelected + " ?",
+                                "Displaying statistics",
+                                JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
+
+                            System.out.println(friendNameSelected);
+                        }
+
+                    }
+                }
+                catch(IndexOutOfBoundsException exception){
+                    exception.printStackTrace();
+                }
             }
         });
 
