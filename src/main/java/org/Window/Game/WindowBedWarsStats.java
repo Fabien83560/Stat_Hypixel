@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class WindowBedWarsStats extends JFrame {
@@ -79,7 +80,9 @@ public class WindowBedWarsStats extends JFrame {
         for(int row : ratio) {
             for (int column = 1; column != 5; column++) {
                 try {
-                    model.setValueAt(String.valueOf(Integer.parseInt(model.getValueAt(row - 2, column).toString()) / Integer.parseInt(model.getValueAt(row - 1, column).toString())), row, column);
+                    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                    double result = Double.parseDouble(model.getValueAt(row - 2, column).toString()) / Double.parseDouble(model.getValueAt(row - 1, column).toString());
+                    model.setValueAt(String.valueOf(decimalFormat.format(result)), row, column);
                 }
                 catch (Exception e) {
                     model.setValueAt("N/A",row,column);

@@ -28,6 +28,11 @@ public class Skywars {
     {
         return this.statistics.get(key);
     }
+
+    public SkywarsModeContainer getModes() {
+        return modes;
+    }
+
     public void display()
     {
         System.out.println("Global SkyWars Statistics");

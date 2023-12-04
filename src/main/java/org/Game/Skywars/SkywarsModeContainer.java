@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SkywarsModeContainer {
-    static final String[] modesList = {"solo" , "solo_normal" , "solo_insane", "team", "team_insane"};
+    static final String[] modesList = {"solo" , "solo_normal" , "solo_insane", "team", "team_normal", "team_insane"};
     static final String[] statsList = {"wins" , "deaths" , "losses" , "kills"};
     Map<String, String> statistics = new HashMap<>();
     public SkywarsModeContainer(JSONObject stats)
