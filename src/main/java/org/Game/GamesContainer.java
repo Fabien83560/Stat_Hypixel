@@ -15,6 +15,19 @@ public class GamesContainer {
         this.skywars = new Skywars(stats.getJSONObject("SkyWars"));
         this.skyblock = new SkyblockProfiles(stats.getJSONObject("SkyBlock"),playerUuid);
     }
+
+    public Skywars getSkywars() {
+        return skywars;
+    }
+
+    public Bedwars getBedwars() {
+        return bedwars;
+    }
+
+    public SkyblockProfiles getSkyblock() {
+        return skyblock;
+    }
+
     public void display()
     {
         this.bedwars.display();

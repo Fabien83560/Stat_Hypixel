@@ -32,6 +32,11 @@ public class Bedwars {
     {
         return this.statistics.get(key);
     }
+    public BedwarsModeContainer getModes() { return modes;}
+    public String[] getStatsList() {
+        return statsList;
+    }
+
     public void display(){
         System.out.println("Global Bedwars Statistics");
         for(String stat : statsList)

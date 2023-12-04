@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 
 public class BedwarsModeContainer {
     static final String[] modesList = {"eight_one", "eight_two", "four_three", "four_four"};
-    static final String[] statsList = {"games_played_bedwars" , "wins_bedwars" , "losses_bedwars" , "kills_bedwars" , "deaths_bedwars" , "final_kills_bedwars" , "winstreak" , "beds_broken_bedwars" , "beds_lost_bedwars"};
+    static final String[] statsList = {"games_played_bedwars" , "wins_bedwars" , "losses_bedwars" , "kills_bedwars" , "deaths_bedwars" , "final_kills_bedwars" ,"final_deaths_bedwars", "winstreak" , "beds_broken_bedwars" , "beds_lost_bedwars"};
     Map<String, String> statistics = new HashMap<>();
     public BedwarsModeContainer(JSONObject stats)
     {

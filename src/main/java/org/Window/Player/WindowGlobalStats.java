@@ -29,14 +29,14 @@ public class WindowGlobalStats {
                 if(!stat.getKey().equals("skin")) {
                     switch(stat.getKey()){
                         case "lastLogin":
-                            Timestamp timestamp = new Timestamp(Long.valueOf(stat.getValue()));
+                            Timestamp timestamp = new Timestamp(Long.parseLong(stat.getValue()));
                             Date date = new Date(timestamp.getTime());
                             lab.setText("Last Login: " + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" +
                                                          (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1)  + "/" +
                                                          (date.getYear() + 1900));
                             break;
                         case "firstLogin":
-                            Timestamp timestamp2 = new Timestamp(Long.valueOf(stat.getValue()));
+                            Timestamp timestamp2 = new Timestamp(Long.parseLong(stat.getValue()));
                             Date date2 = new Date(timestamp2.getTime());
                             lab.setText("First Login: " + (date2.getDate() < 10 ? "0" + date2.getDate() : date2.getDate()) + "/" +
                                                           (date2.getMonth() + 1 < 10 ? "0" + (date2.getMonth() + 1) : date2.getMonth() + 1) + "/" +

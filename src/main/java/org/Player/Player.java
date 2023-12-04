@@ -222,6 +222,7 @@ public class Player {
             return e.getMessage();
         }
     }
+    public GamesContainer getGames(){return games;}
 
     public void display() {
         System.out.println("Name : " + getStatistics("displayname"));

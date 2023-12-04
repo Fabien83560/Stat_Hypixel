@@ -130,6 +130,7 @@ public class WindowPlayer extends JFrame {
         windowBedWarsStats = new WindowBedWarsStats(player);
         windowSkyBlockStats = new WindowSkyBlockStats(player);
         setGlobalStatsPanel(windowGlobalStats.getMainPanel());
+        currentModeStatisticsLabel.setText("BedWars Statistics");
         setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
     }
 }
