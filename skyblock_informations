@@ -1,0 +1,158 @@
+PROFILE :
+
+nom du profile :
+liste des membres de la coop : profile/members/
+date de join : profile/members/uuid/profile/first_join
+
+
+POUR TOUTE LA SUITE LA BASE SERA profile/members/uuid/
+
+GENERAL :
+
+Level : leveling/experience
+Level des 11 Skills : player_data/experience/
+Skills average : total des LvL des principaux skills
+Purse : currencies/coin_purse
+Bank Account : en dehors de la base défini : profile/banking/balance
+Personnal Bank Account :
+Fairy Souls : fairy_soul/total_collected
+Lily / Seinither Weight :
+Networth :
+
+
+ACCESSORIES :
+
+unique accesories : 
+magical power : accessory_bag_storage
+
+
+PETS :
+
+liste des pets : pets_data/pets/
+
+
+MINING :
+
+mitril powder actuel : mining_core/powder_mithril_total
+mitril powder spend : mining_core/powder_spent_mithril
+gemstone powder actuel : mining_core/powder_gemstone_total
+gemstone powder spend : mining_core/powder_spent_gemstone
+total commision effectué : 
+forge : forge/forge_processes/????
+
+
+FISHING :
+
+items fished : player_stats/items_fished/normal
+treasures fished : player_stats/items_fished/treasure
+large treasures fished : player_stats/items_fished/large_treasure
+sea creatures killed :
+
+Trophy fish :
+
+total trophy fish : trophy_fish/total_caught
+
+Tout les trophy fish :
+total : trophy_fish/(nom_du_trophy)
+bronze : trophy_fish/(nom_du_trophy)_bronze
+silver : trophy_fish/(nom_du_trophy)_silver
+gold : trophy_fish/(nom_du_trophy)_gold
+diamond : trophy_fish/(nom_du_trophy)_diamond
+
+
+DUNGEONS :
+
+LvL catacomb : dungeons/???
+LvL de chaque class : dungeons/player_classes/(class)/experience
+secrets trouvé : 
+blood mobs kill :
+
+Chaque Floor :dungeons/dungeon_types/(catacombs || master_catacombs)
+time played : dungeons/dungeon_types/???/times_played/(Floor)
+tier comp : dungeons/dungeon_types/???/tier_completions/(Floor)
+fasted time : dungeons/dungeon_types/???/fastest_time/(Floor)
+best score : dungeons/dungeon_types/???/best_score/(Floor)
+mob kill : dungeons/dungeon_types/???/mobs_killed/(Floor)
+most healing : dungeons/dungeon_types/???/most_healing/(Floor)
+fasted S : dungeons/dungeon_types/???/fastest_time_s/(Floor)
+fasted S+ : dungeons/dungeon_types/???/fastest_time_s_plus/(Floor)
+
+Boss collection :
+LvL :
+boss kill :
+
+
+SLAYER :
+
+total slayer xp : SOMME DE CHAQUE SLAYER
+chaque slayer xp : slayer/slayer_bosses/(slayer)/xp
+boss kill tier 1 : slayer/slayer_bosses/(slayer)/boss_kills_tier_0
+boss kill tier 2 : slayer/slayer_bosses/(slayer)/boss_kills_tier_1
+boss kill tier 3 : slayer/slayer_bosses/(slayer)/boss_kills_tier_2
+boss kill tier 4 : slayer/slayer_bosses/(slayer)/boss_kills_tier_3
+boss kill tier 5 : slayer/slayer_bosses/(slayer)/boss_kills_tier_4
+
+
+MINIONS :
+
+Chaque catégorie :
+combien de minions sont max :
+
+
+BESTIARY :
+
+tiers unlock : (bestiary/milestone/last_claimed_milestone) * 10
+milestone : bestiary/milestone/last_claimed_milestone
+
+
+COLLECTIONS :
+
+total maxed collections : très chiant
+
+Chaque catégorie :
+combien de collections sont max : très chiant
+
+
+CRIMSON ISLE :
+
+selected faction : nether_island_player_data/selected_faction
+mage réputation : nether_island_player_data/mages_reputation
+barbarian réputation : nether_island_player_data/barbarians_reputation
+
+Pour chaque tiers de Kuudra :
+total kill : nether_island_player_data/kuudra_completed_tiers/(nom du tiers)
+
+total point dojo : SOMME DE TOUTE LES CATEGORIES DOJO nether_island_player_data/dojo/
+
+Pour chaque catégorie dojo :
+points : nether_island_player_data/dojo/dojo_points_(categorie)
+rank : IF ELSE SELON le nombre de points
+time : nether_island_player_data/dojo/dojo_time_(categorie)
+
+
+AUCTIONS :
+
+auctions created : player_stats/auctions/created
+total taxes : player_stats/auctions/fees
+total bids effectués : player_stats/auctions/bids
+bid le plus haut : player_stats/auctions/highest_bid
+auction réalisé : player_stats/auctions/completed
+coins gagné : player_stats/auctions/gold_earned
+
+
+OTHER :
+
+total mobs kills : player_stats/kills/total
+top 10 des mobs kills : player_stats/kills/(tout récup puis trier dans croissant)
+total morts : player_stats/deaths/
+top 10 des morts : player_stats/deaths/(tout récup puis trier dans croissant)
+
+gift données : player_stats/gifts/total_given
+gift reçu : player_stats/gifts/total_received
+
+total candy récupéré : player_stats/candy_collected/total
+candy vert : player_stats/candy_collected/green_candy
+candy violet : player_stats/candy_collected/purple_candy
+
+Pour chaque essences : currencies/coin_purse/essence/
+nombre d'essence : currencies/coin_purse/essence/WITHER/current
