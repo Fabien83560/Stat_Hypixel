@@ -19,7 +19,11 @@ public class Skills {
         skills.putIfAbsent(key,value);
     }
 
-    public Double calculateLevel(String skill,Double exp) {
+    public Map<String, Double> getSkills() {
+        return skills;
+    }
+
+    public Double calculateLevel(String skill, Double exp) {
         // skill.substring(6) pour retiré le SKILL_ avant le nom du skill
         return null;
     }
