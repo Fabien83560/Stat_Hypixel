@@ -1,21 +1,66 @@
 package org.Game.Skyblock;
 
+import org.Game.Skyblock.Stats.Dungeon.Dungeon;
+import org.Game.Skyblock.Stats.Fishing.Fishing;
+import org.Game.Skyblock.Stats.Mining;
+import org.Game.Skyblock.Stats.Pet;
 import org.Game.Skyblock.Stats.Skills;
 import org.Player.Player;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 public class SkyblockProfilesContainer {
+    String cuteName;
+    List<String> membersList = new ArrayList<>();
+    String firstJoin;
+    String level;
     Skills skills;
-    public SkyblockProfilesContainer(String profileUuid, String playerUuid) {
-        JSONObject jsonMember = fetchProfile(profileUuid).getJSONObject("profile").getJSONObject("members").getJSONObject(playerUuid);
+    String purse;
+    String purseBank;
+    String fairySoulCollected;
+    String magicalPower;
+    List<Pet> petList = new ArrayList<>();
+    Mining mining;
+    Fishing fishing;
+    Dungeon dungeon;
+    public SkyblockProfilesContainer(String profileUuid, String playerUuid, String profileName) {
+        final JSONObject json = fetchProfile(profileUuid).getJSONObject("profile");
+        cuteName = profileName;
+        for (Object key : json.getJSONObject("members") .keySet()) {
+            String memberUuid = (String) key;
+            membersList.add(memberUuid);
+        }
+        JSONObject jsonMember = json.getJSONObject("members").getJSONObject(playerUuid);
+        Timestamp timestamp = new Timestamp(Long.parseLong(jsonMember.getJSONObject("profile").get("first_join").toString()));
+        Date date = new Date(timestamp.getTime());
+        firstJoin = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" +
+                (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1)  + "/" +
+                (date.getYear() + 1900);
+        level = String.valueOf(jsonMember.getJSONObject("leveling").getLong("experience") / 100);
+        purse = String.valueOf(jsonMember.getJSONObject("currencies").getLong("coin_purse"));
+        purseBank = String.valueOf(json.getJSONObject("banking").get("balance"));
+        fairySoulCollected = String.valueOf(jsonMember.getJSONObject("fairy_soul").get("total_collected"));
+        magicalPower = String.valueOf(jsonMember.getJSONObject("accessory_bag_storage").get("highest_magical_power"));
         try {
             skills = new Skills(jsonMember.getJSONObject("player_data").getJSONObject("experience"));
         }
         catch (JSONException e)
         {
-            this.skills = null;
+            skills = null;
         }
+        JSONArray petsArray = jsonMember.getJSONObject("pets_data").getJSONArray("pets");
+        for (int i = 0; i < petsArray.length(); i++)
+            petList.add(new Pet(petsArray.getJSONObject(i)));
+        mining = new Mining(jsonMember.getJSONObject("mining_core"));
+        fishing = new Fishing(jsonMember);
+        dungeon = new Dungeon(jsonMember.getJSONObject("dungeons"));
     }
 
     public static JSONObject fetchProfile(String profileUuid) {
@@ -30,5 +75,40 @@ public class SkyblockProfilesContainer {
             jsonError.put("errorState" , "PROFILE_STATUS");
             return jsonError;
         }
+    }
+
+    public void display() {
+        System.out.println("SKYBLOCK STATISTICS");
+        System.out.println("cute_name : " + cuteName);
+        for(String uuid : membersList)
+            System.out.println("Coop member : " + uuid);
+        System.out.println("First join : " + firstJoin);
+        System.out.println("SkyBlock level : " + level);
+        skills.display();
+        System.out.println("Purse : " + purse);
+        System.out.println("Bank Account : " + purseBank);
+        System.out.println("Fairy Soul Collected : " + fairySoulCollected);
+        System.out.println("Magical Power : " + magicalPower);
+        System.out.println();
+        System.out.println("PETS LIST");
+        System.out.println("----------------");
+        for(Pet pet : petList)
+        {
+            System.out.println("Type : " + pet.getType());
+            System.out.println("Tier : " + pet.getTier());
+            System.out.println("Exp : " + pet.getExp());
+            System.out.println("Candy Used : " + pet.getCandyUsed());
+            System.out.println("----------------");
+        }
+        System.out.println();
+        System.out.println("MINING");
+        System.out.println("Actual Mithril Powder : " + mining.getActualMithrilPowder());
+        System.out.println("Spent Mithril Powder : " + mining.getSpentMithrilPower());
+        System.out.println("Actual Gemstone Powder : " + mining.getActualGemstonePowder());
+        System.out.println("Spent Gemstone Powder : " + mining.getSpentGemstonePower());
+        System.out.println();
+        fishing.display();
+        System.out.println();
+        dungeon.display();
     }
 }
