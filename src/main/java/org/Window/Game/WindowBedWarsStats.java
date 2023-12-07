@@ -1,24 +1,60 @@
 package org.Window.Game;
 
 import org.Game.Bedwars.Bedwars;
+import org.Game.GamesContainer;
 import org.Player.Player;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.Timestamp;
 import java.text.DecimalFormat;
-import java.util.Date;
 
+/**
+ * The WindowBedWarsStats class displays, in a non-editable table,
+ * all the BedWars statistics of a player in the interface.
+ * That is displayed by default in the interface, but can
+ * also be displayed by clicking on the 'Bedwars' button if
+ * another mode was displayed instead.
+ */
 public class WindowBedWarsStats extends JFrame {
+
+    /**
+     * The main panel of the WindowBedWarsStats class.
+     * Displayed when the user wants to see the player's
+     * Bedwars statistics.
+     */
     private JPanel mainPanel;
+
+    /**
+     * The table that contains all the specific statistics
+     * of the player in Bedwars mode.
+     */
     private JTable statisticsTable;
-    private JPanel testPanel;
 
+    /**
+     * A panel meant to display the global statistics
+     * of the player in Bedwars mode, such as his coins, or wins.
+     * This panel is displayed above the table of the specific
+     * statistics of the player.
+     */
+    private JPanel globalStatsBedwars;
 
-    public WindowBedWarsStats() {
-
-    }
+    /**
+     * Constructor of the WindowBedWarsStats class.
+     * It uses a Player instance as a parameter to
+     * get the Bedwars statistics of that said player.
+     * It then will display the table of all the statistics,
+     * as well as the global ones right above that table.
+     * @param player A Player Object to get the Bedwars
+     *               statistics of.
+     * @see NonEditableTableModel
+     * @see Bedwars
+     * @see Bedwars#getStatistics(String)
+     * @see Bedwars#getModes()
+     * @see Player#getGames()
+     * @see GamesContainer#getBedwars()
+     * @see org.Game.Bedwars.BedwarsModeContainer#getStatistics(String)
+     * @see #setStatisticsTable(JTable)
+     */
     public WindowBedWarsStats(Player player) {
         String[] columns = {"","1v1", "2v2", "3v3", "4v4"};
         String[] rows = {"","Games Played", "Winstreak", "Wins", "Losses", "Ratio Wins / Losses","",
@@ -55,7 +91,7 @@ public class WindowBedWarsStats extends JFrame {
                     lab.setText("Global Final Kills : " + res + " | ");
                     break;
                 case "coins":
-                    lab.setText("Coins : " + res + " ");
+                    lab.setText("Coins : " + res);
                     break;
                 default:
                     break;
@@ -64,7 +100,7 @@ public class WindowBedWarsStats extends JFrame {
             lab.setFont(new Font("Cascadia Code", Font.PLAIN, 16));
             hbox.add(lab);
         }
-        testPanel.add(hbox);
+        globalStatsBedwars.add(hbox);
 
         for(int i = 0;i < columns.length;i++)
             model.setValueAt(columns[i],0,i);
@@ -98,17 +134,48 @@ public class WindowBedWarsStats extends JFrame {
         mainPanel.add(statisticsTable);
     }
 
+    /**
+     * Gets the main panel of that class, which contains
+     * the table and the global stats that are right above
+     * that table.
+     * @return The main panel of that class.
+     */
     public JPanel getMainPanel(){return mainPanel;}
 
-    public void setStatisticsTable(JTable statisticsTable) {
-        this.statisticsTable = statisticsTable;
+    /**
+     * Sets the JTable to display in the main panel.
+     * @param _statisticsTable The JTable Object to display
+     *                         in the main panel.
+     */
+    public void setStatisticsTable(JTable _statisticsTable) {
+        statisticsTable = _statisticsTable;
     }
 }
 
+/**
+ * This class creates a NonEditableTableModel instance in order
+ * for the table of the Bedwars statistics not to be editable by
+ * the user. The WindowBedWarsStats class calls it.
+ */
 class NonEditableTableModel extends DefaultTableModel {
+
+    /**
+     * Constructor of the NonEditableTableModel class
+     * @param columnNames A List containing the name of the
+     *                    columns of the table.
+     * @param rowCount The number of rows of the table.
+     */
     NonEditableTableModel(Object[] columnNames, int rowCount) {
         super(columnNames, rowCount);
     }
+
+    /**
+     * Makes sure that all the cells of the table can't be edited
+     * by the user.
+     * @param row The row whose value is to be queried
+     * @param column The column whose value is to be queried
+     * @return false in any case.
+     */
     @Override
     public boolean isCellEditable(int row, int column) {
         return false;

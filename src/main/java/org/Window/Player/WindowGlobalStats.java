@@ -1,6 +1,9 @@
 package org.Window.Player;
 
 import org.Player.Player;
+import org.Window.Game.WindowBedWarsStats;
+import org.Window.Game.WindowSkyBlockStats;
+import org.Window.Game.WindowSkyWarsStats;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,14 +12,54 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * The WindowGlobalStats class is meant to
+ * display all the global statistics of a player
+ * (Player class). It has a JPanel 'mainPanel' used
+ * to display all the global statistics of a player,
+ * but also another JPanel that uses a JLabel to
+ * display the skin of the player.
+ * @see Player
+ */
 public class WindowGlobalStats {
+
+    /**
+     * The panel that is added to the globalStatsPanel
+     * from the WindowPlayer class. It contains the
+     * global statistics of a player as well as his skin.
+     * @see WindowPlayer#globalStatsPanel
+     */
     private JPanel mainPanel;
+
+    /**
+     * This JLabel contains the image of the skin the player
+     * uses in Hypixel.
+     */
     private JLabel skinLabel;
+
+    /**
+     * This panel contains the JLabel above in order to
+     * display the skin properly.
+     * @see #skinLabel
+     */
     private JPanel JPanelSkin;
 
-    public WindowGlobalStats() {
+    /**
+     * Default constructor of the
+     * WindowGlobalStats class. Does
+     * nothing into it.
+     */
+    public WindowGlobalStats() {}
 
-    }
+    /**
+     * Constructor of the WindowGlobalStats class
+     * that uses a Player instance as a parameter
+     * to display his global statistics, such as his
+     * first and last login, his name, his Hypixel level...
+     * If one of those statistics is null, displays 'N/A'.
+     * @param player The player to display the global statistics of.
+     * @see Player#getAllStatistics()
+     */
     public WindowGlobalStats(Player player) {
         if(mainPanel.getComponentCount() != 0){
             mainPanel.removeAll();
@@ -76,12 +119,20 @@ public class WindowGlobalStats {
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,
-                    "Error displaying the global Statistics of the player.",
+                    "Can't display the global Statistics of the player.",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
             System.out.println("Can't display the global statistics of the researched player:\n");
             e.printStackTrace();
         }
     }
+
+    /**
+     * Gets the main panel of the global statistics of a player.
+     * @return The main panel of the global statistics.
+     * @see WindowBedWarsStats#getMainPanel()
+     * @see WindowSkyWarsStats#getMainPanel()
+     * @see WindowSkyBlockStats#getMainPanel()
+     */
     public JPanel getMainPanel(){return mainPanel;}
 }

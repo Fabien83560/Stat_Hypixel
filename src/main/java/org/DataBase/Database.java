@@ -1,30 +1,70 @@
 package org.DataBase;
 
-import org.Player.Player;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.Config.ConfigReader;
 
 import javax.swing.*;
 import java.sql.*;
 
+/**
+ * This class is meant to create and manage the database in order to store
+ * data related to the Player and FriendList classes.
+ */
 public class Database {
-    Connection dataBase;
-    String url,username,password;
 
+    /**
+     * The dataBase Object. Used to connect the application to its DataBase.
+     */
+    Connection dataBase;
+
+    /**
+     * The URL of the DataBase.
+     */
+    String url;
+
+    /**
+     * The username of the DataBase.
+     */
+    String username;
+
+    /**
+     * The password of the DataBase.
+     */
+    String password;
+
+    /**
+     * Constructor of the DataBase class. Connects the Database to the
+     * application through the URL, Username and Password of the Database.
+     * @see ConfigReader#getUrlDataBase()
+     * @see ConfigReader#getUsernameDataBase()
+     * @see ConfigReader#getPasswordDataBase()
+     */
     public Database(){
-        this.url = org.Config.ConfigReader.getUrlDataBase();
-        this.username = org.Config.ConfigReader.getUsernameDataBase();
-        this.password = org.Config.ConfigReader.getPasswordDataBase();
+        url = org.Config.ConfigReader.getUrlDataBase();
+        username = org.Config.ConfigReader.getUsernameDataBase();
+        password = org.Config.ConfigReader.getPasswordDataBase();
         try {
-            this.dataBase = DriverManager.getConnection(url, username, password);
+            dataBase = DriverManager.getConnection(url, username, password);
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public Connection getDataBase(){return this.dataBase;}
 
-    public void addFriendPlayerToDataBase(String uuid,String name){
+    /**
+     * Gets the DataBase object.
+     * @return A Connection Object containing the DataBase itself.
+     */
+    public Connection getDataBase(){return dataBase;}
+
+    /**
+     * Method to add a player to the 'FriendList' table of the DataBase, using his
+     * uuid and his name. If the INSERT command is unsuccessful, shows a dialog to
+     * the user telling him that an error occurred while trying to add him,
+     * otherwise, shows a dialog meaning that the player has successfully been added.
+     * @param uuid A String Object containing the uuid of the player to add.
+     * @param name A String Object containing the name of the player to add.
+     */
+    public void addFriendPlayerToDataBase(String uuid, String name){
         try {
             String sql = "INSERT INTO `FriendList`(`uuid`, `displayName`) VALUES (?,?)";
             PreparedStatement statement = dataBase.prepareStatement(sql);
@@ -38,10 +78,22 @@ public class Database {
                         JOptionPane.INFORMATION_MESSAGE);
         }
         catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error trying to add " + name + " to the FriendList table of the DataBase.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
-    public void removeFriendPlayerToDataBase(String name) {
+
+    /**
+     * Method to remove a player from the 'FriendList' table of the DataBase, using his
+     * name as a parameter to find him. If the DELETE command is unsuccessful, shows a dialog
+     * to the user telling him that an error occurred while trying to remove him,
+     * otherwise, shows a JOptionPane meaning that the player has successfully been removed.
+     * @param name A String Object containing the name of the player to remove.
+     */
+    public void removeFriendPlayerFromDataBase(String name) {
         try {
             String sql = "DELETE FROM `FriendList` WHERE displayName = ?";
             PreparedStatement statement = dataBase.prepareStatement(sql);
@@ -54,32 +106,56 @@ public class Database {
                         JOptionPane.INFORMATION_MESSAGE);
         }
         catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error trying to remove " + name + " to the FriendList table of the DataBase.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
-    public void addPlayerToDataBase(String uuid,String name) {
+
+    /**
+     * Add a player in the 'Player' table of the DataBase, using his
+     * uuid and his name. If the INSERT command is unsuccessful, throws a SQLException.
+     * @param uuid A String Object containing the uuid of the player to add.
+     * @param name A String Object containing the name of the player to add.
+     */
+    public void addPlayerToDataBase(String uuid, String name) {
         try {
-            String sql = "INSERT INTO Player (uuid,displayName) VALUES (?,?)";
+            String sql = "INSERT INTO Player (uuid,displayName) VALUES (?, ?)";
             PreparedStatement statement = dataBase.prepareStatement(sql);
-            statement.setString(1,uuid);
-            statement.setString(2,name);
-            int modify = statement.executeUpdate();
+            statement.setString(1, uuid);
+            statement.setString(2, name);
+            statement.executeUpdate();
         }
-        catch (Exception e) {
+        catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error trying to add " + name + " to the Player table of the DataBase.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
-    public String knowPlayer(String uuid,String Name) {
+
+    /**
+     * Method returning the uuid of a player if the latter is already known
+     * in the 'Player' table of the DataBase. If it isn't, returns null.
+     * @param uuid
+     * @param name
+     * @return A String Object containing the uuid of the player, if it's in the 'Player' table.
+     *         Otherwise, returns null.
+     */
+    public String knowPlayer(String uuid, String name) {
         try {
             String sql = "SELECT uuid FROM Player WHERE uuid = ? OR displayName = ?";
             PreparedStatement statement = dataBase.prepareStatement(sql);
-            statement.setString(1,uuid);
-            statement.setString(2,Name);
+            statement.setString(1, uuid);
+            statement.setString(2, name);
             ResultSet result = statement.executeQuery();
             result.next();
             return result.getString("uuid");
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             return null;
         }
     }
