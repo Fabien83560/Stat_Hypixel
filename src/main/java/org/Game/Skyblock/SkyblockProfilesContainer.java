@@ -13,10 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SkyblockProfilesContainer {
     String cuteName;
@@ -43,6 +40,14 @@ public class SkyblockProfilesContainer {
     String highestBid;
     String auctionCompleted;
     String coinsEarned;
+    String totalMobKill;
+    String totalDeaths;
+    String giftGiven;
+    String giftReceived;
+    String totalCandy;
+    String greenCandy;
+    String purpleCandy;
+    Map<String,String> essenceList = new HashMap<>();
     public SkyblockProfilesContainer(String profileUuid, String playerUuid, String profileName) {
         final JSONObject json = fetchProfile(profileUuid).getJSONObject("profile");
         cuteName = profileName;
@@ -125,6 +130,16 @@ public class SkyblockProfilesContainer {
         catch (JSONException e) {
             coinsEarned = "0";
         }
+        totalMobKill = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("kills").get("total"));
+        totalDeaths = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("deaths").get("total"));
+        giftGiven = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("gifts").get("total_given"));
+        giftReceived = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("gifts").get("total_received"));
+        totalCandy = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("candy_collected").get("total"));
+        greenCandy = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("candy_collected").get("green_candy"));
+        purpleCandy = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("candy_collected").get("purple_candy"));
+        String[] essences = {"WITHER","DRAGON","SPIDER","UNDEAD","DIAMOND","ICE","GOLD","CRIMSON"};
+        for(String essence : essences)
+            essenceList.putIfAbsent(essence,String.valueOf(jsonMember.getJSONObject("currencies").getJSONObject("essence").getJSONObject(essence).get("current")));
     }
 
     public static JSONObject fetchProfile(String profileUuid) {
@@ -198,5 +213,18 @@ public class SkyblockProfilesContainer {
         System.out.println("Total Bids : " + totalBids);
         System.out.println("Highest Bid : " + highestBid);
         System.out.println("Coins Earned : " + coinsEarned);
+        System.out.println();
+        System.out.println("OTHER STATISTICS");
+        System.out.println("Total Mobs Kills : " + totalMobKill);
+        System.out.println("Total Deaths : " + totalDeaths);
+        System.out.println("Gifts Given : " + giftGiven);
+        System.out.println("Gifts received : " + giftReceived);
+        System.out.println("Total Candy : " + totalCandy);
+        System.out.println("Green Candy : " + greenCandy);
+        System.out.println("Purple Candy : " + purpleCandy);
+        System.out.println();
+        System.out.println("ESSENCE");
+        for(String key : essenceList.keySet())
+            System.out.println(key + " Essence : " + essenceList.get(key));
     }
 }
