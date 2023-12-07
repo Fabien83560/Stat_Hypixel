@@ -33,6 +33,8 @@ public class SkyblockProfilesContainer {
     Dungeon dungeon;
     String totalXpSlayer;
     List<Slayer> slayerList = new ArrayList<>();
+    String milestone;
+    String milestoneUnlockTiers;
     public SkyblockProfilesContainer(String profileUuid, String playerUuid, String profileName) {
         final JSONObject json = fetchProfile(profileUuid).getJSONObject("profile");
         cuteName = profileName;
@@ -77,6 +79,8 @@ public class SkyblockProfilesContainer {
             }
         }
         totalXpSlayer = String.valueOf(res);
+        milestone = String.valueOf(jsonMember.getJSONObject("bestiary").getJSONObject("milestone").get("last_claimed_milestone"));
+        milestoneUnlockTiers = String.valueOf(Double.parseDouble(milestone) * 10);
     }
 
     public static JSONObject fetchProfile(String profileUuid) {
@@ -138,5 +142,9 @@ public class SkyblockProfilesContainer {
             System.out.println("Boss Tier 4 : " + slayer.getTier4());
             System.out.println("Boss Tier 5 : " + slayer.getTier5());
         }
+        System.out.println("----------------");
+        System.out.println("BESTIARY");
+        System.out.println("Milestone : " + milestone);
+        System.out.println("Unlocked Milestone Tiers : " + milestoneUnlockTiers);
     }
 }
