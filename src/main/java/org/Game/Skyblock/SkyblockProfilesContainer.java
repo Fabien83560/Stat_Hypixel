@@ -5,6 +5,7 @@ import org.Game.Skyblock.Stats.Fishing.Fishing;
 import org.Game.Skyblock.Stats.Mining;
 import org.Game.Skyblock.Stats.Pet;
 import org.Game.Skyblock.Stats.Skills;
+import org.Game.Skyblock.Stats.Slayer;
 import org.Player.Player;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +31,8 @@ public class SkyblockProfilesContainer {
     Mining mining;
     Fishing fishing;
     Dungeon dungeon;
+    String totalXpSlayer;
+    List<Slayer> slayerList = new ArrayList<>();
     public SkyblockProfilesContainer(String profileUuid, String playerUuid, String profileName) {
         final JSONObject json = fetchProfile(profileUuid).getJSONObject("profile");
         cuteName = profileName;
@@ -61,6 +64,19 @@ public class SkyblockProfilesContainer {
         mining = new Mining(jsonMember.getJSONObject("mining_core"));
         fishing = new Fishing(jsonMember);
         dungeon = new Dungeon(jsonMember.getJSONObject("dungeons"));
+        String[] slayers = {"zombie","spider","wolf","enderman","blaze","vampire"};
+        double res = 0.0;
+        for(String slayer : slayers) {
+            try {
+                Slayer s = new Slayer(slayer,jsonMember.getJSONObject("slayer").getJSONObject("slayer_bosses").getJSONObject(slayer));
+                res +=  Double.parseDouble(s.getExp());
+                slayerList.add(s);
+            }
+            catch (JSONException e) {
+                slayerList.add(new Slayer(slayer,new JSONObject()));
+            }
+        }
+        totalXpSlayer = String.valueOf(res);
     }
 
     public static JSONObject fetchProfile(String profileUuid) {
@@ -110,5 +126,17 @@ public class SkyblockProfilesContainer {
         fishing.display();
         System.out.println();
         dungeon.display();
+        System.out.println("SLAYER");
+        System.out.println("Total Slayer Xp : " + totalXpSlayer);
+        for(Slayer slayer : slayerList) {
+            System.out.println("----------------");
+            System.out.println("Name : " + slayer.getName());
+            System.out.println("Exp : " + slayer.getExp());
+            System.out.println("Boss Tier 1 : " + slayer.getTier1());
+            System.out.println("Boss Tier 2 : " + slayer.getTier2());
+            System.out.println("Boss Tier 3 : " + slayer.getTier3());
+            System.out.println("Boss Tier 4 : " + slayer.getTier4());
+            System.out.println("Boss Tier 5 : " + slayer.getTier5());
+        }
     }
 }
