@@ -37,6 +37,12 @@ public class SkyblockProfilesContainer {
     String milestone;
     String milestoneUnlockTiers;
     Crimson crimson;
+    String auctionsCreated;
+    String totalFees;
+    String totalBids;
+    String highestBid;
+    String auctionCompleted;
+    String coinsEarned;
     public SkyblockProfilesContainer(String profileUuid, String playerUuid, String profileName) {
         final JSONObject json = fetchProfile(profileUuid).getJSONObject("profile");
         cuteName = profileName;
@@ -88,6 +94,36 @@ public class SkyblockProfilesContainer {
         }
         catch (JSONException e) {
             crimson = null;
+        }
+        try {
+            auctionsCreated = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("created"));
+        }
+        catch (JSONException e) {
+            auctionsCreated = "0";
+        }
+        try {
+            totalFees = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("fees"));
+        }
+        catch (JSONException e) {
+            totalFees = "0";
+        }
+        try {
+            totalBids = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("bids"));
+        }
+        catch (JSONException e) {
+            totalBids = "0";
+        }
+        try {
+            highestBid = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("highest_bid"));
+        }
+        catch (JSONException e) {
+            highestBid = "0";
+        }
+        try {
+            coinsEarned = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("gold_earned"));
+        }
+        catch (JSONException e) {
+            coinsEarned = "0";
         }
     }
 
@@ -155,5 +191,12 @@ public class SkyblockProfilesContainer {
         System.out.println("Milestone : " + milestone);
         System.out.println("Unlocked Milestone Tiers : " + milestoneUnlockTiers);
         crimson.display();
+        System.out.println();
+        System.out.println("AUCTIONS");
+        System.out.println("Total Auctions Created : " + auctionsCreated);
+        System.out.println("Total Fees : " + totalFees);
+        System.out.println("Total Bids : " + totalBids);
+        System.out.println("Highest Bid : " + highestBid);
+        System.out.println("Coins Earned : " + coinsEarned);
     }
 }
