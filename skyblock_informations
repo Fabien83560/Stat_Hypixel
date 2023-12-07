@@ -121,6 +121,7 @@ barbarian réputation : nether_island_player_data/barbarians_reputation
 
 Pour chaque tiers de Kuudra :
 total kill : nether_island_player_data/kuudra_completed_tiers/(nom du tiers)
+best wave
 
 total point dojo : SOMME DE TOUTE LES CATEGORIES DOJO nether_island_player_data/dojo/
 

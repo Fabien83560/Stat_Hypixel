@@ -1,5 +1,6 @@
 package org.Game.Skyblock;
 
+import org.Game.Skyblock.Stats.Crimson.Crimson;
 import org.Game.Skyblock.Stats.Dungeon.Dungeon;
 import org.Game.Skyblock.Stats.Fishing.Fishing;
 import org.Game.Skyblock.Stats.Mining;
@@ -35,6 +36,7 @@ public class SkyblockProfilesContainer {
     List<Slayer> slayerList = new ArrayList<>();
     String milestone;
     String milestoneUnlockTiers;
+    Crimson crimson;
     public SkyblockProfilesContainer(String profileUuid, String playerUuid, String profileName) {
         final JSONObject json = fetchProfile(profileUuid).getJSONObject("profile");
         cuteName = profileName;
@@ -81,6 +83,12 @@ public class SkyblockProfilesContainer {
         totalXpSlayer = String.valueOf(res);
         milestone = String.valueOf(jsonMember.getJSONObject("bestiary").getJSONObject("milestone").get("last_claimed_milestone"));
         milestoneUnlockTiers = String.valueOf(Double.parseDouble(milestone) * 10);
+        try {
+            crimson = new Crimson(jsonMember.getJSONObject("nether_island_player_data"));
+        }
+        catch (JSONException e) {
+            crimson = null;
+        }
     }
 
     public static JSONObject fetchProfile(String profileUuid) {
@@ -146,5 +154,6 @@ public class SkyblockProfilesContainer {
         System.out.println("BESTIARY");
         System.out.println("Milestone : " + milestone);
         System.out.println("Unlocked Milestone Tiers : " + milestoneUnlockTiers);
+        crimson.display();
     }
 }
