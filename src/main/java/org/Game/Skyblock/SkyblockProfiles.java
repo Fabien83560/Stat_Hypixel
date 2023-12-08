@@ -15,7 +15,20 @@ public class SkyblockProfiles {
         for(String uuid : uuidProfiles)
         {
             profilesNames.put(uuid,String.valueOf(jsonProfiles.getJSONObject(uuid).get("cute_name")));
-            profiles.put(uuid,new SkyblockProfilesContainer(uuid,playerUuid));
+            try {
+                profiles.put(uuid,new SkyblockProfilesContainer(uuid,playerUuid,profilesNames.get(uuid)));
+            }
+            catch (Exception e) {
+                profiles.put(uuid, null);
+            }
         }
+    }
+
+    public Map<String, SkyblockProfilesContainer> getProfiles() {
+        return profiles;
+    }
+
+    public Map<String, String> getProfilesNames() {
+        return profilesNames;
     }
 }
