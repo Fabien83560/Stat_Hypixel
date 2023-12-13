@@ -18,7 +18,7 @@
           <visible value="true"/>
         </properties>
       </component>
-      <grid id="9ffe1" binding="testPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="9ffe1" binding="globalStatsBedwars" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints border-constraint="North"/>
         <properties/>
         <border type="none"/>
