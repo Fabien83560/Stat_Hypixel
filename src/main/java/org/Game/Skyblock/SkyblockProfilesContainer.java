@@ -31,9 +31,9 @@ public class SkyblockProfilesContainer {
     Dungeon dungeon;
     String totalXpSlayer;
     List<Slayer> slayerList = new ArrayList<>();
+    Crimson crimson;
     String milestone;
     String milestoneUnlockTiers;
-    Crimson crimson;
     String auctionsCreated;
     String totalFees;
     String totalBids;
