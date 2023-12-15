@@ -9,13 +9,13 @@ public class Fishing {
     String itemsFished;
     String treasuresFished;
     String largeTreasuresFished;
-    String totalTropyFish;
+    String totalTrophyFish;
     List<TrophyFish> trophyFishList = new ArrayList<>();
     public Fishing(JSONObject jsonMember) {
         itemsFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("normal"));
         treasuresFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("treasure"));
         largeTreasuresFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("large_treasure"));
-        totalTropyFish = String.valueOf(jsonMember.getJSONObject("trophy_fish").get("total_caught"));
+        totalTrophyFish = String.valueOf(jsonMember.getJSONObject("trophy_fish").get("total_caught"));
         String[] trophyList = {"sulphur_skitter","obfuscated_fish_1","steaming_hot_flounder","obfuscated_fish_2","gusher","blobfish","slugfish","obfuscated_fish_3","flyfish","lavahorse","volcanic_stonefish","vanille","skeleton_fish","moldfin","soul_fish","mana_ray","karate_fish","golden_fish"};
         JSONObject trophyObject = jsonMember.getJSONObject("trophy_fish");
         for(String trophy : trophyList)
@@ -27,7 +27,7 @@ public class Fishing {
         System.out.println("Items Fished : " + itemsFished);
         System.out.println("Treasures Fished : " + treasuresFished);
         System.out.println("Large Treasures Fished : " + largeTreasuresFished);
-        System.out.println("Total Trophy Fish : " + totalTropyFish);
+        System.out.println("Total Trophy Fish : " + totalTrophyFish);
         for(TrophyFish trophy : trophyFishList) {
             System.out.println("----------------");
             System.out.println("Name : " + trophy.getName());
