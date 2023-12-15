@@ -130,6 +130,12 @@ public class SkyblockProfilesContainer {
         catch (JSONException e) {
             coinsEarned = "0";
         }
+        try {
+            auctionCompleted = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("completed"));
+        }
+        catch (JSONException e) {
+            auctionCompleted = "0";
+        }
         totalMobKill = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("kills").get("total"));
         totalDeaths = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("deaths").get("total"));
         giftGiven = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("gifts").get("total_given"));
@@ -212,6 +218,7 @@ public class SkyblockProfilesContainer {
         System.out.println("Total Fees : " + totalFees);
         System.out.println("Total Bids : " + totalBids);
         System.out.println("Highest Bid : " + highestBid);
+        System.out.println("Auctions Completed : " + auctionCompleted );
         System.out.println("Coins Earned : " + coinsEarned);
         System.out.println();
         System.out.println("OTHER STATISTICS");
