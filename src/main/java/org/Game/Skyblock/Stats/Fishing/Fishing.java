@@ -1,5 +1,6 @@
 package org.Game.Skyblock.Stats.Fishing;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -12,15 +13,44 @@ public class Fishing {
     String totalTrophyFish;
     List<TrophyFish> trophyFishList = new ArrayList<>();
     public Fishing(JSONObject jsonMember) {
-        itemsFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("normal"));
-        treasuresFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("treasure"));
-        largeTreasuresFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("large_treasure"));
-        totalTrophyFish = String.valueOf(jsonMember.getJSONObject("trophy_fish").get("total_caught"));
+        try{
+            itemsFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("normal"));
+        }
+        catch (JSONException e)
+        {
+            itemsFished = "";
+        }
+        try {
+            treasuresFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("treasure"));
+        }
+        catch (JSONException e)
+        {
+            treasuresFished = "0";
+        }
+        try {
+            largeTreasuresFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("large_treasure"));
+        }
+        catch (JSONException e)
+        {
+            largeTreasuresFished = "0";
+        }
+        try {
+            totalTrophyFish = String.valueOf(jsonMember.getJSONObject("trophy_fish").get("total_caught"));
+        }
+        catch (JSONException e)
+        {
+            totalTrophyFish = "0";
+        }
         String[] trophyList = {"sulphur_skitter","obfuscated_fish_1","steaming_hot_flounder","obfuscated_fish_2","gusher","blobfish","slugfish","obfuscated_fish_3","flyfish","lavahorse","volcanic_stonefish","vanille","skeleton_fish","moldfin","soul_fish","mana_ray","karate_fish","golden_fish"};
-        JSONObject trophyObject = jsonMember.getJSONObject("trophy_fish");
-        for(String trophy : trophyList)
-            trophyFishList.add(new TrophyFish(trophy,trophyObject));
-
+        try {
+            JSONObject trophyObject = jsonMember.getJSONObject("trophy_fish");
+            for(String trophy : trophyList)
+                trophyFishList.add(new TrophyFish(trophy,trophyObject));
+        }
+        catch (JSONException e)
+        {
+            trophyFishList = null;
+        }
     }
     public void display() {
         System.out.println("FISHING");

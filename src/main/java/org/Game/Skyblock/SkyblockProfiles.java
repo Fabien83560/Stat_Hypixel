@@ -28,6 +28,10 @@ public class SkyblockProfiles {
         return profiles;
     }
 
+    public SkyblockProfilesContainer getProfile(String uuid) {
+        return profiles.get(uuid);
+    }
+
     public Map<String, String> getProfilesNames() {
         return profilesNames;
     }

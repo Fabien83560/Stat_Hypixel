@@ -1,5 +1,6 @@
 package org.Window.Player;
 
+import org.Game.Skyblock.SkyblockProfilesContainer;
 import org.Player.Player;
 import org.Window.Game.WindowBedWarsStats;
 import org.Window.Game.WindowSkyBlockStats;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Set;
 
 /**
  * THe WindowPlayer class is used to display all
@@ -387,7 +389,13 @@ public class WindowPlayer extends JFrame {
         windowGlobalStats = new WindowGlobalStats(player);
         windowSkyWarsStats = new WindowSkyWarsStats(player);
         windowBedWarsStats = new WindowBedWarsStats(player);
-        windowSkyBlockStats = new WindowSkyBlockStats(player);
+
+        SkyblockProfilesContainer profile = null;
+        Set<String> set = player.getGames().getSkyblock().getProfilesNames().keySet();
+        for (String s : set) {
+            profile = player.getGames().getSkyblock().getProfile(s);
+        }
+        windowSkyBlockStats = new WindowSkyBlockStats(profile);
         setGlobalStatsPanel(windowGlobalStats.getMainPanel());
         currentModeStatisticsLabel.setText("BedWars Statistics");
         setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
