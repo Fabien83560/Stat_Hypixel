@@ -87,7 +87,7 @@ public class SkyblockProfilesContainer {
             try {
                 skills = new Skills(jsonMember.getJSONObject("player_data").getJSONObject("experience"));
             } catch (JSONException e) {
-                skills = null;
+                skills = new Skills("null");
             }
             JSONArray petsArray = jsonMember.getJSONObject("pets_data").getJSONArray("pets");
             for (int i = 0; i < petsArray.length(); i++)

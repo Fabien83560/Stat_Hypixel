@@ -29,9 +29,6 @@ public class WindowSkyBlockStats {
     private JLabel magicalPowerLabel;
     private JLabel fairySoulLabel;
 
-    public WindowSkyBlockStats() {
-
-    }
     public WindowSkyBlockStats(SkyblockProfilesContainer profile) {
         cuteNameLabel.setText("Profile name : " + profile.getCuteName());
         levelLabel.setText("Level : " + profile.getLevel());
@@ -40,7 +37,15 @@ public class WindowSkyBlockStats {
         purseBankLabel.setText("Purse Bank : " + profile.getPurseBank());
         magicalPowerLabel.setText("Magical Power : " + profile.getMagicalPower());
         fairySoulLabel.setText("Fairy Souls Collected : " + profile.getFairySoulCollected());
-        skillPanel = new WindowSkill(profile.getSkills()).getMainPanel();
+        setSkillPanel(new WindowSkill(profile.getSkills()).getMainPanel());
+    }
+
+    public void setSkillPanel(JPanel panel) {
+        skillPanel.setLayout(new BoxLayout(skillPanel, BoxLayout.Y_AXIS));
+        skillPanel.removeAll();
+        skillPanel.add(panel);
+        skillPanel.revalidate();
+        skillPanel.repaint();
     }
     public JPanel getMainPanel(){return mainPanel;}
 }

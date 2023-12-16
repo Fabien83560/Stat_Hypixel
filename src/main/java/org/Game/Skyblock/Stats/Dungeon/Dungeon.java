@@ -65,8 +65,15 @@ public class Dungeon {
                 for (int i = 0; i < 8; i++) {
                     try {
                         String timePlayed = "";
-                        if (m.equals("catacombs"))
-                            timePlayed = String.valueOf(modeObject.getJSONObject("times_played").get(String.valueOf(i)));
+                        if (m.equals("catacombs")) {
+                            try {
+                                timePlayed = String.valueOf(modeObject.getJSONObject("times_played").get(String.valueOf(i)));
+                            }
+                            catch (JSONException e)
+                            {
+                                timePlayed = "0";
+                            }
+                        }
                         if (!(m.equals("master_catacombs") && i == 0)) {
                             String tierCompletions = "";
                             try {

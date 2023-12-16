@@ -50,7 +50,7 @@ public class WindowSkill {
     private JLabel foragingAmountLabel;
     private JLabel fishingAmountLabel;
     private JLabel enchantingAmountLabel;
-    private JLabel AlchemyamountLabel;
+    private JLabel alchemyAmountLabel;
     private JLabel carpentryAmountLabel;
     private JLabel runecraftingAmountLabel;
     private JLabel tamingAmountLabel;
@@ -58,7 +58,20 @@ public class WindowSkill {
     private JLabel socialAmountLabel;
 
     public WindowSkill(Skills skill) {
+        titleLabel.setText("Skills");
+        skillAverageLabel.setText(String.valueOf(skill.getSkillAverage()));
 
+        farmingAmountLabel.setText(skill.get("SKILL_FARMING") + "exp");
+        miningAmountLabel.setText(skill.get("SKILL_MINING") + "exp");
+        combatAmountLabel.setText(skill.get("SKILL_COMBAT") + "exp");
+        foragingAmountLabel.setText(skill.get("SKILL_FORAGING") + "exp");
+        fishingAmountLabel.setText(skill.get("SKILL_FISHING") + "exp");
+        enchantingAmountLabel.setText(skill.get("SKILL_ENCHANTING") + "exp");
+        alchemyAmountLabel.setText(skill.get("SKILL_ALCHEMY") + "exp");
+        carpentryAmountLabel.setText(skill.get("SKILL_CARPENTRY") + "exp");
+        runecraftingAmountLabel.setText(skill.get("SKILL_RUNECRAFTING") + "exp");
+        tamingAmountLabel.setText(skill.get("SKILL_TAMING") + "exp");
+        socialAmountLabel.setText(skill.get("SKILL_SOCIAL") + "exp");
     }
 
     public JPanel getMainPanel() {
