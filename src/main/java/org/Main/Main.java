@@ -1,5 +1,6 @@
 package org.Main;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import org.Window.Window;
 import org.Window.Player.WindowPlayer;
 
@@ -20,6 +21,13 @@ public class Main {
      */
     public static void main(String[] args)
     {
+        FlatDarkLaf.setup();
+        try{
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        }
+        catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         WindowPlayer windowPlayer = new WindowPlayer();
         Window w = new Window(windowPlayer.getMainPanel());
     }
