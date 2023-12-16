@@ -3,6 +3,7 @@ package org.Window.Game.SkyBlock;
 import org.Game.Skyblock.SkyblockProfilesContainer;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class WindowSkyBlockStats {
     private JPanel mainPanel;
@@ -26,6 +27,14 @@ public class WindowSkyBlockStats {
     private JLabel purseBankLabel;
     private JLabel magicalPowerLabel;
     private JLabel fairySoulLabel;
+    private JLabel titleOtherLabel;
+    private JLabel totalMobsKillsLabel;
+    private JLabel totalDeathsLabel;
+    private JLabel giftsGivenLabel;
+    private JLabel totalCandyLabel;
+    private JLabel purpleCandyLabel;
+    private JLabel greenCandyLabel;
+    private JLabel giftsReceivedLabel;
 
     public WindowSkyBlockStats(SkyblockProfilesContainer profile) {
         cuteNameLabel.setText("Profile name : " + profile.getCuteName());
@@ -35,6 +44,7 @@ public class WindowSkyBlockStats {
         purseBankLabel.setText("Purse Bank : " + profile.getPurseBank());
         magicalPowerLabel.setText("Magical Power : " + profile.getMagicalPower());
         fairySoulLabel.setText("Fairy Souls Collected : " + profile.getFairySoulCollected());
+
         setSkillPanel(new WindowSkill(profile.getSkills()).getMainPanel());
         setPetsPanel(new WindowPets(profile.getPetList()).getMainPanel());
         setMiningPanel(new WindowMining(profile.getMining()).getMainPanel());
@@ -42,6 +52,16 @@ public class WindowSkyBlockStats {
         setDungeonPanel(new WindowDungeon(profile.getDungeon()).getMainPanel());
         setSlayerPanel(new WindowSlayer(profile.getSlayerList(),profile.getTotalXpSlayer()).getMainPanel());
         setCrimsonIslePanel(new WindowCrimsonIsle(profile.getCrimson()).getMainPanel());
+        setBestiaryPanel(new WindowBestiary(profile.getMilestone(),profile.getMilestoneUnlockTiers()).getMainPanel());
+
+        titleOtherLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
+        totalMobsKillsLabel.setText("Total Mobs Kills : " + profile.getTotalMobKill());
+        totalDeathsLabel.setText("Total Deaths : " + profile.getTotalDeaths());
+        giftsGivenLabel.setText("Gifts Given : " + profile.getGiftGiven());
+        giftsReceivedLabel.setText("Gifts Received : " + profile.getGiftReceived());
+        totalCandyLabel.setText("Total Candy : " + profile.getTotalCandy());
+        greenCandyLabel.setText("Green Candy : " + profile.getGreenCandy());
+        purpleCandyLabel.setText("Purple candy : " + profile.getPurpleCandy());
     }
 
     public void setSkillPanel(JPanel panel) {
@@ -91,12 +111,21 @@ public class WindowSkyBlockStats {
         slayerPanel.revalidate();
         slayerPanel.repaint();
     }
+
     public void setCrimsonIslePanel(JPanel panel) {
         crimsonIslePanel.setLayout(new BoxLayout(crimsonIslePanel, BoxLayout.Y_AXIS));
         crimsonIslePanel.removeAll();
         crimsonIslePanel.add(panel);
         crimsonIslePanel.revalidate();
         crimsonIslePanel.repaint();
+    }
+
+    public void setBestiaryPanel(JPanel panel) {
+        bestiaryPanel.setLayout(new BoxLayout(bestiaryPanel, BoxLayout.Y_AXIS));
+        bestiaryPanel.removeAll();
+        bestiaryPanel.add(panel);
+        bestiaryPanel.revalidate();
+        bestiaryPanel.repaint();
     }
     public JPanel getMainPanel(){return mainPanel;}
 }
