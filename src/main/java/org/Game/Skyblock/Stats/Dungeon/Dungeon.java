@@ -2,19 +2,56 @@ package org.Game.Skyblock.Stats.Dungeon;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements the Dungeon statistics of
+ * a player's profile in Skyblock.
+ */
 public class Dungeon {
+
+    /**
+     * String containing the dungeon experience of the Dungeon in Skyblock.
+     */
     String catacomb;
+
+    /**
+     * String containing the experience of the mage class of the Dungeon in Skyblock.
+     */
     String mage;
+
+    /**
+     * String containing the experience of the archer class of the Dungeon in Skyblock.
+     */
     String archer;
+
+    /**
+     * String containing the experience of the tank class of the Dungeon in Skyblock.
+     */
     String tank;
+
+    /**
+     * String containing the experience of the berserk class of the Dungeon in Skyblock.
+     */
     String berserk;
+
+    /**
+     * String containing the experience of the healer class of the Dungeon in Skyblock.
+     */
     String healer;
+
+    /**
+     * List containing the different floors of the Dungeon that a player unlocked in Skyblock.
+     */
     List<Floor> floorList = new ArrayList<>();
 
+    /**
+     * Constructor of the Dungeon class. The parameter is a
+     * JSONObject containing the Dungeon data of the API.
+     * @param dungeonObject A JSONObject containing all the data
+     *                      of the Dungeon.
+     */
     public Dungeon(JSONObject dungeonObject) {
         try {
             catacomb = String.valueOf(dungeonObject.getJSONObject("dungeon_types").getJSONObject("catacombs").get("experience"));
@@ -66,7 +103,12 @@ public class Dungeon {
                     try {
                         String timePlayed = "";
                         if (m.equals("catacombs"))
-                            timePlayed = String.valueOf(modeObject.getJSONObject("times_played").get(String.valueOf(i)));
+                            try{
+                                timePlayed = String.valueOf(modeObject.getJSONObject("times_played").get(String.valueOf(i)));
+                            }
+                            catch(JSONException e){
+                                timePlayed = "0";
+                            }
                         if (!(m.equals("master_catacombs") && i == 0)) {
                             String tierCompletions = "";
                             try {
@@ -131,30 +173,65 @@ public class Dungeon {
         }
     }
 
+    /**
+     * Gets the 'floorList' member of the class.
+     * @return A List of 'Floor' Object.
+     * @see Dungeon#floorList
+     */
     public List<Floor> getFloorList() {
         return floorList;
     }
 
+    /**
+     * Gets the 'archer' member of the class.
+     * @return A String Object.
+     * @see Dungeon#archer
+     */
     public String getArcher() {
         return archer;
     }
 
+    /**
+     * Gets the 'berserk' member of the class.
+     * @return A String Object.
+     * @see Dungeon#berserk
+     */
     public String getBerserk() {
         return berserk;
     }
 
+    /**
+     * Gets the 'catacomb' member of the class.
+     * @return A String Object.
+     * @see Dungeon#catacomb
+     */
     public String getCatacomb() {
         return catacomb;
     }
 
+    /**
+     * Gets the 'healer' member of the class.
+     * @return A String Object.
+     * @see Dungeon#healer
+     */
     public String getHealer() {
         return healer;
     }
 
+    /**
+     * Gets the 'mage' member of the class.
+     * @return A String Object.
+     * @see Dungeon#mage
+     */
     public String getMage() {
         return mage;
     }
 
+    /**
+     * Gets the 'tank' member of the class.
+     * @return A String Object.
+     * @see Dungeon#tank
+     */
     public String getTank() {
         return tank;
     }
