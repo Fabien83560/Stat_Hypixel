@@ -14,9 +14,9 @@ public class WindowPet {
 
     public WindowPet(Pet pet) {
         typeLabel.setText(pet.getType());
-        expLabel.setText(pet.getExp());
+        expLabel.setText("Exp : " + pet.getExp());
         tierLabel.setText(pet.getTier());
-        candyUsedLabel.setText(pet.getCandyUsed());
+        candyUsedLabel.setText("Candy Used : " + pet.getCandyUsed());
 
         String tier = pet.getTier();
         switch (tier) {

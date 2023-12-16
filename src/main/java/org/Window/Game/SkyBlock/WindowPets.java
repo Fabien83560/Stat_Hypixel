@@ -11,6 +11,7 @@ public class WindowPets {
     private JPanel petsListPanel;
     private JPanel globalPanel;
     private JLabel titleLabel;
+    private JScrollPane scrollPane;
 
     public WindowPets(List<Pet> petList) {
         titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));

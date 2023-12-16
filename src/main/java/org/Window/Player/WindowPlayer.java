@@ -108,6 +108,7 @@ public class WindowPlayer extends JFrame {
      * this label isn't displayed.
      */
     private JLabel currentModeStatisticsLabel;
+    private JScrollPane currentModeScrollPane;
 
     /**
      * Instance of the WindowGlobalStats class. Used

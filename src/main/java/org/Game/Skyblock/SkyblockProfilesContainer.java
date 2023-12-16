@@ -31,7 +31,7 @@ public class SkyblockProfilesContainer {
     Fishing fishing;
     Dungeon dungeon;
     String totalXpSlayer;
-    List<Slayer> slayerList = new ArrayList<>();
+    Map<String,Slayer> slayerList = new HashMap<>();
     Crimson crimson;
     String milestone;
     String milestoneUnlockTiers;
@@ -113,9 +113,9 @@ public class SkyblockProfilesContainer {
                 try {
                     Slayer s = new Slayer(slayer, jsonMember.getJSONObject("slayer").getJSONObject("slayer_bosses").getJSONObject(slayer));
                     res += Double.parseDouble(s.getExp());
-                    slayerList.add(s);
+                    slayerList.put(slayer,s);
                 } catch (JSONException e) {
-                    slayerList.add(new Slayer(slayer, new JSONObject()));
+                    slayerList.put(slayer,new Slayer(slayer, new JSONObject()));
                 }
             }
             totalXpSlayer = String.valueOf(res);
@@ -282,16 +282,16 @@ public class SkyblockProfilesContainer {
         dungeon.display();
         System.out.println("SLAYER");
         System.out.println("Total Slayer Xp : " + totalXpSlayer);
-        for(Slayer slayer : slayerList) {
-            System.out.println("----------------");
-            System.out.println("Name : " + slayer.getName());
-            System.out.println("Exp : " + slayer.getExp());
-            System.out.println("Boss Tier 1 : " + slayer.getTier1());
-            System.out.println("Boss Tier 2 : " + slayer.getTier2());
-            System.out.println("Boss Tier 3 : " + slayer.getTier3());
-            System.out.println("Boss Tier 4 : " + slayer.getTier4());
-            System.out.println("Boss Tier 5 : " + slayer.getTier5());
-        }
+        //for(Slayer slayer : slayerList.keySet()) {
+            //System.out.println("----------------");
+            //System.out.println("Name : " + slayer.getName());
+            //System.out.println("Exp : " + slayer.getExp());
+            //System.out.println("Boss Tier 1 : " + slayer.getTier1());
+            //System.out.println("Boss Tier 2 : " + slayer.getTier2());
+            //System.out.println("Boss Tier 3 : " + slayer.getTier3());
+            //System.out.println("Boss Tier 4 : " + slayer.getTier4());
+            //System.out.println("Boss Tier 5 : " + slayer.getTier5());
+        //}
         System.out.println("----------------");
         System.out.println("BESTIARY");
         System.out.println("Milestone : " + milestone);
@@ -336,7 +336,7 @@ public class SkyblockProfilesContainer {
         return fishing;
     }
 
-    public List<Slayer> getSlayerList() {
+    public Map<String, Slayer> getSlayerList() {
         return slayerList;
     }
 

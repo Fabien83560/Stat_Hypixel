@@ -39,6 +39,8 @@ public class WindowSkyBlockStats {
         setPetsPanel(new WindowPets(profile.getPetList()).getMainPanel());
         setMiningPanel(new WindowMining(profile.getMining()).getMainPanel());
         setFishingPanel(new WindowFishing(profile.getFishing()).getMainPanel());
+        setDungeonPanel(new WindowDungeon(profile.getDungeon()).getMainPanel());
+        setSlayerPanel(new WindowSlayer(profile.getSlayerList(),profile.getTotalXpSlayer()).getMainPanel());
     }
 
     public void setSkillPanel(JPanel panel) {
@@ -71,6 +73,22 @@ public class WindowSkyBlockStats {
         fishingPanel.add(panel);
         fishingPanel.revalidate();
         fishingPanel.repaint();
+    }
+
+    public void setDungeonPanel(JPanel panel) {
+        dungeonPanel.setLayout(new BoxLayout(dungeonPanel, BoxLayout.Y_AXIS));
+        dungeonPanel.removeAll();
+        dungeonPanel.add(panel);
+        dungeonPanel.revalidate();
+        dungeonPanel.repaint();
+    }
+
+    public void setSlayerPanel(JPanel panel) {
+        slayerPanel.setLayout(new BoxLayout(slayerPanel, BoxLayout.Y_AXIS));
+        slayerPanel.removeAll();
+        slayerPanel.add(panel);
+        slayerPanel.revalidate();
+        slayerPanel.repaint();
     }
     public JPanel getMainPanel(){return mainPanel;}
 }
