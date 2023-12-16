@@ -78,37 +78,58 @@ public class Dungeon {
                             String tierCompletions = "";
                             try {
                                 tierCompletions = String.valueOf(modeObject.getJSONObject("tier_completions").get(String.valueOf(i)));
-                            } catch (JSONException e) {
+                            }
+                            catch (JSONException e)
+                            {
+                                tierCompletions = "0";
                             }
                             String fastedTime = "";
                             try {
                                 fastedTime = String.valueOf(modeObject.getJSONObject("fastest_time").get(String.valueOf(i)));
-                            } catch (JSONException e) {
+                            }
+                            catch (JSONException e)
+                            {
+                                fastedTime = "0";
                             }
                             String bestScore = "";
                             try {
                                 bestScore = String.valueOf(modeObject.getJSONObject("best_score").get(String.valueOf(i)));
-                            } catch (JSONException e) {
+                            }
+                            catch (JSONException e)
+                            {
+                                bestScore = "0";
                             }
                             String mobKill = "";
                             try {
                                 mobKill = String.valueOf(modeObject.getJSONObject("mobs_killed").get(String.valueOf(i)));
-                            } catch (JSONException e) {
+                            }
+                            catch (JSONException e)
+                            {
+                                mobKill = "0";
                             }
                             String mostHealing = "";
                             try {
                                 mostHealing = String.valueOf(modeObject.getJSONObject("most_healing").get(String.valueOf(i)));
-                            } catch (JSONException e) {
+                            }
+                            catch (JSONException e)
+                            {
+                                mostHealing = "0";
                             }
                             String fastedS = "";
                             try {
                                 fastedS = String.valueOf(modeObject.getJSONObject("fastest_time_s").get(String.valueOf(i)));
-                            } catch (JSONException e) {
+                            }
+                            catch (JSONException e)
+                            {
+                                fastedS = "0";
                             }
                             String fastedSPlus = "";
                             try {
                                 fastedSPlus = String.valueOf(modeObject.getJSONObject("fastest_time_s_plus").get(String.valueOf(i)));
-                            } catch (JSONException e) {
+                            }
+                            catch (JSONException e)
+                            {
+                                fastedSPlus = "0";
                             }
 
                             floorList.add(new Floor("Floor_" + i, m, timePlayed, tierCompletions, fastedTime, bestScore, mobKill, mostHealing, fastedS, fastedSPlus));
@@ -132,9 +153,12 @@ public class Dungeon {
         System.out.println("Tank Exp : " + tank);
         System.out.println("berserk Exp : " + berserk);
         System.out.println("Healer Exp : " + healer);
-        for(Floor floor : floorList) {
-            System.out.println("----------------");
-            floor.display();
+        if(!(floorList == null))
+        {
+            for(Floor floor : floorList) {
+                System.out.println("----------------");
+                floor.display();
+            }
         }
     }
 

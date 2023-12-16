@@ -11,8 +11,8 @@ public class WindowBestiary {
 
     public WindowBestiary(String milestone, String milestoneUnlockTiers) {
         titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
-        milestoneLabel.setText(milestone);
-        milestoneUnlockTiersLabel.setText(milestoneUnlockTiers);
+        milestoneLabel.setText("Milestone : " + milestone);
+        milestoneUnlockTiersLabel.setText("Milestone Unlock Tiers : " + milestoneUnlockTiers);
     }
 
     public JPanel getMainPanel() {
