@@ -41,6 +41,7 @@ public class WindowSkyBlockStats {
         setFishingPanel(new WindowFishing(profile.getFishing()).getMainPanel());
         setDungeonPanel(new WindowDungeon(profile.getDungeon()).getMainPanel());
         setSlayerPanel(new WindowSlayer(profile.getSlayerList(),profile.getTotalXpSlayer()).getMainPanel());
+        setCrimsonIslePanel(new WindowCrimsonIsle(profile.getCrimson()).getMainPanel());
     }
 
     public void setSkillPanel(JPanel panel) {
@@ -89,6 +90,13 @@ public class WindowSkyBlockStats {
         slayerPanel.add(panel);
         slayerPanel.revalidate();
         slayerPanel.repaint();
+    }
+    public void setCrimsonIslePanel(JPanel panel) {
+        crimsonIslePanel.setLayout(new BoxLayout(crimsonIslePanel, BoxLayout.Y_AXIS));
+        crimsonIslePanel.removeAll();
+        crimsonIslePanel.add(panel);
+        crimsonIslePanel.revalidate();
+        crimsonIslePanel.repaint();
     }
     public JPanel getMainPanel(){return mainPanel;}
 }
