@@ -3,6 +3,7 @@ package org.Window.Game.SkyBlock;
 import org.Game.Skyblock.Stats.Slayer;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,8 +47,10 @@ public class WindowSlayer {
     private JLabel tier3VampireLabel;
     private JLabel tier4VampireLabel;
     private JLabel tier5VampireLabel;
+    private JLabel titleLabel;
 
     public WindowSlayer(Map<String,Slayer> slayers, String xp) {
+        titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
         totalXpSlayerLabel.setText(xp);
         Slayer s = slayers.get("zombie");
         zombieExpLabel.setText("Exp : " + s.getExp());

@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <maximumSize width="1050" height="2147483647"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="e4207" layout-manager="GridLayoutManager" row-count="7" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -435,7 +437,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="19bb0" class="javax.swing.JLabel">
+          <component id="19bb0" class="javax.swing.JLabel" binding="titleLabel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
