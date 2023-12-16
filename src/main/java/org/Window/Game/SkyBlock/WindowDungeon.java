@@ -20,18 +20,30 @@ public class WindowDungeon {
 
     public WindowDungeon(Dungeon dungeon) {
         titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
-        catacombLabel.setText("Catacomb Level : " + dungeon.getCatacomb());
-        mageLabel.setText("Mage Exp : " + dungeon.getMage());
-        archerLabel.setText("Archer Exp : " + dungeon.getArcher());
-        tankLabel.setText("Tank Exp : " + dungeon.getTank());
-        berserkLabel.setText("Berserk Exp : " + dungeon.getBerserk());
-        healerLabel.setText("Healer Exp : " + dungeon.getHealer());
+        if(dungeon != null) {
+            catacombLabel.setText("Catacomb Level : " + dungeon.getCatacomb());
+            mageLabel.setText("Mage Exp : " + dungeon.getMage());
+            archerLabel.setText("Archer Exp : " + dungeon.getArcher());
+            tankLabel.setText("Tank Exp : " + dungeon.getTank());
+            berserkLabel.setText("Berserk Exp : " + dungeon.getBerserk());
+            healerLabel.setText("Healer Exp : " + dungeon.getHealer());
 
-        if( !(dungeon.getFloorList().isEmpty()))
-            for(Floor f : dungeon.getFloorList())
-                dungeonPanel.add(new WindowFloor(f).getMainPanel());
+            if (dungeon.getFloorList() != null)
+                for (Floor f : dungeon.getFloorList())
+                    dungeonPanel.add(new WindowFloor(f).getMainPanel());
+            else
+                dungeonPanel.add(new JLabel("This player didn't do any Dungeon"));
+        }
         else
+        {
+            catacombLabel.setText("Catacomb Level : 0");
+            mageLabel.setText("Mage Exp : 0");
+            archerLabel.setText("Archer Exp : 0");
+            tankLabel.setText("Tank Exp : 0");
+            berserkLabel.setText("Berserk Exp : 0");
+            healerLabel.setText("Healer Exp : 0");
             dungeonPanel.add(new JLabel("This player didn't do any Dungeon"));
+        }
     }
 
     public JPanel getMainPanel() {

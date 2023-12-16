@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -109,6 +110,7 @@ public class WindowPlayer extends JFrame {
      */
     private JLabel currentModeStatisticsLabel;
     private JScrollPane currentModeScrollPane;
+    private JPanel skyblockProfilesButtonPanel;
 
     /**
      * Instance of the WindowGlobalStats class. Used
@@ -166,6 +168,7 @@ public class WindowPlayer extends JFrame {
     public WindowPlayer() {
         windowGlobalStats = new WindowGlobalStats();
         setGlobalStatsPanel(windowGlobalStats.getMainPanel());
+        skyblockProfilesButtonPanel.setVisible(false);
 
         /**
         * This listener is called when the user clicks on the
@@ -181,6 +184,7 @@ public class WindowPlayer extends JFrame {
         skyWarsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                skyblockProfilesButtonPanel.setVisible(false);
                 if(isPlayerDisplayed) {
                     setCurrentModeStatsPanel(windowSkyWarsStats.getMainPanel());
                     currentModeStatisticsLabel.setText("SkyWars Statistics");
@@ -207,6 +211,7 @@ public class WindowPlayer extends JFrame {
         bedWarsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                skyblockProfilesButtonPanel.setVisible(false);
                 if(isPlayerDisplayed) {
                     setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
                     currentModeStatisticsLabel.setText("BedWars Statistics");
@@ -234,6 +239,7 @@ public class WindowPlayer extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(isPlayerDisplayed) {
+                    skyblockProfilesButtonPanel.setVisible(true);
                     setCurrentModeStatsPanel(windowSkyBlockStats.getMainPanel());
                     currentModeStatisticsLabel.setText("SkyBlock Statistics");
                 }
@@ -391,13 +397,20 @@ public class WindowPlayer extends JFrame {
         windowSkyWarsStats = new WindowSkyWarsStats(player);
         windowBedWarsStats = new WindowBedWarsStats(player);
 
-        SkyblockProfilesContainer profile = null;
-        Set<String> set = player.getGames().getSkyblock().getProfilesNames().keySet();
-        for (String s : set) {
-            profile = player.getGames().getSkyblock().getProfile(s);
+        for (Map.Entry<String, String> entry : player.getGames().getSkyblock().getProfilesNames() .entrySet()) {
+            String key = entry.getKey();
+            String name = entry.getValue();
+            windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
+            JButton button = new JButton(name);
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
+                    setCurrentModeStatsPanel(windowSkyBlockStats.getMainPanel());
+                }
+            });
+            skyblockProfilesButtonPanel.add(button);
         }
-        profile = player.getGames().getSkyblock().getProfile("055db3693e1e4431a3204d586be92a37");
-        windowSkyBlockStats = new WindowSkyBlockStats(profile);
         setGlobalStatsPanel(windowGlobalStats.getMainPanel());
         currentModeStatisticsLabel.setText("BedWars Statistics");
         setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());

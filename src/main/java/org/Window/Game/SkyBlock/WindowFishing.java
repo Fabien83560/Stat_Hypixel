@@ -18,16 +18,26 @@ public class WindowFishing {
 
     public WindowFishing(Fishing fishing) {
         titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
-        itemsFishedLabel.setText("Items Fished : " + fishing.getItemsFished());
-        treasuresFishedLabel.setText("Treasures Fished : " + fishing.getTreasuresFished());
-        largeTreasuresFishedLabel.setText("Large Treasures Fished : " + fishing.getLargeTreasuresFished());
-        totalTrophyFishedLabel.setText("Total TrophyFish Fished : " + fishing.getTotalTrophyFish());
+        if(fishing != null) {
+            itemsFishedLabel.setText("Items Fished : " + fishing.getItemsFished());
+            treasuresFishedLabel.setText("Treasures Fished : " + fishing.getTreasuresFished());
+            largeTreasuresFishedLabel.setText("Large Treasures Fished : " + fishing.getLargeTreasuresFished());
+            totalTrophyFishedLabel.setText("Total TrophyFish Fished : " + fishing.getTotalTrophyFish());
 
-        if( !(fishing.getTrophyFishList().isEmpty()))
-            for(TrophyFish t : fishing.getTrophyFishList())
-                trophyFishPanel.add(new WindowTrophyFish(t).getMainPanel());
+            if(fishing.getTrophyFishList() != null)
+                for(TrophyFish t : fishing.getTrophyFishList())
+                    trophyFishPanel.add(new WindowTrophyFish(t).getMainPanel());
+            else
+                trophyFishPanel.add(new JLabel("This Player didn't fish any Trophy Fish !"));
+        }
         else
+        {
+            itemsFishedLabel.setText("Items Fished : 0");
+            treasuresFishedLabel.setText("Treasures Fished : 0");
+            largeTreasuresFishedLabel.setText("Large Treasures Fished : 0");
+            totalTrophyFishedLabel.setText("Total TrophyFish Fished : 0");
             trophyFishPanel.add(new JLabel("This Player didn't fish any Trophy Fish !"));
+        }
     }
 
     public JPanel getMainPanel() {
