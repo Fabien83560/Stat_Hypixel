@@ -234,4 +234,132 @@ public class SkyblockProfilesContainer {
         for(String key : essenceList.keySet())
             System.out.println(key + " Essence : " + essenceList.get(key));
     }
+
+    public Crimson getCrimson() {
+        return crimson;
+    }
+
+    public List<Pet> getPetList() {
+        return petList;
+    }
+
+    public Dungeon getDungeon() {
+        return dungeon;
+    }
+
+    public Fishing getFishing() {
+        return fishing;
+    }
+
+    public List<Slayer> getSlayerList() {
+        return slayerList;
+    }
+
+    public List<String> getMembersList() {
+        return membersList;
+    }
+
+    public Mining getMining() {
+        return mining;
+    }
+
+    public Skills getSkills() {
+        return skills;
+    }
+
+    public String getAuctionsCreated() {
+        return auctionsCreated;
+    }
+
+    public String getCuteName() {
+        return cuteName;
+    }
+
+    public String getAuctionCompleted() {
+        return auctionCompleted;
+    }
+
+    public String getCoinsEarned() {
+        return coinsEarned;
+    }
+
+    public String getFairySoulCollected() {
+        return fairySoulCollected;
+    }
+
+    public String getFirstJoin() {
+        return firstJoin;
+    }
+
+    public String getHighestBid() {
+        return highestBid;
+    }
+
+    public String getGiftGiven() {
+        return giftGiven;
+    }
+
+    public String getGiftReceived() {
+        return giftReceived;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public String getMagicalPower() {
+        return magicalPower;
+    }
+
+    public String getGreenCandy() {
+        return greenCandy;
+    }
+
+    public String getMilestone() {
+        return milestone;
+    }
+
+    public String getMilestoneUnlockTiers() {
+        return milestoneUnlockTiers;
+    }
+
+    public String getPurse() {
+        return purse;
+    }
+
+    public String getPurpleCandy() {
+        return purpleCandy;
+    }
+
+    public String getPurseBank() {
+        return purseBank;
+    }
+
+    public String getTotalBids() {
+        return totalBids;
+    }
+
+    public String getTotalCandy() {
+        return totalCandy;
+    }
+
+    public String getTotalDeaths() {
+        return totalDeaths;
+    }
+
+    public String getTotalFees() {
+        return totalFees;
+    }
+
+    public Map<String, String> getEssenceList() {
+        return essenceList;
+    }
+
+    public String getTotalMobKill() {
+        return totalMobKill;
+    }
+
+    public String getTotalXpSlayer() {
+        return totalXpSlayer;
+    }
 }

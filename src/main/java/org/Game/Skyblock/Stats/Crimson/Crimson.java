@@ -74,4 +74,24 @@ public class Crimson {
             System.out.println("Time : " + dojo.getTime() + "s");
         }
     }
+
+    public List<Dojo> getDojoList() {
+        return dojoList;
+    }
+
+    public List<Kuudra> getKuudraList() {
+        return kuudraList;
+    }
+
+    public String getBarbarianReputation() {
+        return barbarianReputation;
+    }
+
+    public String getMageReputation() {
+        return mageReputation;
+    }
+
+    public String getSelectedFaction() {
+        return selectedFaction;
+    }
 }

@@ -53,4 +53,44 @@ public class Floor {
 
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBestScore() {
+        return bestScore;
+    }
+
+    public String getFastedS() {
+        return fastedS;
+    }
+
+    public String getFastedSPlus() {
+        return fastedSPlus;
+    }
+
+    public String getFastedTime() {
+        return fastedTime;
+    }
+
+    public String getMobKill() {
+        return mobKill;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public String getMostHealing() {
+        return mostHealing;
+    }
+
+    public String getTierCompletions() {
+        return tierCompletions;
+    }
+
+    public String getTimePlayed() {
+        return timePlayed;
+    }
 }

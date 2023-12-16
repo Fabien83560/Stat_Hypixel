@@ -90,4 +90,32 @@ public class Dungeon {
             floor.display();
         }
     }
+
+    public List<Floor> getFloorList() {
+        return floorList;
+    }
+
+    public String getArcher() {
+        return archer;
+    }
+
+    public String getBerserk() {
+        return berserk;
+    }
+
+    public String getCatacomb() {
+        return catacomb;
+    }
+
+    public String getHealer() {
+        return healer;
+    }
+
+    public String getMage() {
+        return mage;
+    }
+
+    public String getTank() {
+        return tank;
+    }
 }

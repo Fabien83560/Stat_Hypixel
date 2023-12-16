@@ -71,4 +71,8 @@ public class Skills {
             System.out.println(key + " : " + value);
         }
     }
+
+    public Double getSkillAverage() {
+        return skillAverage;
+    }
 }

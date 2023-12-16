@@ -37,4 +37,24 @@ public class Fishing {
             System.out.println("Diamond : " + trophy.getDiamond());
         }
     }
+
+    public List<TrophyFish> getTrophyFishList() {
+        return trophyFishList;
+    }
+
+    public String getItemsFished() {
+        return itemsFished;
+    }
+
+    public String getLargeTreasuresFished() {
+        return largeTreasuresFished;
+    }
+
+    public String getTotalTrophyFish() {
+        return totalTrophyFish;
+    }
+
+    public String getTreasuresFished() {
+        return treasuresFished;
+    }
 }
