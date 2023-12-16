@@ -3,7 +3,7 @@ package org.Window.Player;
 import org.Game.Skyblock.SkyblockProfilesContainer;
 import org.Player.Player;
 import org.Window.Game.WindowBedWarsStats;
-import org.Window.Game.WindowSkyBlockStats;
+import org.Window.Game.SkyBlock.WindowSkyBlockStats;
 import org.Window.Game.WindowSkyWarsStats;
 import javax.swing.*;
 import java.awt.*;

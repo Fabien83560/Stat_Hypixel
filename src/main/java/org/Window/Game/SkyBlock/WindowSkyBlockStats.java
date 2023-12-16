@@ -1,4 +1,4 @@
-package org.Window.Game;
+package org.Window.Game.SkyBlock;
 
 import org.Game.Skyblock.SkyblockProfiles;
 import org.Game.Skyblock.SkyblockProfilesContainer;
@@ -40,6 +40,7 @@ public class WindowSkyBlockStats {
         purseBankLabel.setText("Purse Bank : " + profile.getPurseBank());
         magicalPowerLabel.setText("Magical Power : " + profile.getMagicalPower());
         fairySoulLabel.setText("Fairy Souls Collected : " + profile.getFairySoulCollected());
+        skillPanel = new WindowSkill(profile.getSkills()).getMainPanel();
     }
     public JPanel getMainPanel(){return mainPanel;}
 }
