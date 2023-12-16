@@ -33,7 +33,13 @@ public class WindowSkyBlockStats {
 
     }
     public WindowSkyBlockStats(SkyblockProfilesContainer profile) {
-        cuteNameLabel.setText(profile.getCuteName());
+        cuteNameLabel.setText("Profile name : " + profile.getCuteName());
+        levelLabel.setText("Level : " + profile.getLevel());
+        firstJoinLabel.setText("Join : " + profile.getFirstJoin());
+        purseLabel.setText("Purse : " + profile.getPurse());
+        purseBankLabel.setText("Purse Bank : " + profile.getPurseBank());
+        magicalPowerLabel.setText("Magical Power : " + profile.getMagicalPower());
+        fairySoulLabel.setText("Fairy Souls Collected : " + profile.getFairySoulCollected());
     }
     public JPanel getMainPanel(){return mainPanel;}
 }
