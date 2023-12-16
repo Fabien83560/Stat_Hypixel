@@ -38,6 +38,7 @@ public class WindowSkyBlockStats {
         magicalPowerLabel.setText("Magical Power : " + profile.getMagicalPower());
         fairySoulLabel.setText("Fairy Souls Collected : " + profile.getFairySoulCollected());
         setSkillPanel(new WindowSkill(profile.getSkills()).getMainPanel());
+        setPetsPanel(new WindowPets(profile.getPetList()).getMainPanel());
     }
 
     public void setSkillPanel(JPanel panel) {
@@ -46,6 +47,14 @@ public class WindowSkyBlockStats {
         skillPanel.add(panel);
         skillPanel.revalidate();
         skillPanel.repaint();
+    }
+
+    public void setPetsPanel(JPanel panel) {
+        petsPanel.setLayout(new BoxLayout(petsPanel, BoxLayout.Y_AXIS));
+        petsPanel.removeAll();
+        petsPanel.add(panel);
+        petsPanel.revalidate();
+        petsPanel.repaint();
     }
     public JPanel getMainPanel(){return mainPanel;}
 }
