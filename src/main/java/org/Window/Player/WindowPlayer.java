@@ -395,6 +395,7 @@ public class WindowPlayer extends JFrame {
         for (String s : set) {
             profile = player.getGames().getSkyblock().getProfile(s);
         }
+        profile = player.getGames().getSkyblock().getProfile("055db3693e1e4431a3204d586be92a37");
         windowSkyBlockStats = new WindowSkyBlockStats(profile);
         setGlobalStatsPanel(windowGlobalStats.getMainPanel());
         currentModeStatisticsLabel.setText("BedWars Statistics");

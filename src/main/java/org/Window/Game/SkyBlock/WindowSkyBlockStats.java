@@ -1,8 +1,6 @@
 package org.Window.Game.SkyBlock;
 
-import org.Game.Skyblock.SkyblockProfiles;
 import org.Game.Skyblock.SkyblockProfilesContainer;
-import org.Player.Player;
 
 import javax.swing.*;
 
@@ -13,7 +11,7 @@ public class WindowSkyBlockStats {
     private JPanel skillPanel;
     private JPanel petsPanel;
     private JPanel miningPanel;
-    private JPanel FishingPanel;
+    private JPanel fishingPanel;
     private JPanel dungeonPanel;
     private JPanel slayerPanel;
     private JPanel crimsonIslePanel;
@@ -39,6 +37,8 @@ public class WindowSkyBlockStats {
         fairySoulLabel.setText("Fairy Souls Collected : " + profile.getFairySoulCollected());
         setSkillPanel(new WindowSkill(profile.getSkills()).getMainPanel());
         setPetsPanel(new WindowPets(profile.getPetList()).getMainPanel());
+        setMiningPanel(new WindowMining(profile.getMining()).getMainPanel());
+        setFishingPanel(new WindowFishing(profile.getFishing()).getMainPanel());
     }
 
     public void setSkillPanel(JPanel panel) {
@@ -55,6 +55,22 @@ public class WindowSkyBlockStats {
         petsPanel.add(panel);
         petsPanel.revalidate();
         petsPanel.repaint();
+    }
+
+    public void setMiningPanel(JPanel panel) {
+        miningPanel.setLayout(new BoxLayout(miningPanel, BoxLayout.Y_AXIS));
+        miningPanel.removeAll();
+        miningPanel.add(panel);
+        miningPanel.revalidate();
+        miningPanel.repaint();
+    }
+
+    public void setFishingPanel(JPanel panel) {
+        fishingPanel.setLayout(new BoxLayout(fishingPanel, BoxLayout.Y_AXIS));
+        fishingPanel.removeAll();
+        fishingPanel.add(panel);
+        fishingPanel.revalidate();
+        fishingPanel.repaint();
     }
     public JPanel getMainPanel(){return mainPanel;}
 }

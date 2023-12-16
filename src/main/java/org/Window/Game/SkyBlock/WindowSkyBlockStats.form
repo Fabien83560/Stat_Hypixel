@@ -119,7 +119,7 @@
         <border type="none"/>
         <children/>
       </grid>
-      <grid id="bf00a" binding="FishingPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="bf00a" binding="fishingPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>

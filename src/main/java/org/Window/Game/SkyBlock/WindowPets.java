@@ -3,6 +3,7 @@ package org.Window.Game.SkyBlock;
 import org.Game.Skyblock.Stats.Pet;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public class WindowPets {
@@ -12,6 +13,7 @@ public class WindowPets {
     private JLabel titleLabel;
 
     public WindowPets(List<Pet> petList) {
+        titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
         if (!(petList.isEmpty())) {
             for (Pet p : petList) {
                 petsListPanel.add(new WindowPet(p).getMainPanel());

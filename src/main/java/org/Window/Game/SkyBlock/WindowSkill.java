@@ -3,6 +3,7 @@ package org.Window.Game.SkyBlock;
 import org.Game.Skyblock.Stats.Skills;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class WindowSkill {
 
@@ -58,6 +59,7 @@ public class WindowSkill {
     private JLabel socialAmountLabel;
 
     public WindowSkill(Skills skill) {
+        titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
         skillAverageLabel.setText(String.valueOf(skill.getSkillAverage()));
 
         farmingAmountLabel.setText(skill.get("SKILL_FARMING") + " LvL");
