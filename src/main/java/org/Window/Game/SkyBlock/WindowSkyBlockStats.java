@@ -35,6 +35,14 @@ public class WindowSkyBlockStats {
     private JLabel purpleCandyLabel;
     private JLabel greenCandyLabel;
     private JLabel giftsReceivedLabel;
+    private JLabel witherLabel;
+    private JLabel dragonLabel;
+    private JLabel spiderLabel;
+    private JLabel undeadLabel;
+    private JLabel diamondLabel;
+    private JLabel iceLabel;
+    private JLabel goldLabel;
+    private JLabel crimsonLabel;
 
     public WindowSkyBlockStats(SkyblockProfilesContainer profile) {
         cuteNameLabel.setText("Profile name : " + profile.getCuteName());
@@ -62,6 +70,15 @@ public class WindowSkyBlockStats {
         totalCandyLabel.setText("Total Candy : " + profile.getTotalCandy());
         greenCandyLabel.setText("Green Candy : " + profile.getGreenCandy());
         purpleCandyLabel.setText("Purple candy : " + profile.getPurpleCandy());
+
+        witherLabel.setText("Wither : " + profile.getEssenceList().get("WITHER"));
+        dragonLabel.setText("Dragon : " + profile.getEssenceList().get("DRAGON"));
+        spiderLabel.setText("Spider : " + profile.getEssenceList().get("SPIDER"));
+        undeadLabel.setText("Undead : " + profile.getEssenceList().get("UNDEAD"));
+        diamondLabel.setText("Diamond : " + profile.getEssenceList().get("DIAMOND"));
+        iceLabel.setText("Ice : " + profile.getEssenceList().get("ICE"));
+        goldLabel.setText("Gold : " + profile.getEssenceList().get("GOLD"));
+        crimsonLabel.setText("Crimson : " + profile.getEssenceList().get("CRIMSON"));
     }
 
     public void setSkillPanel(JPanel panel) {
