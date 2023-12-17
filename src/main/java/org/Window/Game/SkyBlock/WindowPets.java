@@ -15,7 +15,7 @@ public class WindowPets {
 
     public WindowPets(List<Pet> petList) {
         titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
-        if (!(petList.isEmpty())) {
+        if (petList != null) {
             for (Pet p : petList) {
                 petsListPanel.add(new WindowPet(p).getMainPanel());
             }

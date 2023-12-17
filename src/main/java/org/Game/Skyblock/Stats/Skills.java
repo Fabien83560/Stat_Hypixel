@@ -16,7 +16,7 @@ public class Skills {
     public Skills(JSONObject jsonSkills) {
             Set<String> keys = jsonSkills.keySet();
             for(String key : keys)
-                addSkills(key,calculateLevel(key,jsonSkills.getDouble(key)));
+                    addSkills(key, calculateLevel(key, jsonSkills.getDouble(key)));
             skillAverage = calculateSkillAverage();
     }
     public Skills(String val) {

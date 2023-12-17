@@ -89,9 +89,15 @@ public class SkyblockProfilesContainer {
             } catch (JSONException e) {
                 skills = new Skills("null");
             }
-            JSONArray petsArray = jsonMember.getJSONObject("pets_data").getJSONArray("pets");
-            for (int i = 0; i < petsArray.length(); i++)
-                petList.add(new Pet(petsArray.getJSONObject(i)));
+            try {
+                JSONArray petsArray = jsonMember.getJSONObject("pets_data").getJSONArray("pets");
+                for (int i = 0; i < petsArray.length(); i++)
+                    petList.add(new Pet(petsArray.getJSONObject(i)));
+            }
+            catch (JSONException e)
+            {
+                petList = null;
+            }
             try {
                 mining = new Mining(jsonMember.getJSONObject("mining_core"));
             }

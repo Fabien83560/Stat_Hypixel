@@ -3,6 +3,7 @@ package org.Game;
 import org.Game.Bedwars.Bedwars;
 import org.Game.Skyblock.SkyblockProfiles;
 import org.Game.Skywars.Skywars;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -44,9 +45,27 @@ public class GamesContainer {
      */
     public GamesContainer(JSONObject stats, JSONObject achievements, String playerUuid)
     {
-        bedwars = new Bedwars(stats.getJSONObject("Bedwars"), achievements);
-        skywars = new Skywars(stats.getJSONObject("SkyWars"));
-        skyblock = new SkyblockProfiles(stats.getJSONObject("SkyBlock"),playerUuid);
+        try {
+            bedwars = new Bedwars(stats.getJSONObject("Bedwars"), achievements);
+        }
+        catch (JSONException e)
+        {
+            bedwars = null;
+        }
+        try {
+            skywars = new Skywars(stats.getJSONObject("SkyWars"));
+        }
+        catch (JSONException e)
+        {
+            skywars = null;
+        }
+        try {
+            skyblock = new SkyblockProfiles(stats.getJSONObject("SkyBlock"), playerUuid);
+        }
+        catch (JSONException e)
+        {
+            skyblock = null;
+        }
     }
 
     /**
