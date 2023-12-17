@@ -153,28 +153,7 @@ public class Window extends JFrame {
 
         setPanelRight(windowPlayer);
 
-        if (org.Config.ConfigReader.getApiKey().isEmpty()) {
-            boolean apiKeyValid = false;
-
-            while (!apiKeyValid) {
-                String testUUID = "055db3693e1e4431a3204d586be92a37";
-
-                try {
-                    String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
-                    boolean b = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
-
-                    if (b == true || b == false) {
-                        apiKeyValid = true;
-                        org.Config.ConfigReader.setApiKey(newApiKey);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
-                    }
-                } catch (JSONException e) {
-
-                }
-            }
-        }
+        testAPIkey();
 
         friendListModel = new DefaultListModel<>();
         dataBase = new Database();
@@ -505,5 +484,41 @@ public class Window extends JFrame {
         panelRight.add(panel);
         panelRight.revalidate();
         panelRight.repaint();
+    }
+
+    public void testAPIkey() {
+        String testUUID = "055db3693e1e4431a3204d586be92a37";
+        if( ! org.Config.ConfigReader.getApiKey().isEmpty()) {
+            try {
+                Player.fetchStatus(testUUID, org.Config.ConfigReader.getApiKey()).getJSONObject("session").getBoolean("online");
+            }
+            catch (JSONException e) {
+                org.Config.ConfigReader.setApiKey("");
+                JOptionPane.showMessageDialog(null,
+                        "Your lasted API Key was expired.",
+                        "API Key expired",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        if (org.Config.ConfigReader.getApiKey().isEmpty()){
+            boolean apiKeyValid = false;
+
+            while (!apiKeyValid) {
+                try {
+                    String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
+                    boolean b = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
+
+                    if (b == true || b == false) {
+                        apiKeyValid = true;
+                        org.Config.ConfigReader.setApiKey(newApiKey);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
+                    }
+                } catch (JSONException e) {
+
+                }
+            }
+        }
     }
 }
