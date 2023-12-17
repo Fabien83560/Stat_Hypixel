@@ -222,12 +222,22 @@ public class SkyblockProfilesContainer {
                 membersList.add(memberUuid);
             }
             JSONObject jsonMember = json.getJSONObject("members").getJSONObject(playerUuid);
-            Timestamp timestamp = new Timestamp(Long.parseLong(jsonMember.getJSONObject("profile").get("first_join").toString()));
-            Date date = new Date(timestamp.getTime());
-            firstJoin = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" +
-                    (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "/" +
-                    (date.getYear() + 1900);
-            level = String.valueOf(jsonMember.getJSONObject("leveling").getLong("experience") / 100);
+            try {
+                Timestamp timestamp = new Timestamp(Long.parseLong(jsonMember.getJSONObject("profile").get("first_join").toString()));
+                Date date = new Date(timestamp.getTime());
+                firstJoin = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" +
+                        (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "/" +
+                        (date.getYear() + 1900);
+            }
+            catch(JSONException e) {
+                firstJoin = "N/A";
+            }
+            try {
+                level = String.valueOf(jsonMember.getJSONObject("leveling").getLong("experience") / 100);
+            }
+            catch (JSONException e) {
+                level = "N/A";
+            }
             try {
                 purse = String.valueOf(jsonMember.getJSONObject("currencies").getLong("coin_purse"));
             }
