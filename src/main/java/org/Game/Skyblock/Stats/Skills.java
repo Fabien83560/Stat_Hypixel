@@ -33,8 +33,17 @@ public class Skills {
     public Skills(JSONObject jsonSkills) {
             Set<String> keys = jsonSkills.keySet();
             for(String key : keys)
-                addSkills(key,calculateLevel(key,jsonSkills.getDouble(key)));
+                    addSkills(key, calculateLevel(key, jsonSkills.getDouble(key)));
             skillAverage = calculateSkillAverage();
+    }
+    public Skills(String val) {
+        if(val.equals("null"))
+        {
+            String[] skills = {"SKILL_FARMING", "SKILL_MINING", "SKILL_COMBAT", "SKILL_FORAGING", "SKILL_FISHING", "SKILL_ENCHANTING", "SKILL_ALCHEMY", "SKILL_CARPENTRY", "SKILL_RUNECRAFTING", "SKILL_TAMING", "SKILL_SOCIAL"};
+            for(String key : skills)
+                addSkills(key,0.0);
+            skillAverage = 0.0;
+        }
     }
 
     /**
@@ -104,6 +113,9 @@ public class Skills {
     public JSONObject fetchSkillsLevel(String skill) {
         String url = "https://api.hypixel.net/v2/resources/skyblock/skills";
         return new JSONObject(Player.fetch(url)).getJSONObject("skills").getJSONObject(skill);
+    }
+    public String get(String skill) {
+        return String.valueOf(skills.get(skill));
     }
 
     public void display() {
