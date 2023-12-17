@@ -1,5 +1,0 @@
-https://api.hypixel.net/player?name=PLAYER_NAME&key=API_KEY
-
-Rajouter les détails de certains skins qui sont bugués si nécessaire (oreilles par ex)
-
-problème quand il n'y a pas de lastLogin ou bien newPackageRank
