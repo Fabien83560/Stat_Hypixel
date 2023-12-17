@@ -1,54 +1,226 @@
 package org.Window.Game.SkyBlock;
 
 import org.Game.Skyblock.Stats.Slayer;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+/**
+ * This class sets all the interface of the Slayer
+ * mode when Skyblock mode is selected. Used only once
+ * in the WindowSkyBlockStats class.
+ * @see WindowSkyBlockStats
+ */
 public class WindowSlayer {
+
+    /**
+     * The main panel of the WindowSlayer class.
+     */
     private JPanel mainPanel;
-    private JLabel zombieExpLabel;
-    private JLabel tier1ZombieLabel;
-    private JLabel tier2ZombieLabel;
-    private JLabel tier3ZombieLabel;
-    private JLabel tier4ZombieLabel;
-    private JLabel tier5ZombieLabel;
-    private JLabel spiderExpLabel;
-    private JLabel wolfExpLabel;
-    private JLabel endermanExpLabel;
-    private JLabel blazeExpLabel;
-    private JLabel vampireExpLabel;
+
+    /**
+     * Total player's experience in Slayer mode in Skyblock.
+     */
     private JLabel totalXpSlayerLabel;
+
+    /**
+     * Total experience of the player in the Zombie slayer mode.
+     */
+    private JLabel zombieExpLabel;
+
+    /**
+     * Total experience of the player in the Spider slayer mode.
+     */
+    private JLabel spiderExpLabel;
+
+    /**
+     * Total experience of the player in the Wolf slayer mode.
+     */
+    private JLabel wolfExpLabel;
+
+    /**
+     * Total experience of the player in the Enderman slayer mode.
+     */
+    private JLabel endermanExpLabel;
+
+    /**
+     * Total experience of the player in the Blaze slayer mode.
+     */
+    private JLabel blazeExpLabel;
+
+    /**
+     * Total experience of the player in the Vampire slayer mode.
+     */
+    private JLabel vampireExpLabel;
+
+    /**
+     * Number of Zombie bosses killed by the player in tier 1.
+     */
+    private JLabel tier1ZombieLabel;
+
+    /**
+     * Number of Zombie bosses killed by the player in tier 2.
+     */
+    private JLabel tier2ZombieLabel;
+
+    /**
+     * Number of Zombie bosses killed by the player in tier 3.
+     */
+    private JLabel tier3ZombieLabel;
+
+    /**
+     * Number of Zombie bosses killed by the player in tier 4.
+     */
+    private JLabel tier4ZombieLabel;
+
+    /**
+     * Number of Zombie bosses killed by the player in tier 5.
+     */
+    private JLabel tier5ZombieLabel;
+
+    /**
+     * Number of Spider bosses killed by the player in tier 1.
+     */
     private JLabel tier1SpiderLabel;
+
+    /**
+     * Number of Spider bosses killed by the player in tier 2.
+     */
     private JLabel tier2SpiderLabel;
+
+    /**
+     * Number of Spider bosses killed by the player in tier 3.
+     */
     private JLabel tier3SpiderLabel;
+
+    /**
+     * Number of Spider bosses killed by the player in tier 4.
+     */
     private JLabel tier4SpiderLabel;
+
+    /**
+     * Number of Spider bosses killed by the player in tier 5.
+     */
     private JLabel tier5SpiderLabel;
+
+    /**
+     * Number of Wolf bosses killed by the player in tier 1.
+     */
     private JLabel tier1WolfLabel;
+
+    /**
+     * Number of Wolf bosses killed by the player in tier 2.
+     */
     private JLabel tier2WolfLabel;
+
+    /**
+     * Number of Wolf bosses killed by the player in tier 3.
+     */
     private JLabel tier3WolfLabel;
+
+    /**
+     * Number of Wolf bosses killed by the player in tier 4.
+     */
     private JLabel tier4WolfLabel;
+
+    /**
+     * Number of Wolf bosses killed by the player in tier 5.
+     */
     private JLabel tier5WolfLabel;
+
+    /**
+     * Number of Enderman bosses killed by the player in tier 1.
+     */
     private JLabel tier1EndermanLabel;
+
+    /**
+     * Number of Wolf bosses killed by the player in tier 2.
+     */
     private JLabel tier2EndermanLabel;
+
+    /**
+     * Number of Wolf bosses killed by the player in tier 3.
+     */
     private JLabel tier3EndermanLabel;
+
+    /**
+     * Number of Wolf bosses killed by the player in tier 4.
+     */
     private JLabel tier4EndermanLabel;
+
+    /**
+     * Number of Wolf bosses killed by the player in tier 5.
+     */
     private JLabel tier5EndermanLabel;
+
+    /**
+     * Number of Blaze bosses killed by the player in tier 1.
+     */
     private JLabel tier1BlazeLabel;
+
+    /**
+     * Number of Blaze bosses killed by the player in tier 2.
+     */
     private JLabel tier2BlazeLabel;
+
+    /**
+     * Number of Blaze bosses killed by the player in tier 3.
+     */
     private JLabel tier3BlazeLabel;
+
+    /**
+     * Number of Blaze bosses killed by the player in tier 4.
+     */
     private JLabel tier4BlazeLabel;
+
+    /**
+     * Number of Blaze bosses killed by the player in tier 5.
+     */
     private JLabel tier5BlazeLabel;
+
+    /**
+     * Number of Vampire bosses killed by the player in tier 1.
+     */
     private JLabel tier1VampireLabel;
+
+    /**
+     * Number of Vampire bosses killed by the player in tier 2.
+     */
     private JLabel tier2VampireLabel;
+
+    /**
+     * Number of Vampire bosses killed by the player in tier 3.
+     */
     private JLabel tier3VampireLabel;
+
+    /**
+     * Number of Vampire bosses killed by the player in tier 4.
+     */
     private JLabel tier4VampireLabel;
+
+    /**
+     * Number of Vampire bosses killed by the player in tier 5.
+     */
     private JLabel tier5VampireLabel;
+
+    /**
+     * Label containing the 'Slayer' title.
+     */
     private JLabel titleLabel;
 
+    /**
+     * Constructor of the WindowSlayer class, displaying all
+     * the statistics of a player in Slayer mode in the interface.
+     * It uses two parameters, the first one being a Map of
+     * 'String, Slayer' containing the name of the enemy, the value
+     * being a Slayer instance containing all the experience and tiers
+     * of each enemy in the Map. The second parameter is the total experience
+     * the player earned in Slayer mode.
+     * @param slayers A Map of 'String, Slayer' used to display the data of the
+     *                Slayer mode of a player.
+     * @param xp A String containing the total of experience of a player in
+     *           Slayer mode.
+     */
     public WindowSlayer(Map<String,Slayer> slayers, String xp) {
         titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
         totalXpSlayerLabel.setText(xp);
@@ -96,6 +268,10 @@ public class WindowSlayer {
         tier5VampireLabel.setText("Tier 5 : " + s.getTier5());
     }
 
+    /**
+     * Gets the main panel of the class.
+     * @return A JPanel Object.
+     */
     public JPanel getMainPanel() {
         return mainPanel;
     }

@@ -1,17 +1,53 @@
 package org.Window.Game.SkyBlock;
 
 import org.Game.Skyblock.Stats.Pet;
-
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class sets all the interface of a player's pet
+ * when Skyblock mode is selected. Used only once
+ * in the WindowPets class that contains all the
+ * pets of the player (multiple instances of this class).
+ * @see WindowPets
+ */
 public class WindowPet {
+
+    /**
+     * Main panel of the WindowPet class.
+     */
     private JPanel mainPanel;
+
+    /**
+     * Type of pet (Pig, Horse...)
+     */
     private JLabel typeLabel;
+
+    /**
+     * Experience value of that said pet.
+     */
     private JLabel expLabel;
+
+    /**
+     * Rarity of the pet (Legendary, Epic...)
+     */
     private JLabel tierLabel;
+
+    /**
+     * Number of candies used on that pet.
+     */
     private JLabel candyUsedLabel;
 
+    /**
+     * Constructor of the Pet class, initializing
+     * each data member through a Pet class instance
+     * passed as a parameter.
+     * @param pet A Pet instance of the current player
+     *            used to initialize each of his pet
+     *            statistics.
+     * @see Pet
+     * @see WindowPets
+     */
     public WindowPet(Pet pet) {
         typeLabel.setText(pet.getType());
         expLabel.setText("Exp : " + pet.getExp());
@@ -41,6 +77,10 @@ public class WindowPet {
         };
     }
 
+    /**
+     * Gets the main panel of the class
+     * @return A JPanel Object.
+     */
     public JPanel getMainPanel() {
         return mainPanel;
     }
