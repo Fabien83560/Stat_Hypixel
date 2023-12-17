@@ -281,12 +281,12 @@ public class WindowPlayer extends JFrame {
                         searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         SearchPlayer.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         Player player = new Player(search);
-                        if(player != null)
-                            displayAllStats(player);
                         globalStatsPanel.setCursor(Cursor.getDefaultCursor());
                         currentModeStatsPanel.setCursor(Cursor.getDefaultCursor());
                         searchButton.setCursor(Cursor.getDefaultCursor());
                         SearchPlayer.setCursor(Cursor.getDefaultCursor());
+                        if(player != null)
+                            displayAllStats(player);
                     }
                 }
                 catch(NullPointerException exception) {

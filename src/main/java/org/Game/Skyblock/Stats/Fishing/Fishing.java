@@ -2,16 +2,48 @@ package org.Game.Skyblock.Stats.Fishing;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements the Fishing statistics of
+ * a player's profile in Skyblock.
+ */
 public class Fishing {
+
+    /**
+     * String containing the number of items the player fished in Fishing mode in Skyblock.
+     */
     String itemsFished;
+
+    /**
+     * String containing the number of treasures the player fished in Fishing mode in Skyblock.
+     */
     String treasuresFished;
+
+    /**
+     * String containing the number of large treasures the player fished in Fishing mode in Skyblock.
+     */
     String largeTreasuresFished;
+
+    /**
+     * String containing the number of trophies the player owns in Fishing mode in Skyblock.
+     */
     String totalTrophyFish;
+
+    /**
+     * List of 'TrophyFish' containing all the trophies of the player in Fishing mode in Skyblock.
+     */
     List<TrophyFish> trophyFishList = new ArrayList<>();
+
+    /**
+     * Constructor of the Fishing class. It has one parameter being
+     * a JSONObject that contains all the data related to the Fishing mode
+     * in Skyblock, Used to initialize data members with the associated fields
+     * in the API.
+     * @param jsonMember A JSONObject containing all the data related to the
+     *                   Fishing mode in Skyblock.
+     */
     public Fishing(JSONObject jsonMember) {
         try{
             itemsFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("normal"));
@@ -68,22 +100,48 @@ public class Fishing {
         }
     }
 
+    /**
+     * Gets the 'trophyFishList' member of the class.
+     * @return A List of 'TrophyFish' Object
+     * @see TrophyFish
+     * @see Fishing#trophyFishList
+     */
     public List<TrophyFish> getTrophyFishList() {
         return trophyFishList;
     }
 
+    /**
+     * Gets the 'itemsFished' member of the class.
+     * @return A String Object
+     * @see Fishing#itemsFished
+     */
     public String getItemsFished() {
         return itemsFished;
     }
 
+    /**
+     * Gets the 'largeTreasuresFished' member of the class.
+     * @return A String Object
+     * @see Fishing#largeTreasuresFished
+     */
     public String getLargeTreasuresFished() {
         return largeTreasuresFished;
     }
 
+    /**
+     * Gets the 'totalTrophyFish' member of the class.
+     * @return A String Object
+     * @see Fishing#totalTrophyFish
+     */
     public String getTotalTrophyFish() {
         return totalTrophyFish;
     }
 
+    /**
+     * Gets the 'treasuresFished' member of the class.
+     * @return A String Object
+     * @see Fishing#treasuresFished
+     */
     public String getTreasuresFished() {
         return treasuresFished;
     }
