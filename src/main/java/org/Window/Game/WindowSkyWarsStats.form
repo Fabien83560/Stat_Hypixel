@@ -9,7 +9,10 @@
     <children>
       <component id="e74e0" class="javax.swing.JTable" binding="statisticsTable">
         <constraints border-constraint="Center"/>
-        <properties/>
+        <properties>
+          <foreground color="-1"/>
+          <maximumSize width="2147483647" height="70"/>
+        </properties>
       </component>
     </children>
   </grid>

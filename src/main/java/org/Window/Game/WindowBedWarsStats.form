@@ -13,6 +13,7 @@
           <enabled value="true"/>
           <fillsViewportHeight value="true"/>
           <focusable value="false"/>
+          <foreground color="-1"/>
           <rowSelectionAllowed value="false"/>
           <updateSelectionOnSort value="false"/>
           <visible value="true"/>

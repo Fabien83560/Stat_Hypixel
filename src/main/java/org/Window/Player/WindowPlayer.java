@@ -292,6 +292,10 @@ public class WindowPlayer extends JFrame {
                 catch(NullPointerException exception) {
                     exception.printStackTrace();
                     System.out.println("Error trying to do a research in \"searchButton.addActionListener\".");
+                    globalStatsPanel.setCursor(Cursor.getDefaultCursor());
+                    currentModeStatsPanel.setCursor(Cursor.getDefaultCursor());
+                    searchButton.setCursor(Cursor.getDefaultCursor());
+                    SearchPlayer.setCursor(Cursor.getDefaultCursor());
                 }
             }
         });
