@@ -249,6 +249,14 @@ public class WindowSkyBlockStats {
      * in the associated profile in Skyblock.
      */
     private JLabel crimsonLabel;
+    private JLabel auctionsCreatedLabel;
+    private JLabel totalFeesLabel;
+    private JLabel totalBidsLabel;
+    private JLabel highestBidLabel;
+    private JLabel auctionCompletedLabel;
+    private JLabel coinsEarnedLabel;
+    private JLabel titleEssenceLabel;
+    private JLabel titleAuctionsLabel;
 
     /**
      * Constructor of the WindowSkyBlockStats class, initializing
@@ -294,6 +302,14 @@ public class WindowSkyBlockStats {
         setCrimsonIslePanel(new WindowCrimsonIsle(profile.getCrimson()).getMainPanel());
         setBestiaryPanel(new WindowBestiary(profile.getMilestone(),profile.getMilestoneUnlockTiers()).getMainPanel());
 
+        titleAuctionsLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
+        auctionsCreatedLabel.setText("Auctions Created : " + profile.getAuctionsCreated());
+        totalFeesLabel.setText("Total Fees : " + profile.getTotalFees());
+        totalBidsLabel.setText("Total Bids : " + profile.getTotalBids());
+        highestBidLabel.setText("Highest Bid : " + profile.getHighestBid());
+        auctionCompletedLabel.setText("Auctions Completed : " + profile.getAuctionCompleted());
+        coinsEarnedLabel.setText("Coins Earned : " + profile.getCoinsEarned());
+
         titleOtherLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
         totalMobsKillsLabel.setText("Total Mobs Kills : " + profile.getTotalMobKill());
         totalDeathsLabel.setText("Total Deaths : " + profile.getTotalDeaths());
@@ -303,6 +319,7 @@ public class WindowSkyBlockStats {
         greenCandyLabel.setText("Green Candy : " + profile.getGreenCandy());
         purpleCandyLabel.setText("Purple candy : " + profile.getPurpleCandy());
 
+        titleEssenceLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
         witherLabel.setText("Wither : " + profile.getEssenceList().get("WITHER"));
         dragonLabel.setText("Dragon : " + profile.getEssenceList().get("DRAGON"));
         spiderLabel.setText("Spider : " + profile.getEssenceList().get("SPIDER"));

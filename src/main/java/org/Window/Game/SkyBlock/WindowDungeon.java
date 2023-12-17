@@ -76,7 +76,7 @@ public class WindowDungeon {
     public WindowDungeon(Dungeon dungeon) {
         titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
         if(dungeon != null) {
-            catacombLabel.setText("Catacomb Level : " + dungeon.getCatacomb());
+            catacombLabel.setText("Catacomb Exp : " + dungeon.getCatacomb());
             mageLabel.setText("Mage Exp : " + dungeon.getMage());
             archerLabel.setText("Archer Exp : " + dungeon.getArcher());
             tankLabel.setText("Tank Exp : " + dungeon.getTank());

@@ -223,7 +223,7 @@ public class WindowSlayer {
      */
     public WindowSlayer(Map<String,Slayer> slayers, String xp) {
         titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
-        totalXpSlayerLabel.setText(xp);
+        totalXpSlayerLabel.setText("Total Slayer Exp : " + xp);
         Slayer s = slayers.get("zombie");
         zombieExpLabel.setText("Exp : " + s.getExp());
         tier1ZombieLabel.setText("Tier 1 : " + s.getTier1());

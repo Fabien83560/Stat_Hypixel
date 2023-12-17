@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.Window.Game.SkyBlock.WindowSkyBlockStats">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="24" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="26" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="729"/>
+      <xy x="20" y="20" width="500" height="802"/>
     </constraints>
     <properties>
       <alignmentX value="0.0"/>
@@ -185,20 +185,70 @@
         <border type="none"/>
         <children/>
       </grid>
-      <grid id="d38fe" binding="auctionsPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="d38fe" binding="auctionsPanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <maximum-size width="1050" height="-1"/>
           </grid>
         </constraints>
         <properties/>
         <border type="none"/>
-        <children/>
+        <children>
+          <component id="c1d35" class="javax.swing.JLabel" binding="auctionsCreatedLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="f0ed3" class="javax.swing.JLabel" binding="totalFeesLabel">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="5681" class="javax.swing.JLabel" binding="totalBidsLabel">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="a6628" class="javax.swing.JLabel" binding="highestBidLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="3c835" class="javax.swing.JLabel" binding="auctionCompletedLabel">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="fe278" class="javax.swing.JLabel" binding="coinsEarnedLabel">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+        </children>
       </grid>
       <grid id="d3101" binding="otherPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="21" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="22" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <maximum-size width="1050" height="-1"/>
           </grid>
         </constraints>
@@ -266,7 +316,7 @@
       <grid id="adb89" binding="essencesPanel" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="23" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="25" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <maximum-size width="1050" height="-1"/>
           </grid>
         </constraints>
@@ -341,7 +391,7 @@
       </grid>
       <component id="59c72" class="javax.swing.JLabel" binding="titleOtherLabel">
         <constraints>
-          <grid row="20" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="21" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Others"/>
@@ -431,7 +481,7 @@
       </component>
       <component id="6a9e8" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="2" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="20" column="1" row-span="1" col-span="1" vsize-policy="2" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-16777216"/>
@@ -440,7 +490,7 @@
       </component>
       <component id="e0bdd" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="22" column="1" row-span="1" col-span="1" vsize-policy="2" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="23" column="1" row-span="1" col-span="1" vsize-policy="2" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-16777216"/>
@@ -449,18 +499,34 @@
       </component>
       <vspacer id="8d364">
         <constraints>
-          <grid row="0" column="2" row-span="24" col-span="1" vsize-policy="6" hsize-policy="1" anchor="4" fill="2" indent="0" use-parent-layout="false">
+          <grid row="0" column="2" row-span="26" col-span="1" vsize-policy="6" hsize-policy="1" anchor="4" fill="2" indent="0" use-parent-layout="false">
             <minimum-size width="15" height="-1"/>
           </grid>
         </constraints>
       </vspacer>
       <vspacer id="c2064">
         <constraints>
-          <grid row="0" column="0" row-span="24" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="0" column="0" row-span="26" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="10" height="-1"/>
           </grid>
         </constraints>
       </vspacer>
+      <component id="c2aa6" class="javax.swing.JLabel" binding="titleEssenceLabel">
+        <constraints>
+          <grid row="24" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Essences"/>
+        </properties>
+      </component>
+      <component id="6ce5a" class="javax.swing.JLabel" binding="titleAuctionsLabel">
+        <constraints>
+          <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Auctions"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
