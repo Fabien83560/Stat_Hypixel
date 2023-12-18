@@ -11,6 +11,12 @@ import javax.swing.*;
  * issue.
  */
 public class Main {
+
+    /**
+     * Empty constructor of the class, unused.
+     */
+    public Main(){}
+
     /**
      * main method of the Main class.
      * Necessary for the application to run.
