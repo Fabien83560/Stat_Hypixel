@@ -110,7 +110,7 @@ public class WindowGlobalStats {
                         default:
                             break;
                     }
-                    lab.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
+                    lab.setFont(new Font("Cascadia Code", Font.PLAIN, 20));
                     vbox.add(lab);
                 }
             }
