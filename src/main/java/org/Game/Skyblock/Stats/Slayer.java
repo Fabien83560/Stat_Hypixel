@@ -58,36 +58,42 @@ public class Slayer {
      */
     public Slayer(String _name, JSONObject slayerObject) {
         name = _name;
+
         try {
             exp = String.valueOf(slayerObject.get("xp"));
         }
         catch (JSONException e) {
             exp = "0";
         }
+
         try {
             tier1 = String.valueOf(slayerObject.get("boss_kills_tier_0"));
         }
         catch (JSONException e) {
             tier1 = "0";
         }
+
         try {
             tier2 = String.valueOf(slayerObject.get("boss_kills_tier_1"));
         }
         catch (JSONException e) {
             tier2 = "0";
         }
+
         try {
             tier3 = String.valueOf(slayerObject.get("boss_kills_tier_2"));
         }
         catch (JSONException e) {
             tier3 = "0";
         }
+
         try {
             tier4 = String.valueOf(slayerObject.get("boss_kills_tier_3"));
         }
         catch (JSONException e) {
             tier4 = "0";
         }
+
         try {
             tier5 = String.valueOf(slayerObject.get("boss_kills_tier_4"));
         }

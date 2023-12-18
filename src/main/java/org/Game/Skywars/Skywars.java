@@ -45,14 +45,14 @@ public class Skywars {
      */
     public Skywars(JSONObject stats)
     {
-        for(String stat : statsList) {
+        for(String stat : statsList)
             try {
                 addStatistics(stat, String.valueOf(stats.get(stat)));
             }
             catch (Exception e) {
                 addStatistics(stat, "N/A");
             }
-        }
+
         modes = new SkywarsModeContainer(stats);
     }
 
@@ -66,17 +66,6 @@ public class Skywars {
     public void addStatistics(String key, String value)
     {
         statistics.putIfAbsent(key,value);
-    }
-
-    /**
-     * Gets the value of the specified key in the 'statistics' Map by returning a String.
-     * @param key the key whose associated value is to be returned.
-     * @return A String containing the value associated to the key, if the key exists, and
-     * null otherwise.
-     */
-    public String getStatistics(String key)
-    {
-        return statistics.get(key);
     }
 
     /**

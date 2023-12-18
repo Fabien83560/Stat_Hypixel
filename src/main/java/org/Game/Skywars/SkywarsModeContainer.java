@@ -91,7 +91,6 @@ public class SkywarsModeContainer {
     public void calculateNormalStats()
     {
         for(String stat : statsList)
-        {
             try {
                 String stat_total = getStatistics("team_" + stat);
                 String stat_insane = getStatistics("team_insane_" + stat);
@@ -101,6 +100,5 @@ public class SkywarsModeContainer {
             catch (Exception e) {
                 addStatistics("team_normal_" + stat , "N/A");
             }
-        }
     }
 }

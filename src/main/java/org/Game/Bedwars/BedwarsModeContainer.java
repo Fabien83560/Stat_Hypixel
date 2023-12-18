@@ -45,14 +45,13 @@ public class BedwarsModeContainer {
     public BedwarsModeContainer(JSONObject stats)
     {
         for (String mode : modesList)
-            for (String stat : statsList) {
+            for (String stat : statsList)
                 try {
                     addStatistics(mode + "_" + stat, String.valueOf(stats.get(mode + "_" + stat)));
                 }
                 catch (Exception e) {
                     addStatistics(mode + "_" + stat, "N/A");
                 }
-            }
     }
 
     /**

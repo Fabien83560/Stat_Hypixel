@@ -74,7 +74,6 @@ public class Database {
                     "Error trying to add " + name + " to the FriendList table of the DataBase.",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 

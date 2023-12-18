@@ -45,8 +45,7 @@ public class Skills {
      *            never played in it.
      */
     public Skills(String val) {
-        if(val.equals("null"))
-        {
+        if(val.equals("null")) {
             String[] skills = {"SKILL_FARMING", "SKILL_MINING", "SKILL_COMBAT", "SKILL_FORAGING", "SKILL_FISHING", "SKILL_ENCHANTING", "SKILL_ALCHEMY", "SKILL_CARPENTRY", "SKILL_RUNECRAFTING", "SKILL_TAMING", "SKILL_SOCIAL"};
             for(String key : skills)
                 addSkills(key,0.0);
@@ -77,13 +76,15 @@ public class Skills {
      */
     public Double calculateLevel(String skill, Double exp) {
         try {
-            JSONObject jsonSkillsInformation = fetchSkillsLevel(skill.substring(6));
+            final JSONObject jsonSkillsInformation = fetchSkillsLevel(skill.substring(6));
             int maxLevel = (int) jsonSkillsInformation.get("maxLevel");
-            JSONArray jsonSkillsLists = jsonSkillsInformation.getJSONArray("levels");
+            final JSONArray jsonSkillsLists = jsonSkillsInformation.getJSONArray("levels");
+
             for(int level = 0 ; level < maxLevel ; level++) {
                 int xpRequired = ((BigDecimal) ((JSONObject) jsonSkillsLists.get(level)).get("totalExpRequired")).intValue();
                 if(!(xpRequired < exp))
                     return Double.parseDouble(String.valueOf(level+1));
+
                 if((xpRequired < exp) || xpRequired == exp)
                     return Double.parseDouble(String.valueOf(maxLevel));
             }
@@ -101,11 +102,12 @@ public class Skills {
      */
     public Double calculateSkillAverage() {
         Double res = 0.0;
-        String[] skillCalculate = {"SKILL_FARMING", "SKILL_MINING", "SKILL_COMBAT", "SKILL_FORAGING", "SKILL_FISHING", "SKILL_ENCHANTING", "SKILL_ALCHEMY", "SKILL_CARPENTRY"};
+        final String[] skillCalculate = {"SKILL_FARMING", "SKILL_MINING", "SKILL_COMBAT", "SKILL_FORAGING", "SKILL_FISHING", "SKILL_ENCHANTING", "SKILL_ALCHEMY", "SKILL_CARPENTRY"};
 
         for (String skill : skillCalculate)
             if (skills.containsKey(skill))
                 res += skills.get(skill);
+
         return res / (double) skillCalculate.length;
     }
 
@@ -119,7 +121,7 @@ public class Skills {
      * @see Player#fetch(String)
      */
     public JSONObject fetchSkillsLevel(String skill) {
-        String url = "https://api.hypixel.net/v2/resources/skyblock/skills";
+        final String url = "https://api.hypixel.net/v2/resources/skyblock/skills";
         return new JSONObject(Player.fetch(url)).getJSONObject("skills").getJSONObject(skill);
     }
 

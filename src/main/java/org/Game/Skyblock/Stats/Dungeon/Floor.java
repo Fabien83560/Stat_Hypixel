@@ -105,6 +105,7 @@ public class Floor {
     public String millisecondToFormat(String millisecond) {
         if(millisecond.isEmpty())
             return "00:00:00";
+
         Duration duration = Duration.ofMillis((long) Double.parseDouble(millisecond));
         long hours = duration.toHours();
         long minutes = duration.toMinutesPart();

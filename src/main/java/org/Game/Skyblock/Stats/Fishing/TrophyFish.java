@@ -54,18 +54,21 @@ public class TrophyFish {
         catch (JSONException e) {
             bronze = "0";
         }
+
         try {
             silver = String.valueOf(trophyObject.get(_name + "_silver"));
         }
         catch (JSONException e) {
             silver = "0";
         }
+
         try {
             gold = String.valueOf(trophyObject.get(_name + "_gold"));
         }
         catch (JSONException e) {
             gold = "0";
         }
+
         try {
             diamond = String.valueOf(trophyObject.get(_name + "_diamond"));
         }

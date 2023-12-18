@@ -2,8 +2,6 @@ package org.FriendList;
 
 import org.Application.App;
 import org.DataBase.Database;
-
-import javax.swing.*;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +35,7 @@ public class FriendList {
         try {
             PreparedStatement statement = dataBase.getDataBase().prepareStatement(sql);
             ResultSet result = statement.executeQuery();
-            while (result.next())
-            {
+            while (result.next()) {
                 String uuid = result.getString("uuid");
                 String name = result.getString("displayName");
                 addPlayer(name,uuid);

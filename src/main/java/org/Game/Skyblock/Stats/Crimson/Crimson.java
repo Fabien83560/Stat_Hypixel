@@ -53,36 +53,38 @@ public class Crimson {
         catch (JSONException e) {
             selectedFaction = "";
         }
+
         try {
             mageReputation = String.valueOf(jsonCrimson.get("mages_reputation"));
         }
         catch (JSONException e) {
             mageReputation = "";
         }
+
         try {
             barbarianReputation = String.valueOf(jsonCrimson.get("barbarians_reputation"));
         }
         catch (JSONException e) {
             barbarianReputation = "";
         }
-        String[] kuudras = {"none","hot","burning","fiery","infernal"};
-        for(String kuudra : kuudras) {
+
+        final String[] kuudras = {"none","hot","burning","fiery","infernal"};
+        for(String kuudra : kuudras)
             try {
                 kuudraList.add(new Kuudra(kuudra, jsonCrimson.getJSONObject("kuudra_completed_tiers")));
             }
             catch (JSONException e) {
                 kuudraList.add(new Kuudra(kuudra,new JSONObject()));
             }
-        }
-        String[] dojos = {"mob_kb","wall_jump","archer","sword_swap","snake","fireball","lock_head"};
-        for(String dojo : dojos) {
+
+        final String[] dojos = {"mob_kb","wall_jump","archer","sword_swap","snake","fireball","lock_head"};
+        for(String dojo : dojos)
             try {
                 dojoList.add(new Dojo(dojo, jsonCrimson.getJSONObject("dojo")));
             }
             catch (JSONException e) {
                 dojoList.add(new Dojo(dojo,new JSONObject()));
             }
-        }
     }
 
     /**

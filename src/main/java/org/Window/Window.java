@@ -1,7 +1,6 @@
 package org.Window;
 
 import org.Application.App;
-import org.Config.Config;
 import org.DataBase.Database;
 import org.Player.Player;
 import org.FriendList.FriendList;
@@ -143,9 +142,12 @@ public class Window extends JFrame {
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         setMinimumSize(new Dimension(1450, 950));
         setTitle("Hypixel Statistics");
+        Image icon = Toolkit.getDefaultToolkit().getImage("src/main/resources/img/logo.png");
+        setIconImage(icon);
         setSize(1450, 950);
         add(mainPanel);
         setVisible(true);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setPanelRight(windowPlayer);
@@ -187,9 +189,9 @@ public class Window extends JFrame {
         addNewPlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String newPlayer = JOptionPane.showInputDialog("Enter the new player's name:");
-                if(newPlayer != null)
-                {
+                final String newPlayer = JOptionPane.showInputDialog("Enter the new player's name:");
+                if(newPlayer != null) {
+
                     if(friendPlayerList.getList().get(newPlayer) == null) {
                         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         friendListModel.addElement(addPlayer(newPlayer));
@@ -197,7 +199,7 @@ public class Window extends JFrame {
                     }
                     else
                         JOptionPane.showMessageDialog(null,
-                                "This Player already exists in your Friend list!",
+                                "This player already exists in your Friend list!",
                                 "Player already exists",
                                 JOptionPane.ERROR_MESSAGE);
                 }
@@ -246,28 +248,26 @@ public class Window extends JFrame {
         displayPlayerStatisticsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
-                    if(friendList.getSelectedValue() == null){
+                try {
+                    if(friendList.getSelectedValue() == null)
                         JOptionPane.showMessageDialog(null,
                                 "Please select a player to display the statistics of.",
                                 "Select a player", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else if(!friendList.getValueIsAdjusting()){
+
+                    else if(!friendList.getValueIsAdjusting()) {
                         //Getting the name of the selected player to do a fetch with it afterward
-                        String friendSelectedFullName = friendList.getSelectedValue();
+                        final String friendSelectedFullName = friendList.getSelectedValue();
                         String friendNameSelected = "";
-                        int startName = friendSelectedFullName.indexOf("-") + 1;
+                        final int startName = friendSelectedFullName.indexOf("-") + 1;
                         //If there is the first dash in the name of the player in the friendList
                         if (startName != -1) {
-                            int endName = friendSelectedFullName.indexOf("-", startName + 1);
+                            final int endName = friendSelectedFullName.indexOf("-", startName + 1);
                             //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
-                            if (endName != -1) {
+                            if (endName != -1)
                                 //Extracting the name of the player
                                 friendNameSelected = friendSelectedFullName.substring(startName + 1, endName).trim();
-                            }
-                            else{
+                            else
                                 friendNameSelected = friendSelectedFullName.substring(startName + 1).trim();
-                            }
                         }
                         if(JOptionPane.showConfirmDialog(null,
                                 "Do you wish to display the statistics of " + friendNameSelected + " ?",
@@ -277,13 +277,13 @@ public class Window extends JFrame {
                             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             Player player = new Player(friendNameSelected);
                             WindowPlayer windowPlayer = new WindowPlayer();
+                            setCursor(Cursor.getDefaultCursor());
                             windowPlayer.displayAllStats(player);
                             setPanelRight(windowPlayer.getMainPanel());
-                            setCursor(Cursor.getDefaultCursor());
                         }
                     }
                 }
-                catch(IndexOutOfBoundsException exception){
+                catch(IndexOutOfBoundsException exception) {
                     exception.printStackTrace();
                 }
             }
@@ -302,19 +302,18 @@ public class Window extends JFrame {
         removePlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
-                    if(friendList.getSelectedValue() == null){
+                try {
+                    if(friendList.getSelectedValue() == null)
                         JOptionPane.showMessageDialog(null,
                                 "Please select a player to delete from your Friend List.",
                                 "Select a player", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else{
-                        String friendSelectedFullName = friendList.getSelectedValue();
+                    else {
+                        final String friendSelectedFullName = friendList.getSelectedValue();
                         String friendNameSelected = "";
-                        int startName = friendSelectedFullName.indexOf("-") + 1;
+                        final int startName = friendSelectedFullName.indexOf("-") + 1;
                         //If there is the first dash in the name of the player in the friendList
                         if (startName != -1) {
-                            int endName = friendSelectedFullName.indexOf("-", startName + 1);
+                            final int endName = friendSelectedFullName.indexOf("-", startName + 1);
                             //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
                             if (endName != -1) {
                                 //Extracting the name of the player
@@ -328,6 +327,7 @@ public class Window extends JFrame {
                                 "Do you really want to delete " + friendNameSelected + " from your Friend List?",
                                 "Delete " + friendNameSelected,
                                 JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
+
                             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             Database database = new Database();
                             friendPlayerList.removePlayer(friendNameSelected);
@@ -340,7 +340,6 @@ public class Window extends JFrame {
                     }
                 }
                 catch(Exception exception){
-                    System.out.println("Error trying to remove a player from the Friend List:");
                     exception.printStackTrace();
                 }
             }
@@ -368,7 +367,8 @@ public class Window extends JFrame {
      * If the user clicks on Yes, the application is closed.
      */
     public void quit() {
-        if (JOptionPane.showConfirmDialog(null, "Do you want to quit ?", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == JOptionPane.YES_OPTION)
+        if (JOptionPane.showConfirmDialog(null, "Do you want to quit ?",
+                "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == JOptionPane.YES_OPTION)
             System.exit(0);
     }
 
@@ -394,7 +394,7 @@ public class Window extends JFrame {
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null,
-                    "This player is Unknown",
+                    "This player is unknown",
                     "Unknown Player",
                     JOptionPane.ERROR_MESSAGE);
             return "";
@@ -451,18 +451,8 @@ public class Window extends JFrame {
     public void updateWindow() {
         friendListModel.clear();
         Set<String> keys = friendPlayerList.getList().keySet();
-        JSONObject jsonObjectStatus;
-        boolean online;
-        String recentGame;
-        for (String key : keys) {
-            jsonObjectStatus = Player.fetchStatus(friendPlayerList.getList().get(key) , App.getInstance().getConfig().getApikey());
-            online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
-            if(online)
-                recentGame = jsonObjectStatus.getJSONObject("session").getString("gameType");
-            else
-                recentGame = "";
+        for (String key : keys)
             friendListModel.addElement(addPlayer(key,friendPlayerList.getList().get(key)));
-        }
     }
 
     /**
@@ -488,20 +478,24 @@ public class Window extends JFrame {
      * the user to fill it in. Otherwise, starts the application normally.
      */
     public void testAPIkey() {
-        String testUUID = "055db3693e1e4431a3204d586be92a37";
+        final String testUUID = "055db3693e1e4431a3204d586be92a37";
         boolean apiKeyValid = false;
         while (!apiKeyValid) {
             try {
-                String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
+                final String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
 
                 if(newApiKey == null)
                     System.exit(0);
 
-                boolean b = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
+                else if(newApiKey.isEmpty())
+                    JOptionPane.showMessageDialog(null, "Please enter an API Key to start the app.");
 
-                apiKeyValid = true;
-                App.getInstance().getConfig().setApikey(newApiKey);
-
+                else{
+                    Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
+                    //If the fetch is successful, access the application.
+                    apiKeyValid = true;
+                    App.getInstance().getConfig().setApikey(newApiKey);
+                }
             }
             catch (JSONException e) {
                 JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");

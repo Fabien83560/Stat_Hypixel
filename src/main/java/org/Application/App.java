@@ -32,7 +32,7 @@ public final class App {
      * An instance of that same class. It is used to stop the actual
      * instance of the application, and make sure it is only launched once.
      */
-    private static App instance;
+    private static volatile App instance;
 
     /**
      * The main window instance of the application. It displays
@@ -54,6 +54,7 @@ public final class App {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         }
         catch (UnsupportedLookAndFeelException e) {
+
         }
     }
 
@@ -62,7 +63,7 @@ public final class App {
      * @return An App Object.
      */
     public static App getInstance() {
-        if (instance == null)
+         if (instance == null)
             synchronized (App.class) {
                 if (instance == null)
                     instance = new App();

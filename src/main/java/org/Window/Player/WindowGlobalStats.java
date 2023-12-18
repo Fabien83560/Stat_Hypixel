@@ -60,10 +60,10 @@ public class WindowGlobalStats {
      * @see Player#getAllStatistics()
      */
     public WindowGlobalStats(Player player) {
-        if(mainPanel.getComponentCount() != 0){
+        if(mainPanel.getComponentCount() != 0)
             mainPanel.removeAll();
-        }
-        Map<String, String> globalStats = player.getAllStatistics();
+
+        final Map<String, String> globalStats = player.getAllStatistics();
         Box vbox = Box.createVerticalBox();
         try{
             for(Map.Entry<String, String> stat : globalStats.entrySet()){
@@ -72,8 +72,8 @@ public class WindowGlobalStats {
                     switch(stat.getKey()){
                         case "lastLogin":
                             if( ! stat.getValue().equals("N/A")) {
-                                Timestamp timestamp = new Timestamp(Long.parseLong(stat.getValue()));
-                                Date date = new Date(timestamp.getTime());
+                                final Timestamp timestamp = new Timestamp(Long.parseLong(stat.getValue()));
+                                final Date date = new Date(timestamp.getTime());
                                 lab.setText("Last Login : " + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" +
                                         (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "/" +
                                         (date.getYear() + 1900));
@@ -83,8 +83,8 @@ public class WindowGlobalStats {
                             break;
                         case "firstLogin":
                             if( ! stat.getValue().equals("N/A")) {
-                                Timestamp timestamp2 = new Timestamp(Long.parseLong(stat.getValue()));
-                                Date date2 = new Date(timestamp2.getTime());
+                                final Timestamp timestamp2 = new Timestamp(Long.parseLong(stat.getValue()));
+                                final Date date2 = new Date(timestamp2.getTime());
                                 lab.setText("First Login : " + (date2.getDate() < 10 ? "0" + date2.getDate() : date2.getDate()) + "/" +
                                         (date2.getMonth() + 1 < 10 ? "0" + (date2.getMonth() + 1) : date2.getMonth() + 1) + "/" +
                                         (date2.getYear() + 1900));
@@ -114,8 +114,8 @@ public class WindowGlobalStats {
                     vbox.add(lab);
                 }
             }
-            URL skinUrl = new URL(globalStats.get("skin"));
-            ImageIcon skinIcon = new ImageIcon(skinUrl);
+            final URL skinUrl = new URL(globalStats.get("skin"));
+            final ImageIcon skinIcon = new ImageIcon(skinUrl);
             skinLabel.setIcon(skinIcon);
             JPanelSkin = new JPanel(new BorderLayout());
             JPanelSkin.add(skinLabel);
@@ -124,13 +124,11 @@ public class WindowGlobalStats {
             mainPanel.revalidate();
             mainPanel.repaint();
         }
-        catch(Exception e){
+        catch(Exception e) {
             JOptionPane.showMessageDialog(null,
                     "Can't display the global Statistics of the player.",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
-            System.out.println("Can't display the global statistics of the researched player:\n");
-            e.printStackTrace();
         }
     }
 

@@ -40,12 +40,14 @@ public class Kuudra {
             name = _name;
         try {
             kuudraKill = String.valueOf(kuudraObject.get(_name));
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             kuudraKill = "0";
         }
         try {
             highestWave = String.valueOf(kuudraObject.get("highest_wave_" + _name));
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             highestWave = "0";
         }
     }

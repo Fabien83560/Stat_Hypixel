@@ -86,18 +86,22 @@ public class WindowDungeon {
             if (dungeon.getFloorList() != null)
                 for (Floor f : dungeon.getFloorList())
                     dungeonPanel.add(new WindowFloor(f).getMainPanel());
-            else
-                dungeonPanel.add(new JLabel("This player didn't do any Dungeon"));
+            else{
+                final JLabel label = new JLabel("This player didn't play any Dungeon in this profile!");
+                label.setFont(new Font("Cascadia Code", Font.PLAIN, 20));
+                dungeonPanel.add(label);
+            }
         }
-        else
-        {
+        else {
             catacombLabel.setText("Catacomb Level : 0");
             mageLabel.setText("Mage Exp : 0");
             archerLabel.setText("Archer Exp : 0");
             tankLabel.setText("Tank Exp : 0");
             berserkLabel.setText("Berserk Exp : 0");
             healerLabel.setText("Healer Exp : 0");
-            dungeonPanel.add(new JLabel("This player didn't do any Dungeon"));
+            final JLabel label = new JLabel("This player didn't play any Dungeon in this profile!");
+            label.setFont(new Font("Cascadia Code", Font.PLAIN, 20));
+            dungeonPanel.add(label);
         }
     }
 

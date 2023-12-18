@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="505" height="471"/>
     </constraints>
     <properties>
       <maximumSize width="1050" height="2147483647"/>
@@ -73,9 +73,15 @@
             <children>
               <component id="e3e56" class="javax.swing.JLabel" binding="socialImageLabel">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="25" height="25"/>
+                    <preferred-size width="50" height="50"/>
+                    <maximum-size width="50" height="50"/>
+                  </grid>
                 </constraints>
                 <properties>
+                  <horizontalAlignment value="0"/>
+                  <icon value="img/social.png"/>
                   <text value=""/>
                 </properties>
               </component>
@@ -90,10 +96,11 @@
               </component>
               <component id="68d0e" class="javax.swing.JLabel" binding="socialLabel">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <foreground color="-16777216"/>
+                  <horizontalAlignment value="0"/>
                   <text value="SOCIAL"/>
                 </properties>
               </component>
@@ -119,18 +126,30 @@
                 <children>
                   <component id="6b10e" class="javax.swing.JLabel" binding="farmingImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <alignmentX value="0.5"/>
+                      <autoscrolls value="false"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="11"/>
+                      <icon value="img/farming.png"/>
+                      <iconTextGap value="4"/>
+                      <inheritsPopupMenu value="true"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="b4e6c" class="javax.swing.JLabel" binding="farmingLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>
+                      <horizontalAlignment value="0"/>
                       <text value="FARMING"/>
                     </properties>
                   </component>
@@ -157,18 +176,27 @@
                 <children>
                   <component id="59219" class="javax.swing.JLabel" binding="miningImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <alignmentX value="0.5"/>
+                      <horizontalAlignment value="0"/>
+                      <icon value="img/mining.png"/>
+                      <inheritsPopupMenu value="true"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="25a1f" class="javax.swing.JLabel" binding="miningLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>
+                      <horizontalAlignment value="0"/>
                       <text value="MINING"/>
                     </properties>
                   </component>
@@ -195,18 +223,25 @@
                 <children>
                   <component id="adacb" class="javax.swing.JLabel" binding="combatImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <horizontalAlignment value="0"/>
+                      <icon value="img/combat.png"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="ba7e9" class="javax.swing.JLabel" binding="combatLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>
+                      <horizontalAlignment value="0"/>
                       <text value="COMBAT"/>
                     </properties>
                   </component>
@@ -233,18 +268,25 @@
                 <children>
                   <component id="1ee2c" class="javax.swing.JLabel" binding="foragingImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <horizontalAlignment value="0"/>
+                      <icon value="img/foraging.png"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="36fa7" class="javax.swing.JLabel" binding="foragingLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>
+                      <horizontalAlignment value="0"/>
                       <text value="FORAGING"/>
                     </properties>
                   </component>
@@ -271,18 +313,25 @@
                 <children>
                   <component id="6a2a7" class="javax.swing.JLabel" binding="fishingImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <horizontalAlignment value="0"/>
+                      <icon value="img/fishing.png"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="ee0e" class="javax.swing.JLabel" binding="fishingLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>
+                      <horizontalAlignment value="0"/>
                       <text value="FISHING"/>
                     </properties>
                   </component>
@@ -319,15 +368,21 @@
                 <children>
                   <component id="f25ea" class="javax.swing.JLabel" binding="enchantingImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <horizontalAlignment value="0"/>
+                      <icon value="img/enchanting.png"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="35b16" class="javax.swing.JLabel" binding="enchantingLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>
@@ -357,15 +412,21 @@
                 <children>
                   <component id="35a3d" class="javax.swing.JLabel" binding="alchemyImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <horizontalAlignment value="0"/>
+                      <icon value="img/alchemy.png"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="6d1b2" class="javax.swing.JLabel" binding="alchemyLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>
@@ -395,15 +456,21 @@
                 <children>
                   <component id="76d66" class="javax.swing.JLabel" binding="carpentryImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <horizontalAlignment value="0"/>
+                      <icon value="img/carpentry.png"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="4dbed" class="javax.swing.JLabel" binding="carpentryLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>
@@ -433,15 +500,21 @@
                 <children>
                   <component id="8fb20" class="javax.swing.JLabel" binding="runecraftingImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <horizontalAlignment value="0"/>
+                      <icon value="img/runecrafting.png"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="dba21" class="javax.swing.JLabel" binding="runecraftingLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>
@@ -471,15 +544,21 @@
                 <children>
                   <component id="84b94" class="javax.swing.JLabel" binding="tamingImageLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="25" height="25"/>
+                        <preferred-size width="50" height="50"/>
+                        <maximum-size width="50" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
+                      <horizontalAlignment value="0"/>
+                      <icon value="img/taming.png"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="32792" class="javax.swing.JLabel" binding="tamingLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <foreground color="-16777216"/>

@@ -3,7 +3,6 @@ package org.Player;
 import org.Application.App;
 import org.DataBase.Database;
 import org.Game.GamesContainer;
-import org.Window.Window;
 import org.json.JSONException;
 import org.json.JSONObject;
 import javax.swing.*;
@@ -71,8 +70,8 @@ public class Player {
      * @see GamesContainer#GamesContainer(JSONObject, JSONObject, String)
      */
     public Player(String Name) {
-        String apikey = App.getInstance().getConfig().getApikey();
-        JSONObject jsonObjectPlayer = fetchPlayer(Name, apikey);
+        final String apikey = App.getInstance().getConfig().getApikey();
+        final JSONObject jsonObjectPlayer = fetchPlayer(Name, apikey);
         try {
             Object playerObject;
             try {
@@ -81,35 +80,32 @@ public class Player {
             catch (JSONException exeption) {
                 playerObject = null;
             }
-            if (playerObject == null || playerObject.equals(JSONObject.NULL)) {
+            if (playerObject == null || playerObject.equals(JSONObject.NULL))
                 JOptionPane.showMessageDialog(null,
                         "Player " + Name + " is unknown",
                         "Unknown Player",
                         JOptionPane.ERROR_MESSAGE);
-            }
             else {
-                for (String stat : statsList) {
+                for (String stat : statsList)
                     try {
                         addStatistics(stat, String.valueOf(jsonObjectPlayer.getJSONObject("player").get(stat)));
                     }
-                    catch (Exception e)
-                    {
+                    catch (Exception e) {
                         addStatistics(stat, "N/A");
                     }
-                }
 
                 addStatistics("skin", String.valueOf(getSkinURL(getStatistics("uuid"))));
                 addStatistics("guildName", fetchGuildName(getStatistics("uuid"), apikey));
 
                 try {
-                    long exp = jsonObjectPlayer.getJSONObject("player").getLong("networkExp");
+                    final long exp = jsonObjectPlayer.getJSONObject("player").getLong("networkExp");
                     addStatistics("hypixelLevel", String.format("%.2f", Math.sqrt((2 * exp) + 30625) / 50 - 2.5));
                 }
-                catch(JSONException e){
+                catch(JSONException e) {
                     addStatistics("hypixelLevel", "N/A");
                 }
 
-                JSONObject jsonObjectStatus = fetchStatus(getStatistics("uuid"), apikey);
+                final JSONObject jsonObjectStatus = fetchStatus(getStatistics("uuid"), apikey);
                 online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
 
                 games = new GamesContainer(jsonObjectPlayer.getJSONObject("player").getJSONObject("stats"), jsonObjectPlayer.getJSONObject("player").getJSONObject("achievements"),getStatistics("uuid"));
@@ -134,24 +130,24 @@ public class Player {
      */
     public static void handleException(JSONObject jsonObject) {
         try {
-            String errorState = jsonObject.getString("errorState");
-            if (errorState.equals("429")) {
+            final String errorState = jsonObject.getString("errorState");
+            if (errorState.equals("429"))
                 System.out.println("You have already looked up this name recently");
-            }
-            else if (errorState.equals("403")) {
+
+            else if (errorState.equals("403"))
                 System.out.println("Invalid API key");
-            }
-            else if (errorState.equals("STATUS")) {
+
+            else if (errorState.equals("STATUS"))
                 System.out.println("Unable to get Status of this Player");
-            }
+
             else if (errorState.equals("SKIN"))
                 System.out.println("Unable to get Skin of this Player");
-            else {
+
+            else
                 System.out.println("Unknown Error");
-            }
+
         }
         catch (JSONException e) {
-            System.out.println("An unexpected error occurred");
             e.printStackTrace();
         }
     }
@@ -202,8 +198,8 @@ public class Player {
      * the regular expression.
      */
     public static String match(String str) {
-        Pattern error_429 = Pattern.compile("[Server returned HTTP response code: 429 for URL:]");
-        Pattern error_403 = Pattern.compile("[Server returned HTTP response code: 403 for URL:]");
+        final Pattern error_429 = Pattern.compile("[Server returned HTTP response code: 429 for URL:]");
+        final Pattern error_403 = Pattern.compile("[Server returned HTTP response code: 403 for URL:]");
 
         Matcher error_429_ = error_429.matcher(str);
         Matcher error_403_ = error_403.matcher(str);
@@ -236,14 +232,15 @@ public class Player {
         Database dataBase = new Database();
         try {
             String url = "";
-            String uuid = dataBase.knowPlayer("", name);
+            final String uuid = dataBase.knowPlayer("", name);
             if (uuid != null)
                 url = "https://api.hypixel.net/v2/player?uuid=" + uuid + "&key=" + apikey;
+
             else
                 url = "https://api.hypixel.net/v2/player?name=" + name + "&key=" + apikey;
 
             data = fetch(url);
-            JSONObject jsonObject = new JSONObject(data);
+            final JSONObject jsonObject = new JSONObject(data);
 
             if(uuid == null)
                 dataBase.addPlayerToDataBase(jsonObject.getJSONObject("player").getString("uuid"), name);
@@ -271,7 +268,7 @@ public class Player {
      * an error trying to fetch the status.
      */
     public static JSONObject fetchStatus(String uuid,String apikey) {
-        String url = "https://api.hypixel.net/v2/status?uuid=" + uuid + "&key=" + apikey;
+        final String url = "https://api.hypixel.net/v2/status?uuid=" + uuid + "&key=" + apikey;
         String data = fetch(url);
         try {
             return new JSONObject(data);
@@ -293,13 +290,11 @@ public class Player {
      *         the player.
      */
     public static URL getSkinURL(String uuid) {
-        try
-        {
-            String skinURL = "https://crafatar.com/renders/body/" + uuid;
+        try {
+            final String skinURL = "https://crafatar.com/renders/body/" + uuid;
             return new URI(skinURL).toURL();
         }
-        catch(IOException | URISyntaxException e)
-        {
+        catch(IOException | URISyntaxException e) {
             JSONObject jsonError = new JSONObject();
             jsonError.put("errorState" , "SKIN");
             handleException(jsonError);
@@ -319,8 +314,8 @@ public class Player {
      */
     public static String fetchGuildName(String uuid, String apikey) {
         try {
-            String url = "https://api.hypixel.net/v2/guild?player=" + uuid + "&key=" + apikey;
-            JSONObject object = new JSONObject(fetch(url));
+            final String url = "https://api.hypixel.net/v2/guild?player=" + uuid + "&key=" + apikey;
+            final JSONObject object = new JSONObject(fetch(url));
             return object.getJSONObject("guild").getString("name");
         }
         catch (Exception e) {
@@ -340,8 +335,7 @@ public class Player {
      *         used in the parameter.
      */
     public static String fetch(String _url) {
-        try
-        {
+        try {
             URL url = new URI(_url).toURL();
 
             InputStream is = url.openStream();
@@ -356,11 +350,8 @@ public class Player {
             String data = baos.toString(StandardCharsets.UTF_8);
             is.close();
             return data;
-
         }
-        catch(IOException | URISyntaxException e)
-        {
-            System.out.println("Unable to fetch resource at " + _url);
+        catch(IOException | URISyntaxException e) {
             return e.getMessage();
         }
     }

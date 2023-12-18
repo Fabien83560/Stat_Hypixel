@@ -50,14 +50,14 @@ public class Bedwars {
     {
         addStatistics("level", String.valueOf(achievements.get("bedwars_level")));
 
-        for(String stat : statsList) {
+        for(String stat : statsList)
             try {
                 addStatistics(stat, String.valueOf(stats.get(stat)));
             }
             catch (Exception e) {
                 addStatistics(stat, "N/A");
             }
-        }
+
         modes = new BedwarsModeContainer(stats);
     }
 

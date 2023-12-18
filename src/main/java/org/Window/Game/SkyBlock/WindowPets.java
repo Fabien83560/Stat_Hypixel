@@ -56,13 +56,21 @@ public class WindowPets {
     public WindowPets(List<Pet> petList) {
         titleLabel.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
         if (petList != null) {
-            for (Pet p : petList) {
+            for (Pet p : petList)
                 petsListPanel.add(new WindowPet(p).getMainPanel());
+
+            if(petsListPanel.getComponentCount() == 0){
+                final JLabel label = new JLabel("This player doesn't have any Pets in that profile!");
+                label.setFont(new Font("Cascadia Code", Font.PLAIN, 20));
+                petsListPanel.add(label);
             }
         }
         else {
-            petsListPanel.add(new JLabel("This Player didn't have any Pets !"));
+            final JLabel label = new JLabel("This player doesn't have any Pets in that profile!");
+            label.setFont(new Font("Cascadia Code", Font.PLAIN, 20));
+            petsListPanel.add(label);
         }
+
     }
 
     /**

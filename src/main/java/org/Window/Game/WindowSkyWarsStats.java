@@ -47,29 +47,28 @@ public class WindowSkyWarsStats {
      * @see #setStatisticsTable(JTable)
      */
     public WindowSkyWarsStats(Player player) {
-        if(player.getGames().getSkywars() != null)
-        {
-            String[] columns = {"","Solo Normal", "Solo Insane", "Team Normal", "Team Insane"};
-            String[] rows = {"","Kills", "Deaths", "Ratio K / D", "", "Wins", "Losses", "Ratio W / L"};
-            String[] modesList = {"solo_normal", "solo_insane", "team_normal", "team_insane"};
-            String[] statsList = {"", "kills", "deaths","", "", "wins", "losses", "", ""};
+        if(player.getGames().getSkywars() != null) {
+            final String[] columns = {"","Solo Normal", "Solo Insane", "Team Normal", "Team Insane"};
+            final String[] rows = {"","Kills", "Deaths", "Ratio K / D", "", "Wins", "Losses", "Ratio W / L"};
+            final String[] modesList = {"solo_normal", "solo_insane", "team_normal", "team_insane"};
+            final String[] statsList = {"", "kills", "deaths","", "", "wins", "losses", "", ""};
 
-            DefaultTableModel model = new NonEditableTableModel(columns, rows.length);
-            Skywars skywars = player.getGames().getSkywars();
+            final DefaultTableModel model = new NonEditableTableModel(columns, rows.length);
+            final Skywars skywars = player.getGames().getSkywars();
 
             for(int i = 0;i < modesList.length;i++)
-            {
                 for(int j = 0;j < statsList.length - 1;j++)
                     model.setValueAt(skywars.getModes().getStatistics(modesList[i] + "_" + statsList[j]), j, i + 1);
-            }
+
             for(int i = 0;i < columns.length;i++)
                 model.setValueAt(columns[i],0,i);
+
             for(int i = 0;i < rows.length;i++)
                 model.setValueAt(rows[i],i,0);
 
-            int[] ratio = {3,7};
-            for(int row : ratio) {
-                for (int column = 1; column != 5; column++) {
+            final int[] ratio = {3, 7};
+            for(int row : ratio)
+                for (int column = 1; column != 5; column++)
                     try {
                         DecimalFormat decimalFormat = new DecimalFormat("#.##");
                         double result = Double.parseDouble(model.getValueAt(row - 2, column).toString()) / Double.parseDouble(model.getValueAt(row - 1, column).toString());
@@ -78,8 +77,6 @@ public class WindowSkyWarsStats {
                     catch (Exception e) {
                         model.setValueAt("N/A",row,column);
                     }
-                }
-            }
 
             JTable table = new JTable(model);
 
@@ -91,8 +88,8 @@ public class WindowSkyWarsStats {
         else
         {
             JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-            JLabel label = new JLabel("This player has never played SkyWars !");
-            label.setFont(new Font("Arial", Font.PLAIN, 24));
+            final JLabel label = new JLabel("This player has never played SkyWars!");
+            label.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
             panel.add(label);
             mainPanel.add(panel);
         }

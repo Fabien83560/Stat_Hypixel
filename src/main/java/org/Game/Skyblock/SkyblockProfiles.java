@@ -40,7 +40,7 @@ public class SkyblockProfiles {
      * @see SkyblockProfilesContainer
      */
     public SkyblockProfiles(JSONObject stats, String playerUuid){
-        JSONObject jsonProfiles = stats.getJSONObject("profiles");
+        final JSONObject jsonProfiles = stats.getJSONObject("profiles");
         Set<String> uuidProfiles = jsonProfiles.keySet();
         for(String uuid : uuidProfiles)
         {
@@ -52,15 +52,6 @@ public class SkyblockProfiles {
                 profiles.put(uuid, null);
             }
         }
-    }
-
-    /**
-     * Gets the 'profiles' Map of the SkyblockProfiles class.
-     * @return A Map of 'String, SkyblockProfilesContainer'
-     * @see SkyblockProfiles#profiles
-     */
-    public Map<String, SkyblockProfilesContainer> getProfiles() {
-        return profiles;
     }
 
     /**

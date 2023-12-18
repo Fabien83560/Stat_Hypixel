@@ -80,17 +80,22 @@ public class WindowCrimsonIsle {
             if( !(crimson.getKuudraList().isEmpty()))
                 for(Kuudra k : crimson.getKuudraList())
                     kuudraPanel.add(new WindowKuudra(k).getMainPanel());
-            else
-                kuudraPanel.add(new JLabel("This Player didn't do any Kuudra !"));
+            else{
+                final JLabel label = new JLabel("This player didn't play any Kuudra in this profile!");
+                label.setFont(new Font("Cascadia Code", Font.PLAIN, 20));
+                kuudraPanel.add(label);
+            }
 
             if( !(crimson.getDojoList().isEmpty()))
                 for(Dojo d : crimson.getDojoList())
                     dojoPanel.add(new WindowDojo(d).getMainPanel());
-            else
-                dojoPanel.add(new JLabel("This Player didn't do any Dojo !"));
+            else{
+                final JLabel label = new JLabel("This player didn't play any Dojo in this profile!");
+                label.setFont(new Font("Cascadia Code", Font.PLAIN, 20));
+                dojoPanel.add(label);
+            }
         }
-        else
-        {
+        else {
             selectedFactionLabel.setText("Selected faction : 0");
             mageReputationLabel.setText("Mage Reputation : 0");
             barbarianReputationLabel.setText("Barbarian Reputation : 0");

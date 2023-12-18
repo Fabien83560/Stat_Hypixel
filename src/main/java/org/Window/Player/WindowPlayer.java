@@ -106,7 +106,7 @@ public class WindowPlayer extends JFrame {
      * if a player's statistics are shown. Otherwise,
      * this label isn't displayed.
      */
-    private JLabel currentModeStatisticsLabel;
+    private JLabel currentModeStatisticsTitle;
 
     /**
      * This Scroll Panel contains the information related to
@@ -121,6 +121,7 @@ public class WindowPlayer extends JFrame {
      * profile buttons of a player in Skyblock mode.
      */
     private JPanel skyblockProfilesButtonPanel;
+    private JLabel globalStatisticsTitle;
 
     /**
      * Instance of the WindowGlobalStats class. Used
@@ -176,6 +177,8 @@ public class WindowPlayer extends JFrame {
      * @see WindowPlayer#setGlobalStatsPanel(JPanel)
      */
     public WindowPlayer() {
+        globalStatisticsTitle.setFont(new Font(skyBlockButton.getFont().toString(), Font.PLAIN, 18));
+        currentModeStatisticsTitle.setFont(new Font(skyBlockButton.getFont().toString(), Font.PLAIN, 18));
         windowGlobalStats = new WindowGlobalStats();
         setGlobalStatsPanel(windowGlobalStats.getMainPanel());
         skyblockProfilesButtonPanel.setVisible(false);
@@ -197,12 +200,12 @@ public class WindowPlayer extends JFrame {
                 skyblockProfilesButtonPanel.setVisible(false);
                 if(isPlayerDisplayed) {
                     setCurrentModeStatsPanel(windowSkyWarsStats.getMainPanel());
-                    currentModeStatisticsLabel.setText("SkyWars Statistics");
+                    currentModeStatisticsTitle.setText("SkyWars Statistics");
                 }
                 else
                     JOptionPane.showMessageDialog(null,
-                            "Please enter a player's name.",
-                            "No name entered",
+                            "Please select a player in the friend list or enter a player's name.",
+                            "No player selected",
                             JOptionPane.ERROR_MESSAGE);
             }
         });
@@ -224,12 +227,12 @@ public class WindowPlayer extends JFrame {
                 skyblockProfilesButtonPanel.setVisible(false);
                 if(isPlayerDisplayed) {
                     setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
-                    currentModeStatisticsLabel.setText("BedWars Statistics");
+                    currentModeStatisticsTitle.setText("BedWars Statistics");
                 }
                 else
                     JOptionPane.showMessageDialog(null,
-                            "Please enter a player's name.",
-                            "No name entered",
+                            "Please select a player in the friend list or enter a player's name.",
+                            "No player selected",
                             JOptionPane.ERROR_MESSAGE);
             }
         });
@@ -254,17 +257,17 @@ public class WindowPlayer extends JFrame {
                         setCurrentModeStatsPanel(windowSkyBlockStats.getMainPanel());
                     else {
                         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-                        JLabel label = new JLabel("This player has never played Skyblock !");
-                        label.setFont(new Font("Arial", Font.PLAIN, 24));
+                        final JLabel label = new JLabel("This player has never played SkyBlock!");
+                        label.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
                         panel.add(label);
                         setCurrentModeStatsPanel(panel);
                     }
-                    currentModeStatisticsLabel.setText("SkyBlock Statistics");
+                    currentModeStatisticsTitle.setText("SkyBlock Statistics");
                 }
                 else
                     JOptionPane.showMessageDialog(null,
-                            "Please enter a player's name.",
-                            "No name entered",
+                            "Please select a player in the friend list or enter a player's name.",
+                            "No player selected",
                             JOptionPane.ERROR_MESSAGE);
             }
         });
@@ -287,13 +290,13 @@ public class WindowPlayer extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String search = SearchPlayer.getText();
+                    final String search = SearchPlayer.getText();
                     if(search.isEmpty())
                         JOptionPane.showMessageDialog(null,
                                 "Please enter a player's name.",
                                 "No name entered",
                                 JOptionPane.ERROR_MESSAGE);
-                    else{
+                    else {
                         globalStatsPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         currentModeStatsPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -308,8 +311,6 @@ public class WindowPlayer extends JFrame {
                     }
                 }
                 catch(NullPointerException exception) {
-                    exception.printStackTrace();
-                    System.out.println("Error trying to do a research in \"searchButton.addActionListener\".");
                     globalStatsPanel.setCursor(Cursor.getDefaultCursor());
                     currentModeStatsPanel.setCursor(Cursor.getDefaultCursor());
                     searchButton.setCursor(Cursor.getDefaultCursor());
@@ -438,7 +439,7 @@ public class WindowPlayer extends JFrame {
             windowSkyBlockStats = null;
 
         setGlobalStatsPanel(windowGlobalStats.getMainPanel());
-        currentModeStatisticsLabel.setText("BedWars Statistics");
+        currentModeStatisticsTitle.setText("BedWars Statistics");
         setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
         isPlayerDisplayed = true;
     }

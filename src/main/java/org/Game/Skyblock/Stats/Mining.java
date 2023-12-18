@@ -46,25 +46,25 @@ public class Mining {
         catch (JSONException e) {
             actualMithrilPowder = "0";
         }
+
         try {
             spentMithrilPower = String.valueOf(miningObject.get("powder_spent_mithril"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             spentMithrilPower = "0";
         }
+
         try {
             actualGemstonePowder = String.valueOf(miningObject.get("powder_gemstone_total"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             actualGemstonePowder = "0";
         }
+
         try {
             spentGemstonePower = String.valueOf(miningObject.get("powder_spent_gemstone"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             spentGemstonePower = "0";
         }
     }

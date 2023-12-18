@@ -57,24 +57,24 @@ public class WindowBedWarsStats extends JFrame {
      */
     public WindowBedWarsStats(Player player) {
         if(player.getGames().getBedwars() != null) {
-            String[] columns = {"","1v1", "2v2", "3v3", "4v4"};
-            String[] rows = {"","Games Played", "Winstreak", "Wins", "Losses", "Ratio Wins / Losses","",
+            final String[] columns = {"","1v1", "2v2", "3v3", "4v4"};
+            final String[] rows = {"","Games Played", "Winstreak", "Wins", "Losses", "Ratio Wins / Losses","",
                     "Kills", "Deaths", "Ratio Kills / Deaths", "", "Final Kills", "Final Deaths",
                     "Ratio Final K / D", "", "Beds Brokens", "Beds Losts", "Ratio Beds B / L"};
-            String[] modesList = {"eight_one", "eight_two", "four_three", "four_four"};
-            String[] statsList = {"games_played_bedwars" , "winstreak" , "wins_bedwars" , "losses_bedwars" ,
+            final String[] modesList = {"eight_one", "eight_two", "four_three", "four_four"};
+            final String[] statsList = {"games_played_bedwars" , "winstreak" , "wins_bedwars" , "losses_bedwars" ,
                     "","", "kills_bedwars" , "deaths_bedwars" ,"","", "final_kills_bedwars" ,"final_kills_bedwars","","",
                     "beds_broken_bedwars" , "beds_lost_bedwars", ""};
 
-            DefaultTableModel model = new NonEditableTableModel(columns, rows.length);
-            Bedwars bedwars = player.getGames().getBedwars();
+            final DefaultTableModel model = new NonEditableTableModel(columns, rows.length);
+            final Bedwars bedwars = player.getGames().getBedwars();
 
             Box hbox = Box.createHorizontalBox();
-            String[] globalBedwarsStats = {"games_played_bedwars" , "wins_bedwars" , "kills_bedwars" , "beds_broken_bedwars" , "final_kills_bedwars" , "coins"};
+            final String[] globalBedwarsStats = {"games_played_bedwars" , "wins_bedwars" , "kills_bedwars" , "beds_broken_bedwars" , "final_kills_bedwars" , "coins"};
             for(String value : globalBedwarsStats)
             {
                 JLabel lab = new JLabel();
-                String res = bedwars.getStatistics(value);
+                final String res = bedwars.getStatistics(value);
                 switch(value) {
                     case "games_played_bedwars":
                         lab.setText("Global Game Played : " + res + " | ");
@@ -105,17 +105,17 @@ public class WindowBedWarsStats extends JFrame {
 
             for(int i = 0;i < columns.length;i++)
                 model.setValueAt(columns[i],0,i);
+
             for(int i = 0;i < rows.length;i++)
                 model.setValueAt(rows[i],i,0);
+
             for(int i = 0;i < modesList.length;i++)
-            {
                 for(int j = 0;j < statsList.length;j++)
                     model.setValueAt(bedwars.getModes().getStatistics(modesList[i] + "_" + statsList[j]),j+1,i+1);
-            }
 
-            int[] ratio = {5,9,13,17};
-            for(int row : ratio) {
-                for (int column = 1; column != 5; column++) {
+            final int[] ratio = {5, 9, 13, 17};
+            for(int row : ratio)
+                for (int column = 1; column != 5; column++)
                     try {
                         DecimalFormat decimalFormat = new DecimalFormat("#.##");
                         double result = Double.parseDouble(model.getValueAt(row - 2, column).toString()) / Double.parseDouble(model.getValueAt(row - 1, column).toString());
@@ -124,8 +124,6 @@ public class WindowBedWarsStats extends JFrame {
                     catch (Exception e) {
                         model.setValueAt("N/A",row,column);
                     }
-                }
-            }
 
             JTable table = new JTable(model);
 
@@ -134,11 +132,10 @@ public class WindowBedWarsStats extends JFrame {
             setStatisticsTable(table);
             mainPanel.add(statisticsTable);
         }
-        else
-        {
+        else {
             JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-            JLabel label = new JLabel("This player has never played BedWars !");
-            label.setFont(new Font("Arial", Font.PLAIN, 24));
+            final JLabel label = new JLabel("This player has never played BedWars!");
+            label.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
             panel.add(label);
             mainPanel.add(panel);
         }

@@ -54,7 +54,7 @@ public class WindowPet {
         tierLabel.setText(pet.getTier());
         candyUsedLabel.setText("Candy Used : " + pet.getCandyUsed());
 
-        String tier = pet.getTier();
+        final String tier = pet.getTier();
         switch (tier) {
             case "COMMON":
                 mainPanel.setBackground(Color.decode("#FFFFFF")); // White
@@ -74,7 +74,7 @@ public class WindowPet {
             case "MYTHIC":
                 mainPanel.setBackground(Color.decode("#FF69B4")); // Pink
                 break;
-        };
+        }
     }
 
     /**

@@ -48,39 +48,38 @@ public class Fishing {
         try{
             itemsFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("normal"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             itemsFished = "";
         }
+
         try {
             treasuresFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("treasure"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             treasuresFished = "0";
         }
+
         try {
             largeTreasuresFished = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("items_fished").get("large_treasure"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             largeTreasuresFished = "0";
         }
+
         try {
             totalTrophyFish = String.valueOf(jsonMember.getJSONObject("trophy_fish").get("total_caught"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             totalTrophyFish = "0";
         }
-        String[] trophyList = {"sulphur_skitter","obfuscated_fish_1","steaming_hot_flounder","obfuscated_fish_2","gusher","blobfish","slugfish","obfuscated_fish_3","flyfish","lavahorse","volcanic_stonefish","vanille","skeleton_fish","moldfin","soul_fish","mana_ray","karate_fish","golden_fish"};
+
+        final String[] trophyList = {"sulphur_skitter","obfuscated_fish_1","steaming_hot_flounder","obfuscated_fish_2","gusher","blobfish","slugfish","obfuscated_fish_3","flyfish","lavahorse","volcanic_stonefish","vanille","skeleton_fish","moldfin","soul_fish","mana_ray","karate_fish","golden_fish"};
         try {
             JSONObject trophyObject = jsonMember.getJSONObject("trophy_fish");
             for(String trophy : trophyList)
                 trophyFishList.add(new TrophyFish(trophy,trophyObject));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             trophyFishList = null;
         }
     }

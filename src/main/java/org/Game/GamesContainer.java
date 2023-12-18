@@ -48,22 +48,21 @@ public class GamesContainer {
         try {
             bedwars = new Bedwars(stats.getJSONObject("Bedwars"), achievements);
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             bedwars = null;
         }
+
         try {
             skywars = new Skywars(stats.getJSONObject("SkyWars"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             skywars = null;
         }
+
         try {
             skyblock = new SkyblockProfiles(stats.getJSONObject("SkyBlock"), playerUuid);
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             skyblock = null;
         }
     }

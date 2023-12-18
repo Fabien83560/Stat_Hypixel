@@ -34,7 +34,6 @@ public class WindowSkyBlockStats {
      * Panel containing the four general statistics of a player
      * in Skyblock mode (Purse, Bank Purse, Magical Power and Fairy
      * Souls collected).
-     *
      */
     private JPanel generalPanel;
 

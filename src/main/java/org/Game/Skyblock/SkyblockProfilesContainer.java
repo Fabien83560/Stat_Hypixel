@@ -9,7 +9,6 @@ import org.Game.Skyblock.Stats.Pet;
 import org.Game.Skyblock.Stats.Skills;
 import org.Game.Skyblock.Stats.Slayer;
 import org.Player.Player;
-import org.Window.Window;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -229,9 +228,10 @@ public class SkyblockProfilesContainer {
                 String memberUuid = (String) key;
                 membersList.add(memberUuid);
             }
-            JSONObject jsonMember = json.getJSONObject("members").getJSONObject(playerUuid);
+
+            final JSONObject jsonMember = json.getJSONObject("members").getJSONObject(playerUuid);
             try {
-                Timestamp timestamp = new Timestamp(Long.parseLong(jsonMember.getJSONObject("profile").get("first_join").toString()));
+                final Timestamp timestamp = new Timestamp(Long.parseLong(jsonMember.getJSONObject("profile").get("first_join").toString()));
                 Date date = new Date(timestamp.getTime());
                 firstJoin = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" +
                         (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "/" +
@@ -240,174 +240,190 @@ public class SkyblockProfilesContainer {
             catch(JSONException e) {
                 firstJoin = "N/A";
             }
+
             try {
                 level = String.valueOf(jsonMember.getJSONObject("leveling").getLong("experience") / 100);
             }
             catch (JSONException e) {
                 level = "N/A";
             }
+
             try {
                 purse = String.valueOf(jsonMember.getJSONObject("currencies").getLong("coin_purse"));
             }
             catch (JSONException e) {
                 purse = "N/A";
             }
+
             try {
                 purseBank = String.valueOf(json.getJSONObject("banking").get("balance"));
             }
             catch (JSONException e) {
                 purseBank = "N/A";
             }
+
             try {
                 fairySoulCollected = String.valueOf(jsonMember.getJSONObject("fairy_soul").get("total_collected"));
             }
             catch (JSONException e) {
                 fairySoulCollected = "N/A";
             }
+
             try {
                 magicalPower = String.valueOf(jsonMember.getJSONObject("accessory_bag_storage").get("highest_magical_power"));
             }
             catch (JSONException e) {
                 magicalPower = "0";
             }
+
             try {
                 skills = new Skills(jsonMember.getJSONObject("player_data").getJSONObject("experience"));
-            } catch (JSONException e) {
+            }
+            catch (JSONException e) {
                 skills = new Skills("null");
             }
+
             try {
-                JSONArray petsArray = jsonMember.getJSONObject("pets_data").getJSONArray("pets");
+                final JSONArray petsArray = jsonMember.getJSONObject("pets_data").getJSONArray("pets");
                 for (int i = 0; i < petsArray.length(); i++)
                     petList.add(new Pet(petsArray.getJSONObject(i)));
             }
-            catch (JSONException e)
-            {
+            catch (JSONException e) {
                 petList = null;
             }
+
             try {
                 mining = new Mining(jsonMember.getJSONObject("mining_core"));
             }
-            catch (JSONException e)
-            {
+            catch (JSONException e) {
                 mining = null;
             }
+
             fishing = new Fishing(jsonMember);
             try {
                 dungeon = new Dungeon(jsonMember.getJSONObject("dungeons"));
             }
-            catch(JSONException e)
-            {
+            catch(JSONException e) {
                 dungeon = null;
             }
-            String[] slayers = {"zombie", "spider", "wolf", "enderman", "blaze", "vampire"};
+
+            final String[] slayers = {"zombie", "spider", "wolf", "enderman", "blaze", "vampire"};
             double res = 0.0;
-            for (String slayer : slayers) {
+            for (String slayer : slayers)
                 try {
                     Slayer s = new Slayer(slayer, jsonMember.getJSONObject("slayer").getJSONObject("slayer_bosses").getJSONObject(slayer));
                     res += Double.parseDouble(s.getExp());
                     slayerList.put(slayer,s);
-                } catch (JSONException e) {
+                }
+                catch (JSONException e) {
                     slayerList.put(slayer,new Slayer(slayer, new JSONObject()));
                 }
-            }
+
             totalXpSlayer = String.valueOf(res);
             try {
                 milestone = String.valueOf(jsonMember.getJSONObject("bestiary").getJSONObject("milestone").get("last_claimed_milestone"));
             }
-            catch (JSONException e)
-            {
+            catch (JSONException e) {
                 milestone = "0";
             }
+
             try {
                 milestoneUnlockTiers = String.valueOf(Double.parseDouble(milestone) * 10);
             }
-            catch (JSONException e)
-            {
+            catch (JSONException e) {
                 milestoneUnlockTiers = "0";
             }
+
             try {
                 crimson = new Crimson(jsonMember.getJSONObject("nether_island_player_data"));
             }
             catch (JSONException e) {
                 crimson = null;
             }
+
             try {
                 auctionsCreated = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("created"));
             }
             catch (JSONException e) {
                 auctionsCreated = "0";
             }
+
             try {
                 totalFees = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("fees"));
             }
             catch (JSONException e) {
                 totalFees = "0";
             }
+
             try {
                 totalBids = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("bids"));
             }
             catch (JSONException e) {
                 totalBids = "0";
             }
+
             try {
                 highestBid = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("highest_bid"));
             }
             catch (JSONException e) {
                 highestBid = "0";
             }
+
             try {
                 coinsEarned = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("gold_earned"));
             }
             catch (JSONException e) {
                 coinsEarned = "0";
             }
+
             try {
                 auctionCompleted = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("auctions").get("completed"));
             }
             catch (JSONException e) {
                 auctionCompleted = "0";
             }
+
             try {
                 totalMobKill = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("kills").get("total"));
             }
-            catch (JSONException e)
-            {
+            catch (JSONException e) {
                 totalMobKill = "0";
             }
+
             try {
                 totalDeaths = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("deaths").get("total"));
             }
-            catch (JSONException e)
-            {
+            catch (JSONException e) {
                 totalDeaths = "0";
             }
+
             try {
                 giftGiven = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("gifts").get("total_given"));
             }
-            catch (JSONException e)
-            {
+            catch (JSONException e) {
                 giftGiven = "0";
             }
+
             try {
                 giftReceived = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("gifts").get("total_received"));
             }
             catch (JSONException e) {
                 giftReceived = "0";
             }
+
             try {
                 totalCandy = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("candy_collected").get("total"));
                 try {
                     greenCandy = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("candy_collected").get("green_candy"));
                 }
-                catch (JSONException e)
-                {
+                catch (JSONException e) {
                     greenCandy = "0";
                 }
+
                 try {
                     purpleCandy = String.valueOf(jsonMember.getJSONObject("player_stats").getJSONObject("candy_collected").get("purple_candy"));
                 }
-                catch (JSONException e)
-                {
+                catch (JSONException e) {
                     purpleCandy = "0";
                 }
             }
@@ -416,16 +432,14 @@ public class SkyblockProfilesContainer {
                 greenCandy = "0";
                 purpleCandy = "0";
             }
-            String[] essences = {"WITHER", "DRAGON", "SPIDER", "UNDEAD", "DIAMOND", "ICE", "GOLD", "CRIMSON"};
-            for (String essence : essences) {
+            final String[] essences = {"WITHER", "DRAGON", "SPIDER", "UNDEAD", "DIAMOND", "ICE", "GOLD", "CRIMSON"};
+            for (String essence : essences)
                 try {
                     essenceList.putIfAbsent(essence, String.valueOf(jsonMember.getJSONObject("currencies").getJSONObject("essence").getJSONObject(essence).get("current")));
                 }
-                catch (JSONException e)
-                {
+                catch (JSONException e) {
                     essenceList.putIfAbsent(essence,"0");
                 }
-            }
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -441,13 +455,12 @@ public class SkyblockProfilesContainer {
      * @see Player#handleException(JSONObject)
      */
     public static JSONObject fetchProfile(String profileUuid) {
-        String url = "https://api.hypixel.net/v2/skyblock/profile?profile=" + profileUuid + "&key=" + App.getInstance().getConfig().getApikey();
+        final String url = "https://api.hypixel.net/v2/skyblock/profile?profile=" + profileUuid + "&key=" + App.getInstance().getConfig().getApikey();
         String data = Player.fetch(url);
         try {
             return new JSONObject(data);
         }
         catch (Exception e) {
-
             JSONObject jsonError = new JSONObject();
             jsonError.put("errorState" , "PROFILE_STATUS");
             return jsonError;
@@ -496,15 +509,6 @@ public class SkyblockProfilesContainer {
      */
     public Map<String, Slayer> getSlayerList() {
         return slayerList;
-    }
-
-    /**
-     * Gets the List of members member of the class.
-     * @return A List of 'String' Object.
-     * @see SkyblockProfilesContainer#membersList
-     */
-    public List<String> getMembersList() {
-        return membersList;
     }
 
     /**

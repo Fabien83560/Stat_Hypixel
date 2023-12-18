@@ -56,53 +56,52 @@ public class Dungeon {
         try {
             catacomb = String.valueOf(dungeonObject.getJSONObject("dungeon_types").getJSONObject("catacombs").get("experience"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             catacomb = "0";
         }
+
         try {
             mage = String.valueOf(dungeonObject.getJSONObject("player_classes").getJSONObject("mage").get("experience"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             mage = "0";
         }
+
         try {
             archer = String.valueOf(dungeonObject.getJSONObject("player_classes").getJSONObject("archer").get("experience"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             archer = "0";
         }
+
         try {
             tank = String.valueOf(dungeonObject.getJSONObject("player_classes").getJSONObject("tank").get("experience"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             tank = "0";
         }
+
         try {
             berserk = String.valueOf(dungeonObject.getJSONObject("player_classes").getJSONObject("berserk").get("experience"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             berserk = "0";
         }
+
         try {
             healer = String.valueOf(dungeonObject.getJSONObject("player_classes").getJSONObject("healer").get("experience"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             healer = "0";
         }
         if( ! (catacomb.equals("0"))) {
             String[] mode = {"catacombs", "master_catacombs"};
             for (String m : mode) {
                 JSONObject modeObject = dungeonObject.getJSONObject("dungeon_types").getJSONObject(m);
-                for (int i = 0; i < 8; i++) {
+                for (int i = 0; i < 8; i++)
                     try {
                         String timePlayed = "";
-                        if (m.equals("catacombs")) {
+                        if (m.equals("catacombs"))
                             try {
                                 timePlayed = String.valueOf(modeObject.getJSONObject("times_played").get(String.valueOf(i)));
                             }
@@ -110,76 +109,74 @@ public class Dungeon {
                             {
                                 timePlayed = "0";
                             }
-                        }
+
                         if (!(m.equals("master_catacombs") && i == 0)) {
                             String tierCompletions = "";
                             try {
                                 tierCompletions = String.valueOf(modeObject.getJSONObject("tier_completions").get(String.valueOf(i)));
                             }
-                            catch (JSONException e)
-                            {
+                            catch (JSONException e) {
                                 tierCompletions = "0";
                             }
+
                             String fastedTime = "";
                             try {
                                 fastedTime = String.valueOf(modeObject.getJSONObject("fastest_time").get(String.valueOf(i)));
                             }
-                            catch (JSONException e)
-                            {
+                            catch (JSONException e) {
                                 fastedTime = "0";
                             }
+
                             String bestScore = "";
                             try {
                                 bestScore = String.valueOf(modeObject.getJSONObject("best_score").get(String.valueOf(i)));
                             }
-                            catch (JSONException e)
-                            {
+                            catch (JSONException e) {
                                 bestScore = "0";
                             }
+
                             String mobKill = "";
                             try {
                                 mobKill = String.valueOf(modeObject.getJSONObject("mobs_killed").get(String.valueOf(i)));
                             }
-                            catch (JSONException e)
-                            {
+                            catch (JSONException e) {
                                 mobKill = "0";
                             }
+
                             String mostHealing = "";
                             try {
                                 mostHealing = String.valueOf(modeObject.getJSONObject("most_healing").get(String.valueOf(i)));
                             }
-                            catch (JSONException e)
-                            {
+                            catch (JSONException e) {
                                 mostHealing = "0";
                             }
+
                             String fastedS = "";
                             try {
                                 fastedS = String.valueOf(modeObject.getJSONObject("fastest_time_s").get(String.valueOf(i)));
                             }
-                            catch (JSONException e)
-                            {
+                            catch (JSONException e) {
                                 fastedS = "0";
                             }
+
                             String fastedSPlus = "";
                             try {
                                 fastedSPlus = String.valueOf(modeObject.getJSONObject("fastest_time_s_plus").get(String.valueOf(i)));
                             }
-                            catch (JSONException e)
-                            {
+                            catch (JSONException e) {
                                 fastedSPlus = "0";
                             }
 
                             floorList.add(new Floor("Floor_" + i, m, timePlayed, tierCompletions, fastedTime, bestScore, mobKill, mostHealing, fastedS, fastedSPlus));
                         }
-                    } catch (JSONException e) {
+                    }
+                    catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
             }
         }
-        else {
+        else
             floorList = null;
-        }
     }
 
     /**

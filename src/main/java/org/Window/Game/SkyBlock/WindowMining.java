@@ -63,8 +63,7 @@ public class WindowMining {
             actualGemstonePowderLabel.setText("Actual Gemstone Powder : " + mining.getActualGemstonePowder());
             spentGemstonePowderLabel.setText("Spent Gemstone Powder : " + mining.getSpentGemstonePower());
         }
-        else
-        {
+        else {
             actualMithrilPowderLabel.setText("Actual Mithril Powder : 0");
             spentMithrilPowderLabel.setText("Spent Mithril Powder : 0");
             actualGemstonePowderLabel.setText("Actual Gemstone Powder : 0");
