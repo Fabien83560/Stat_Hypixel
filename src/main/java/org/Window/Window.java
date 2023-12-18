@@ -493,17 +493,18 @@ public class Window extends JFrame {
         while (!apiKeyValid) {
             try {
                 String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
+
+                if(newApiKey == null)
+                    System.exit(0);
+
                 boolean b = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
 
-                if (b == true || b == false) {
-                    apiKeyValid = true;
-                    App.getInstance().getConfig().setApikey(newApiKey);
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
-                }
-            } catch (JSONException e) {
+                apiKeyValid = true;
+                App.getInstance().getConfig().setApikey(newApiKey);
 
+            }
+            catch (JSONException e) {
+                JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
             }
         }
     }
