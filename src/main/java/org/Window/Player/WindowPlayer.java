@@ -121,6 +121,10 @@ public class WindowPlayer extends JFrame {
      * profile buttons of a player in Skyblock mode.
      */
     private JPanel skyblockProfilesButtonPanel;
+
+    /**
+     * This Label contains the 'Global Statistics' title in the interface.
+     */
     private JLabel globalStatisticsTitle;
 
     /**
