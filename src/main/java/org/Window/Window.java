@@ -492,12 +492,42 @@ public class Window extends JFrame {
         boolean apiKeyValid = false;
         while (!apiKeyValid) {
             try {
+<<<<<<< HEAD
                 String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
                 boolean b = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
 
                 if (b == true || b == false) {
                     apiKeyValid = true;
                     App.getInstance().getConfig().setApikey(newApiKey);
+=======
+                Player.fetchStatus(testUUID, org.Config.ConfigReader.getApiKey()).getJSONObject("session").getBoolean("online");
+            }
+            catch (JSONException e) {
+                org.Config.ConfigReader.setApiKey("");
+                JOptionPane.showMessageDialog(null,
+                        "Your lasted API Key was expired.",
+                        "API Key expired",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        if (org.Config.ConfigReader.getApiKey().isEmpty()){
+            boolean apiKeyValid = false;
+
+            while (!apiKeyValid) {
+                String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
+                if(newApiKey == null)
+                    System.exit(0);
+
+                try {
+                    boolean b = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
+
+                    if (b || !b) {
+                        apiKeyValid = true;
+                        org.Config.ConfigReader.setApiKey(newApiKey);
+                    }
+                } catch (JSONException e) {
+                    JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
+>>>>>>> d1535048d650ebad7f3bd0e3882c068a0c138b37
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
