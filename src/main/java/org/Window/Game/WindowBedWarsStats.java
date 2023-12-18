@@ -136,7 +136,11 @@ public class WindowBedWarsStats extends JFrame {
         }
         else
         {
-            mainPanel.add(new JLabel("This player has never Played BedWars"));
+            JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+            JLabel label = new JLabel("This player has never played BedWars !");
+            label.setFont(new Font("Arial", Font.PLAIN, 24));
+            panel.add(label);
+            mainPanel.add(panel);
         }
     }
 

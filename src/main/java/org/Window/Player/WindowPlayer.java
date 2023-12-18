@@ -250,7 +250,15 @@ public class WindowPlayer extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(isPlayerDisplayed) {
                     skyblockProfilesButtonPanel.setVisible(true);
-                    setCurrentModeStatsPanel(windowSkyBlockStats.getMainPanel());
+                    if(windowSkyBlockStats != null)
+                        setCurrentModeStatsPanel(windowSkyBlockStats.getMainPanel());
+                    else {
+                        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+                        JLabel label = new JLabel("This player has never played Skyblock !");
+                        label.setFont(new Font("Arial", Font.PLAIN, 24));
+                        panel.add(label);
+                        setCurrentModeStatsPanel(panel);
+                    }
                     currentModeStatisticsLabel.setText("SkyBlock Statistics");
                 }
                 else
@@ -410,21 +418,25 @@ public class WindowPlayer extends JFrame {
         windowGlobalStats = new WindowGlobalStats(player);
         windowSkyWarsStats = new WindowSkyWarsStats(player);
         windowBedWarsStats = new WindowBedWarsStats(player);
-
-        for (Map.Entry<String, String> entry : player.getGames().getSkyblock().getProfilesNames() .entrySet()) {
-            String key = entry.getKey();
-            String name = entry.getValue();
-            windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
-            JButton button = new JButton(name);
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
-                    setCurrentModeStatsPanel(windowSkyBlockStats.getMainPanel());
-                }
-            });
-            skyblockProfilesButtonPanel.add(button);
+        if(player.getGames().getSkyblock() != null) {
+            for (Map.Entry<String, String> entry : player.getGames().getSkyblock().getProfilesNames().entrySet()) {
+                String key = entry.getKey();
+                String name = entry.getValue();
+                windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
+                JButton button = new JButton(name);
+                button.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
+                        setCurrentModeStatsPanel(windowSkyBlockStats.getMainPanel());
+                    }
+                });
+                skyblockProfilesButtonPanel.add(button);
+            }
         }
+        else
+            windowSkyBlockStats = null;
+
         setGlobalStatsPanel(windowGlobalStats.getMainPanel());
         currentModeStatisticsLabel.setText("BedWars Statistics");
         setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());

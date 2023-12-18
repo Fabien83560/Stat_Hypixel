@@ -5,6 +5,7 @@ import org.Game.Skywars.Skywars;
 import org.Player.Player;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.text.DecimalFormat;
 
 /**
@@ -89,7 +90,11 @@ public class WindowSkyWarsStats {
         }
         else
         {
-            mainPanel.add(new JLabel("This player has never Played SkyWars"));
+            JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+            JLabel label = new JLabel("This player has never played SkyWars !");
+            label.setFont(new Font("Arial", Font.PLAIN, 24));
+            panel.add(label);
+            mainPanel.add(panel);
         }
     }
 
