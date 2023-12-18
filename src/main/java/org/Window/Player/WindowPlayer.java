@@ -1,6 +1,5 @@
 package org.Window.Player;
 
-import org.Game.Skyblock.SkyblockProfilesContainer;
 import org.Player.Player;
 import org.Window.Game.WindowBedWarsStats;
 import org.Window.Game.SkyBlock.WindowSkyBlockStats;
@@ -12,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The WindowPlayer class is used to display all

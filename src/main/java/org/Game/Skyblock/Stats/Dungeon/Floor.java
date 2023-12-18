@@ -1,7 +1,6 @@
 package org.Game.Skyblock.Stats.Dungeon;
 
 import org.json.JSONObject;
-
 import java.time.Duration;
 
 /**

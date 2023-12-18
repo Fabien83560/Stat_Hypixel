@@ -3,7 +3,6 @@ package org.Main;
 import com.formdev.flatlaf.FlatDarkLaf;
 import org.Window.Window;
 import org.Window.Player.WindowPlayer;
-
 import javax.swing.*;
 
 /**
