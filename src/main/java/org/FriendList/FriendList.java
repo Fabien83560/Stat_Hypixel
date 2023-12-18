@@ -1,5 +1,6 @@
 package org.FriendList;
 
+import org.Application.App;
 import org.DataBase.Database;
 
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class FriendList {
      * @see FriendList#addPlayer(String, String)
      */
     public FriendList() throws SQLException {
-        Database dataBase = new Database();
+        Database dataBase = App.getInstance().getDataBase();
         String sql = "SELECT * FROM FriendList";
         try {
             PreparedStatement statement = dataBase.getDataBase().prepareStatement(sql);
