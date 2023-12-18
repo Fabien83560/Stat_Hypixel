@@ -36,6 +36,14 @@ public class Skills {
                     addSkills(key, calculateLevel(key, jsonSkills.getDouble(key)));
             skillAverage = calculateSkillAverage();
     }
+
+    /**
+     * Constructor of the Skills class. It uses a String
+     * as a parameter to initialize both data members of the class.
+     * @param val A String containing a value that is null, in order
+     *            to initialize null Skill statistics of a player if he
+     *            never played in it.
+     */
     public Skills(String val) {
         if(val.equals("null"))
         {
@@ -114,17 +122,14 @@ public class Skills {
         String url = "https://api.hypixel.net/v2/resources/skyblock/skills";
         return new JSONObject(Player.fetch(url)).getJSONObject("skills").getJSONObject(skill);
     }
+
+    /**
+     * Gets the skill value information, using the skill key passed as a parameter.
+     * @param skill The skill we want the value of.
+     * @return A String Object.
+     */
     public String get(String skill) {
         return String.valueOf(skills.get(skill));
-    }
-
-    public void display() {
-        System.out.println("Skill Average : " + skillAverage);
-        for (Map.Entry<String, Double> entry : skills.entrySet()) {
-            String key = entry.getKey();
-            Double value = entry.getValue();
-            System.out.println(key + " : " + value);
-        }
     }
 
     /**

@@ -486,6 +486,11 @@ public class Window extends JFrame {
         panelRight.repaint();
     }
 
+    /**
+     * Tries to do a fetch in the API. If it doesn't work, that means the API
+     * key is outdated and needs to be changed. If the API Key is empty, asks
+     * the user to fill it in. Otherwise, starts the application normally.
+     */
     public void testAPIkey() {
         String testUUID = "055db3693e1e4431a3204d586be92a37";
         if( ! org.Config.ConfigReader.getApiKey().isEmpty()) {

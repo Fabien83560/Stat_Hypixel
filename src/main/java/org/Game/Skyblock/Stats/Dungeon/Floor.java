@@ -93,18 +93,6 @@ public class Floor {
             e.printStackTrace();
         }
     }
-    public void display() {
-        System.out.println(name);
-        System.out.println(mode);
-        System.out.println("Time Played : " + timePlayed);
-        System.out.println("Tier Completitions : " + tierCompletions);
-        System.out.println("Fasted Time : " + fastedTime);
-        System.out.println("Best Score : " + bestScore);
-        System.out.println("Mobs Kill : " + mobKill);
-        System.out.println("Most Healing : " + mostHealing);
-        System.out.println("Fasted S : " + fastedS);
-        System.out.println("Fasted S+ : " + fastedSPlus);
-    }
 
     /**
      * This method converts a String Object containing a

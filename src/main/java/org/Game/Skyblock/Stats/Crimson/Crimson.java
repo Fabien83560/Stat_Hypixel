@@ -85,29 +85,6 @@ public class Crimson {
         }
     }
 
-    public void display() {
-        System.out.println();
-        System.out.println("CRIMSON ISLE");
-        System.out.println("Selected Faction : " + selectedFaction);
-        System.out.println("Mage Réputation : " + mageReputation);
-        System.out.println("Barbarian Réputation : " + barbarianReputation);
-        System.out.println();
-        System.out.println("KUUDRA");
-        for(Kuudra kuudra : kuudraList) {
-            System.out.println("----------------");
-            System.out.println("Tier : " + kuudra.getName());
-            System.out.println("Boss kill : " + kuudra.getKuudraKill());
-            System.out.println("Highest Wave : " + kuudra.getHighestWave());
-        }
-        for(Dojo dojo : dojoList) {
-            System.out.println("----------------");
-            System.out.println("Challenge : " + dojo.getName());
-            System.out.println("Rank : " + dojo.getRank());
-            System.out.println("Points : " + dojo.getPoints());
-            System.out.println("Time : " + dojo.getTime() + "s");
-        }
-    }
-
     /**
      * Gets the 'dojoList' member of the class.
      * @return A List of Dojo Object.

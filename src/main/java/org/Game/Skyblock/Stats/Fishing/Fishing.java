@@ -84,21 +84,6 @@ public class Fishing {
             trophyFishList = null;
         }
     }
-    public void display() {
-        System.out.println("FISHING");
-        System.out.println("Items Fished : " + itemsFished);
-        System.out.println("Treasures Fished : " + treasuresFished);
-        System.out.println("Large Treasures Fished : " + largeTreasuresFished);
-        System.out.println("Total Trophy Fish : " + totalTrophyFish);
-        for(TrophyFish trophy : trophyFishList) {
-            System.out.println("----------------");
-            System.out.println("Name : " + trophy.getName());
-            System.out.println("Bronze : " + trophy.getBronze());
-            System.out.println("Silver : " + trophy.getSilver());
-            System.out.println("Gold : " + trophy.getGold());
-            System.out.println("Diamond : " + trophy.getDiamond());
-        }
-    }
 
     /**
      * Gets the 'trophyFishList' member of the class.

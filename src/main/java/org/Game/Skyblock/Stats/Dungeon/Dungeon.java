@@ -182,23 +182,6 @@ public class Dungeon {
         }
     }
 
-    public void display() {
-        System.out.println("DUNGEONS");
-        System.out.println("Cataconb Exp : " +catacomb);
-        System.out.println("Mage Exp : " + mage);
-        System.out.println("Acher Exp : " + archer);
-        System.out.println("Tank Exp : " + tank);
-        System.out.println("berserk Exp : " + berserk);
-        System.out.println("Healer Exp : " + healer);
-        if(!(floorList == null))
-        {
-            for(Floor floor : floorList) {
-                System.out.println("----------------");
-                floor.display();
-            }
-        }
-    }
-
     /**
      * Gets the 'floorList' member of the class.
      * @return A List of 'Floor' Object.

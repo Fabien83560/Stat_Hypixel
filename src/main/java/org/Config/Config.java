@@ -27,6 +27,11 @@ public class Config
     private String passwordDataBase;
 
     /**
+     * Default constructor of the Config class.
+     */
+    public Config(){}
+
+    /**
      * Gets the API Key
      * @return a String Object containing the API Key.
      */

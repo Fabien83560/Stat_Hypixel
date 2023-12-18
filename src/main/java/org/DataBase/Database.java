@@ -140,8 +140,8 @@ public class Database {
     /**
      * Method returning the uuid of a player if the latter is already known
      * in the 'Player' table of the DataBase. If it isn't, returns null.
-     * @param uuid
-     * @param name
+     * @param uuid The uuid of the player
+     * @param name The name of the player.
      * @return A String Object containing the uuid of the player, if it's in the 'Player' table.
      *         Otherwise, returns null.
      */

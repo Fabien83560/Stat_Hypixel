@@ -110,9 +110,15 @@ public class SkyblockProfilesContainer {
      * String containing the total slayer experience of a player.
      */
     String totalXpSlayer;
-  
+
+    /**
+     * Map of 'String, Slayer' containing the different types of slayers in Slayer mode.
+     */
     Map<String,Slayer> slayerList = new HashMap<>();
-  
+
+    /**
+     * A crimson class instance used to initialize the Crimson statistics of the player.
+     */
     Crimson crimson;
 
     /**
@@ -446,79 +452,6 @@ public class SkyblockProfilesContainer {
         }
     }
 
-    public void display() {
-        System.out.println("SKYBLOCK STATISTICS");
-        System.out.println("cute_name : " + cuteName);
-        for(String uuid : membersList)
-            System.out.println("Coop member : " + uuid);
-        System.out.println("First join : " + firstJoin);
-        System.out.println("SkyBlock level : " + level);
-        skills.display();
-        System.out.println("Purse : " + purse);
-        System.out.println("Bank Account : " + purseBank);
-        System.out.println("Fairy Soul Collected : " + fairySoulCollected);
-        System.out.println("Magical Power : " + magicalPower);
-        System.out.println();
-        System.out.println("PETS LIST");
-        System.out.println("----------------");
-        for(Pet pet : petList)
-        {
-            System.out.println("Type : " + pet.getType());
-            System.out.println("Tier : " + pet.getTier());
-            System.out.println("Exp : " + pet.getExp());
-            System.out.println("Candy Used : " + pet.getCandyUsed());
-            System.out.println("----------------");
-        }
-        System.out.println();
-        System.out.println("MINING");
-        System.out.println("Actual Mithril Powder : " + mining.getActualMithrilPowder());
-        System.out.println("Spent Mithril Powder : " + mining.getSpentMithrilPower());
-        System.out.println("Actual Gemstone Powder : " + mining.getActualGemstonePowder());
-        System.out.println("Spent Gemstone Powder : " + mining.getSpentGemstonePower());
-        System.out.println();
-        fishing.display();
-        System.out.println();
-        dungeon.display();
-        System.out.println("SLAYER");
-        System.out.println("Total Slayer Xp : " + totalXpSlayer);
-        //for(Slayer slayer : slayerList.keySet()) {
-            //System.out.println("----------------");
-            //System.out.println("Name : " + slayer.getName());
-            //System.out.println("Exp : " + slayer.getExp());
-            //System.out.println("Boss Tier 1 : " + slayer.getTier1());
-            //System.out.println("Boss Tier 2 : " + slayer.getTier2());
-            //System.out.println("Boss Tier 3 : " + slayer.getTier3());
-            //System.out.println("Boss Tier 4 : " + slayer.getTier4());
-            //System.out.println("Boss Tier 5 : " + slayer.getTier5());
-        //}
-        System.out.println("----------------");
-        System.out.println("BESTIARY");
-        System.out.println("Milestone : " + milestone);
-        System.out.println("Unlocked Milestone Tiers : " + milestoneUnlockTiers);
-        crimson.display();
-        System.out.println();
-        System.out.println("AUCTIONS");
-        System.out.println("Total Auctions Created : " + auctionsCreated);
-        System.out.println("Total Fees : " + totalFees);
-        System.out.println("Total Bids : " + totalBids);
-        System.out.println("Highest Bid : " + highestBid);
-        System.out.println("Auctions Completed : " + auctionCompleted );
-        System.out.println("Coins Earned : " + coinsEarned);
-        System.out.println();
-        System.out.println("OTHER STATISTICS");
-        System.out.println("Total Mobs Kills : " + totalMobKill);
-        System.out.println("Total Deaths : " + totalDeaths);
-        System.out.println("Gifts Given : " + giftGiven);
-        System.out.println("Gifts received : " + giftReceived);
-        System.out.println("Total Candy : " + totalCandy);
-        System.out.println("Green Candy : " + greenCandy);
-        System.out.println("Purple Candy : " + purpleCandy);
-        System.out.println();
-        System.out.println("ESSENCE");
-        for(String key : essenceList.keySet())
-            System.out.println(key + " Essence : " + essenceList.get(key));
-    }
-
     /**
      * Gets the crimson member of the class.
      * @return A Crimson Object.
@@ -555,6 +488,10 @@ public class SkyblockProfilesContainer {
         return fishing;
     }
 
+    /**
+     * Gets the Map of 'String, Slayer' 'slayerList'.
+     * @return A Map of 'String, Slayer' Object.
+     */
     public Map<String, Slayer> getSlayerList() {
         return slayerList;
     }

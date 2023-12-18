@@ -249,13 +249,45 @@ public class WindowSkyBlockStats {
      * in the associated profile in Skyblock.
      */
     private JLabel crimsonLabel;
+
+    /**
+     * Number of auctions created by the player in Skyblock mode.
+     */
     private JLabel auctionsCreatedLabel;
+
+    /**
+     * Total number of fees paid by the player in Skyblock mode.
+     */
     private JLabel totalFeesLabel;
+
+    /**
+     * Total bids done by the player in Skyblock mode.
+     */
     private JLabel totalBidsLabel;
+
+    /**
+     * Value of the highest bid done by the player in Skyblock mode.
+     */
     private JLabel highestBidLabel;
+
+    /**
+     * Number of auctions completed by the player in Skyblock mode.
+     */
     private JLabel auctionCompletedLabel;
+
+    /**
+     * Number of coins earned by the player in Skyblock mode.
+     */
     private JLabel coinsEarnedLabel;
+
+    /**
+     * Label containing the "Essence" title in the Skyblock statistics.
+     */
     private JLabel titleEssenceLabel;
+
+    /**
+     * Label containing the "Auctions" title in the Skyblock statistics.
+     */
     private JLabel titleAuctionsLabel;
 
     /**

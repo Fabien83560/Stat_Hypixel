@@ -107,7 +107,19 @@ public class WindowPlayer extends JFrame {
      * this label isn't displayed.
      */
     private JLabel currentModeStatisticsLabel;
+
+    /**
+     * This Scroll Panel contains the information related to
+     * the current mode statistics. It contains the
+     * 'currentModeStatsPanel' JPanel.
+     * @see WindowPlayer#currentModeStatsPanel
+     */
     private JScrollPane currentModeScrollPane;
+
+    /**
+     * This panel contains all the different
+     * profile buttons of a player in Skyblock mode.
+     */
     private JPanel skyblockProfilesButtonPanel;
 
     /**
