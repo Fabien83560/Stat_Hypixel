@@ -1,5 +1,6 @@
 package org.Game.Skyblock;
 
+import org.Application.App;
 import org.Game.Skyblock.Stats.Crimson.Crimson;
 import org.Game.Skyblock.Stats.Dungeon.Dungeon;
 import org.Game.Skyblock.Stats.Fishing.Fishing;
@@ -8,6 +9,7 @@ import org.Game.Skyblock.Stats.Pet;
 import org.Game.Skyblock.Stats.Skills;
 import org.Game.Skyblock.Stats.Slayer;
 import org.Player.Player;
+import org.Window.Window;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -439,7 +441,7 @@ public class SkyblockProfilesContainer {
      * @see Player#handleException(JSONObject)
      */
     public static JSONObject fetchProfile(String profileUuid) {
-        String url = "https://api.hypixel.net/v2/skyblock/profile?profile=" + profileUuid + "&key=" + org.Config.ConfigReader.getApiKey();
+        String url = "https://api.hypixel.net/v2/skyblock/profile?profile=" + profileUuid + "&key=" + App.getInstance().getConfig().getApikey();
         String data = Player.fetch(url);
         try {
             return new JSONObject(data);

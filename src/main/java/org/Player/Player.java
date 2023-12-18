@@ -1,7 +1,9 @@
 package org.Player;
 
+import org.Application.App;
 import org.DataBase.Database;
 import org.Game.GamesContainer;
+import org.Window.Window;
 import org.json.JSONException;
 import org.json.JSONObject;
 import javax.swing.*;
@@ -69,7 +71,7 @@ public class Player {
      * @see GamesContainer#GamesContainer(JSONObject, JSONObject, String)
      */
     public Player(String Name) {
-        String apikey = org.Config.ConfigReader.getApiKey();
+        String apikey = App.getInstance().getConfig().getApikey();
         JSONObject jsonObjectPlayer = fetchPlayer(Name, apikey);
         try {
             Object playerObject;
@@ -222,8 +224,7 @@ public class Player {
      * already into the 'Player' table of the database.
      * @param name A String containing the name of the player
      *             to find.
-     * @param apikey A String containing the API Key used in
-     *               'config.yml' file to do a request.
+     * @param apikey A String containing the API Key.
      * @return A JSONObject containing either the player's
      * data, or an error state.
      * @see Database#Database()
@@ -312,8 +313,7 @@ public class Player {
      * If the player doesn't have any guild, returns 'N/A'
      * meaning that the player does not belong to a guild.
      * @param uuid A String containing the uuid of the player.
-     * @param apikey A String containing the API Key stored in
-     *               'config.yml'.
+     * @param apikey A String containing the API Key.
      * @return A String containing the name of the player's guild,
      *         or 'N/A' if he doesn't have one.
      */

@@ -1,7 +1,5 @@
 package org.DataBase;
 
-import org.Config.ConfigReader;
-
 import javax.swing.*;
 import java.sql.*;
 
@@ -19,29 +17,23 @@ public class Database {
     /**
      * The URL of the DataBase.
      */
-    String url;
+    final String url = "jdbc:mysql://mysql-iitzwolfyy.alwaysdata.net:3306/iitzwolfyy_stats_hypixel";
 
     /**
      * The username of the DataBase.
      */
-    String username;
+    final String username = "333319";
 
     /**
      * The password of the DataBase.
      */
-    String password;
+    final String password = "}ZVZe7tECD+h>_&";
 
     /**
      * Constructor of the DataBase class. Connects the Database to the
      * application through the URL, Username and Password of the Database.
-     * @see ConfigReader#getUrlDataBase()
-     * @see ConfigReader#getUsernameDataBase()
-     * @see ConfigReader#getPasswordDataBase()
      */
     public Database(){
-        url = org.Config.ConfigReader.getUrlDataBase();
-        username = org.Config.ConfigReader.getUsernameDataBase();
-        password = org.Config.ConfigReader.getPasswordDataBase();
         try {
             dataBase = DriverManager.getConnection(url, username, password);
         }

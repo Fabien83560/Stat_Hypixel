@@ -1,5 +1,7 @@
 package org.Window;
 
+import org.Application.App;
+import org.Config.Config;
 import org.DataBase.Database;
 import org.Player.Player;
 import org.FriendList.FriendList;
@@ -123,11 +125,6 @@ public class Window extends JFrame {
     FriendList friendPlayerList;
 
     /**
-     * The database used with that application.
-     */
-    Database dataBase;
-
-    /**
      * Constructor of the Window class. It uses the main
      * panel of a WindowPlayer instance that displays the
      * statistics, the search bar and the buttons of the modes
@@ -156,7 +153,6 @@ public class Window extends JFrame {
         testAPIkey();
 
         friendListModel = new DefaultListModel<>();
-        dataBase = new Database();
         try {
             friendPlayerList = new FriendList();
             updateWindow();
@@ -393,7 +389,7 @@ public class Window extends JFrame {
         JSONObject jsonObjectStatus;
         String uuid;
         try {
-            uuid = Player.fetchPlayer(name, org.Config.ConfigReader.getApiKey()).getJSONObject("player").getString("uuid");
+            uuid = Player.fetchPlayer(name, App.getInstance().getConfig().getApikey()).getJSONObject("player").getString("uuid");
             friendPlayerList.addPlayer(name, uuid);
         }
         catch (Exception e) {
@@ -404,7 +400,7 @@ public class Window extends JFrame {
             return "";
         }
 
-        jsonObjectStatus = Player.fetchStatus(uuid , org.Config.ConfigReader.getApiKey());
+        jsonObjectStatus = Player.fetchStatus(uuid , App.getInstance().getConfig().getApikey());
         boolean online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
         String recentGame;
 
@@ -416,7 +412,7 @@ public class Window extends JFrame {
         String element = (online ? "ONLINE - " : "OFFLINE - ") + name + (online ? " - " + recentGame : "");
 
         friendPlayerList.getList().putIfAbsent(name,uuid);
-        dataBase.addFriendPlayerToDataBase(uuid,name);
+        App.getInstance().getDataBase().addFriendPlayerToDataBase(uuid,name);
         return element;
     }
 
@@ -434,7 +430,7 @@ public class Window extends JFrame {
      */
     public String addPlayer(String name, String uuid) {
         JSONObject jsonObjectStatus;
-        jsonObjectStatus = Player.fetchStatus(uuid , org.Config.ConfigReader.getApiKey());
+        jsonObjectStatus = Player.fetchStatus(uuid , App.getInstance().getConfig().getApikey());
         boolean online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
         String recentGame;
         if(online)
@@ -459,7 +455,7 @@ public class Window extends JFrame {
         boolean online;
         String recentGame;
         for (String key : keys) {
-            jsonObjectStatus = Player.fetchStatus(friendPlayerList.getList().get(key) , org.Config.ConfigReader.getApiKey());
+            jsonObjectStatus = Player.fetchStatus(friendPlayerList.getList().get(key) , App.getInstance().getConfig().getApikey());
             online = jsonObjectStatus.getJSONObject("session").getBoolean("online");
             if(online)
                 recentGame = jsonObjectStatus.getJSONObject("session").getString("gameType");
@@ -493,36 +489,21 @@ public class Window extends JFrame {
      */
     public void testAPIkey() {
         String testUUID = "055db3693e1e4431a3204d586be92a37";
-        if( ! org.Config.ConfigReader.getApiKey().isEmpty()) {
+        boolean apiKeyValid = false;
+        while (!apiKeyValid) {
             try {
-                Player.fetchStatus(testUUID, org.Config.ConfigReader.getApiKey()).getJSONObject("session").getBoolean("online");
-            }
-            catch (JSONException e) {
-                org.Config.ConfigReader.setApiKey("");
-                JOptionPane.showMessageDialog(null,
-                        "Your lasted API Key was expired.",
-                        "API Key expired",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        if (org.Config.ConfigReader.getApiKey().isEmpty()){
-            boolean apiKeyValid = false;
+                String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
+                boolean b = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
 
-            while (!apiKeyValid) {
-                try {
-                    String newApiKey = JOptionPane.showInputDialog("Enter your API KEY to start the App");
-                    boolean b = Player.fetchStatus(testUUID, newApiKey).getJSONObject("session").getBoolean("online");
-
-                    if (b == true || b == false) {
-                        apiKeyValid = true;
-                        org.Config.ConfigReader.setApiKey(newApiKey);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
-                    }
-                } catch (JSONException e) {
-
+                if (b == true || b == false) {
+                    apiKeyValid = true;
+                    App.getInstance().getConfig().setApikey(newApiKey);
                 }
+                else {
+                    JOptionPane.showMessageDialog(null, "Invalid API Key. Please try again.");
+                }
+            } catch (JSONException e) {
+
             }
         }
     }
