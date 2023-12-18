@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * THe WindowPlayer class is used to display all
+ * The WindowPlayer class is used to display all
  * the different panels of the interface that are
  * related to a Player instance, like the global
  * statistics and the different modes statistics.
