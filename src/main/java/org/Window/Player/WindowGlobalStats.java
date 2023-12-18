@@ -71,33 +71,41 @@ public class WindowGlobalStats {
                 if(!stat.getKey().equals("skin")) {
                     switch(stat.getKey()){
                         case "lastLogin":
-                            Timestamp timestamp = new Timestamp(Long.parseLong(stat.getValue()));
-                            Date date = new Date(timestamp.getTime());
-                            lab.setText("Last Login: " + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" +
-                                                         (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1)  + "/" +
-                                                         (date.getYear() + 1900));
+                            if( ! stat.getValue().equals("N/A")) {
+                                Timestamp timestamp = new Timestamp(Long.parseLong(stat.getValue()));
+                                Date date = new Date(timestamp.getTime());
+                                lab.setText("Last Login : " + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" +
+                                        (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "/" +
+                                        (date.getYear() + 1900));
+                            }
+                            else
+                                lab.setText("Last Login : N/A");
                             break;
                         case "firstLogin":
-                            Timestamp timestamp2 = new Timestamp(Long.parseLong(stat.getValue()));
-                            Date date2 = new Date(timestamp2.getTime());
-                            lab.setText("First Login: " + (date2.getDate() < 10 ? "0" + date2.getDate() : date2.getDate()) + "/" +
-                                                          (date2.getMonth() + 1 < 10 ? "0" + (date2.getMonth() + 1) : date2.getMonth() + 1) + "/" +
-                                                          (date2.getYear() + 1900));
+                            if( ! stat.getValue().equals("N/A")) {
+                                Timestamp timestamp2 = new Timestamp(Long.parseLong(stat.getValue()));
+                                Date date2 = new Date(timestamp2.getTime());
+                                lab.setText("First Login : " + (date2.getDate() < 10 ? "0" + date2.getDate() : date2.getDate()) + "/" +
+                                        (date2.getMonth() + 1 < 10 ? "0" + (date2.getMonth() + 1) : date2.getMonth() + 1) + "/" +
+                                        (date2.getYear() + 1900));
+                            }
+                            else
+                                lab.setText("First Login : N/A");
                             break;
                         case "displayname":
-                            lab.setText("Name: " + stat.getValue());
+                            lab.setText("Name : " + stat.getValue());
                             break;
                         case "newPackageRank":
-                            lab.setText("Rank: " + stat.getValue());
+                            lab.setText("Rank : " + stat.getValue());
                             break;
                         case "hypixelLevel":
-                            lab.setText("Hypixel Level: " + stat.getValue());
+                            lab.setText("Hypixel Level : " + stat.getValue());
                             break;
                         case "uuid":
-                            lab.setText("Id: " + stat.getValue());
+                            lab.setText("Id : " + stat.getValue());
                             break;
                         case "guildName":
-                            lab.setText("Guild Name: " + stat.getValue());
+                            lab.setText("Guild Name : " + stat.getValue());
                             break;
                         default:
                             break;
