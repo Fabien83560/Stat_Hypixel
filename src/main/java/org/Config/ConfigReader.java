@@ -16,7 +16,7 @@ public class ConfigReader {
     /**
      * The file where all the configuration data is stored.
      */
-    private static final String CONFIG_FILE_PATH = "src/main/resources/config.yml";
+    private static final String CONFIG_FILE_PATH = "config.yml";
 
     /**
      * Default constructor of the ConfigReader class.
