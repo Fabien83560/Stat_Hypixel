@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * The WindowPlayer class is used to display all
@@ -428,9 +429,14 @@ public class WindowPlayer extends JFrame {
             for (Map.Entry<String, String> entry : player.getGames().getSkyblock().getProfilesNames().entrySet()) {
                 String key = entry.getKey();
                 String name = entry.getValue();
-                if(tmp <= Integer.valueOf(player.getGames().getSkyblock().getProfile(key).getLevel())) {
+                try {
+                    if (tmp <= Integer.valueOf(player.getGames().getSkyblock().getProfile(key).getLevel())) {
+                        windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
+                        tmp = Integer.valueOf(player.getGames().getSkyblock().getProfile(key).getLevel());
+                    }
+                }
+                catch (Exception e) {
                     windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
-                    tmp = Integer.valueOf(player.getGames().getSkyblock().getProfile(key).getLevel());
                 }
                 JButton button = new JButton(name);
                 button.addActionListener(new ActionListener() {
