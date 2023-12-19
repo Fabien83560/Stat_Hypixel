@@ -188,139 +188,31 @@ public class WindowPlayer extends JFrame {
         setGlobalStatsPanel(windowGlobalStats.getMainPanel());
         skyblockProfilesButtonPanel.setVisible(false);
 
-        /**
-        * This listener is called when the user clicks on the
-        * 'SkyWars' button. It replaces the previous mode panel
-        * with the main panel (empty) of the windowSkyWarsStats data
-        * member and changes the title of the current mode with
-        * 'SkyWars Statistics'. If no player was searched in the
-        * search bar, shows a popup to the user asking him to enter
-        * a player's name in order to change the mode panel that is displayed.
-        * @see WindowSkyWarsStats
-        * @see WindowSkyWarsStats#getMainPanel()
-        */
         skyWarsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                skyblockProfilesButtonPanel.setVisible(false);
-                if(isPlayerDisplayed) {
-                    setCurrentModeStatsPanel(windowSkyWarsStats.getMainPanel());
-                    currentModeStatisticsTitle.setText("SkyWars Statistics");
-                }
-                else
-                    JOptionPane.showMessageDialog(null,
-                            "Please select a player in the friend list or enter a player's name.",
-                            "No player selected",
-                            JOptionPane.ERROR_MESSAGE);
+                skyWarsButtonAction();
             }
         });
 
-        /**
-        * This listener is called when the user clicks on the
-        * 'BedWars' button. It replaces the previous mode panel
-        * with the main panel (empty) of the windowBedWarsStats data
-        * member and changes the title of the current mode with
-        * 'BedWars Statistics'. If no player was searched in the
-        * search bar, shows a popup to the user asking him to enter
-        * a player's name in order to change the mode panel that is displayed.
-        * @see WindowBedWarsStats
-        * @see WindowBedWarsStats#getMainPanel()
-        */
         bedWarsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                skyblockProfilesButtonPanel.setVisible(false);
-                if(isPlayerDisplayed) {
-                    setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
-                    currentModeStatisticsTitle.setText("BedWars Statistics");
-                }
-                else
-                    JOptionPane.showMessageDialog(null,
-                            "Please select a player in the friend list or enter a player's name.",
-                            "No player selected",
-                            JOptionPane.ERROR_MESSAGE);
+                bedWarsButtonAction();
             }
         });
 
-        /**
-        * This listener is called when the user clicks on the
-        * 'SkyBlock' button. It replaces the previous mode panel
-        * with the main panel (empty) of the windowSkyBlockStats data
-        * member and changes the title of the current mode with
-        * 'SkyBlock Statistics'. If no player was searched in the
-        * search bar, shows a popup to the user asking him to enter
-        * a player's name in order to change the mode panel that is displayed.
-        * @see WindowSkyBlockStats
-        * @see WindowSkyBlockStats#getMainPanel()
-        */
         skyBlockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(isPlayerDisplayed) {
-                    skyblockProfilesButtonPanel.setVisible(true);
-                    if(windowSkyBlockStats != null)
-                        setCurrentModeStatsPanel(windowSkyBlockStats.getMainPanel());
-                    else {
-                        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-                        final JLabel label = new JLabel("This player has never played SkyBlock!");
-                        label.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
-                        panel.add(label);
-                        setCurrentModeStatsPanel(panel);
-                    }
-                    currentModeStatisticsTitle.setText("SkyBlock Statistics");
-                }
-                else
-                    JOptionPane.showMessageDialog(null,
-                            "Please select a player in the friend list or enter a player's name.",
-                            "No player selected",
-                            JOptionPane.ERROR_MESSAGE);
+                skyBlockButtonAction();
             }
         });
 
-        /**
-        * This listener is called when the user clicks on the
-        * 'Search' button to search a player whose name has been
-        * written in the search bar. If that search bar is empty,
-        * shows a popup to the user telling him to enter a player's
-        * name. If the search bar isn't empty, then tries to find the
-        * player and to display his statistics. If the player doesn't
-        * exist, shows the dialog of Window.addPlayer(String) saying that
-        * this player is unknown, and shows that the application couldn't
-        * display the global statistics of the searched player.
-        * @see Player
-        * @see WindowPlayer#displayAllStats(Player)
-        * @see org.Window.Window#addPlayer(String)
-        */
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    final String search = SearchPlayer.getText();
-                    if(search.isEmpty())
-                        JOptionPane.showMessageDialog(null,
-                                "Please enter a player's name.",
-                                "No name entered",
-                                JOptionPane.ERROR_MESSAGE);
-                    else {
-                        globalStatsPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        currentModeStatsPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        SearchPlayer.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        Player player = new Player(search);
-                        globalStatsPanel.setCursor(Cursor.getDefaultCursor());
-                        currentModeStatsPanel.setCursor(Cursor.getDefaultCursor());
-                        searchButton.setCursor(Cursor.getDefaultCursor());
-                        SearchPlayer.setCursor(Cursor.getDefaultCursor());
-                        if(player != null)
-                            displayAllStats(player);
-                    }
-                }
-                catch(NullPointerException exception) {
-                    globalStatsPanel.setCursor(Cursor.getDefaultCursor());
-                    currentModeStatsPanel.setCursor(Cursor.getDefaultCursor());
-                    searchButton.setCursor(Cursor.getDefaultCursor());
-                    SearchPlayer.setCursor(Cursor.getDefaultCursor());
-                }
+                searchButtonAction();
             }
         });
 
@@ -456,5 +348,129 @@ public class WindowPlayer extends JFrame {
         currentModeStatisticsTitle.setText("BedWars Statistics");
         setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
         isPlayerDisplayed = true;
+    }
+
+    /**
+     * This function is called when the user clicks on the
+     * 'SkyWars' button. It replaces the previous mode panel
+     * with the main panel (empty) of the windowSkyWarsStats data
+     * member and changes the title of the current mode with
+     * 'SkyWars Statistics'. If no player was searched in the
+     * search bar, shows a popup to the user asking him to enter
+     * a player's name in order to change the mode panel that is displayed.
+     * @see WindowSkyWarsStats
+     * @see WindowSkyWarsStats#getMainPanel()
+     */
+    public void skyWarsButtonAction(){
+        skyblockProfilesButtonPanel.setVisible(false);
+        if(isPlayerDisplayed) {
+            setCurrentModeStatsPanel(windowSkyWarsStats.getMainPanel());
+            currentModeStatisticsTitle.setText("SkyWars Statistics");
+        }
+        else
+            JOptionPane.showMessageDialog(null,
+                    "Please select a player in the friend list or enter a player's name.",
+                    "No player selected",
+                    JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * This function is called when the user clicks on the
+     * 'BedWars' button. It replaces the previous mode panel
+     * with the main panel (empty) of the windowBedWarsStats data
+     * member and changes the title of the current mode with
+     * 'BedWars Statistics'. If no player was searched in the
+     * search bar, shows a popup to the user asking him to enter
+     * a player's name in order to change the mode panel that is displayed.
+     * @see WindowBedWarsStats
+     * @see WindowBedWarsStats#getMainPanel()
+     */
+    public void bedWarsButtonAction(){
+        skyblockProfilesButtonPanel.setVisible(false);
+        if(isPlayerDisplayed) {
+            setCurrentModeStatsPanel(windowBedWarsStats.getMainPanel());
+            currentModeStatisticsTitle.setText("BedWars Statistics");
+        }
+        else
+            JOptionPane.showMessageDialog(null,
+                    "Please select a player in the friend list or enter a player's name.",
+                    "No player selected",
+                    JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * This function is called when the user clicks on the
+     * 'SkyBlock' button. It replaces the previous mode panel
+     * with the main panel (empty) of the windowSkyBlockStats data
+     * member and changes the title of the current mode with
+     * 'SkyBlock Statistics'. If no player was searched in the
+     * search bar, shows a popup to the user asking him to enter
+     * a player's name in order to change the mode panel that is displayed.
+     * @see WindowSkyBlockStats
+     * @see WindowSkyBlockStats#getMainPanel()
+     */
+    public void skyBlockButtonAction(){
+        if(isPlayerDisplayed) {
+            skyblockProfilesButtonPanel.setVisible(true);
+            if(windowSkyBlockStats != null)
+                setCurrentModeStatsPanel(windowSkyBlockStats.getMainPanel());
+            else {
+                JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+                final JLabel label = new JLabel("This player has never played SkyBlock!");
+                label.setFont(new Font("Cascadia Code", Font.PLAIN, 24));
+                panel.add(label);
+                setCurrentModeStatsPanel(panel);
+            }
+            currentModeStatisticsTitle.setText("SkyBlock Statistics");
+        }
+        else
+            JOptionPane.showMessageDialog(null,
+                    "Please select a player in the friend list or enter a player's name.",
+                    "No player selected",
+                    JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * This function is called when the user clicks on the
+     * 'Search' button to search a player whose name has been
+     * written in the search bar. If that search bar is empty,
+     * shows a popup to the user telling him to enter a player's
+     * name. If the search bar isn't empty, then tries to find the
+     * player and to display his statistics. If the player doesn't
+     * exist, shows the dialog of Window.addPlayer(String) saying that
+     * this player is unknown, and shows that the application couldn't
+     * display the global statistics of the searched player.
+     * @see Player
+     * @see WindowPlayer#displayAllStats(Player)
+     * @see org.Window.Window#addPlayer(String)
+     */
+    public void searchButtonAction(){
+        try {
+            final String search = SearchPlayer.getText();
+            if(search.isEmpty())
+                JOptionPane.showMessageDialog(null,
+                        "Please enter a player's name.",
+                        "No name entered",
+                        JOptionPane.ERROR_MESSAGE);
+            else {
+                globalStatsPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                currentModeStatsPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                SearchPlayer.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Player player = new Player(search);
+                globalStatsPanel.setCursor(Cursor.getDefaultCursor());
+                currentModeStatsPanel.setCursor(Cursor.getDefaultCursor());
+                searchButton.setCursor(Cursor.getDefaultCursor());
+                SearchPlayer.setCursor(Cursor.getDefaultCursor());
+                if(player != null)
+                    displayAllStats(player);
+            }
+        }
+        catch(NullPointerException exception) {
+            globalStatsPanel.setCursor(Cursor.getDefaultCursor());
+            currentModeStatsPanel.setCursor(Cursor.getDefaultCursor());
+            searchButton.setCursor(Cursor.getDefaultCursor());
+            SearchPlayer.setCursor(Cursor.getDefaultCursor());
+        }
     }
 }

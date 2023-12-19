@@ -167,11 +167,6 @@ public class Window extends JFrame {
         setCursor(Cursor.getDefaultCursor());
         quitButton.setActionCommand("quit");
 
-        /**
-         * This listener is called when the 'Quit' button
-         * is clicked. It asks the user if he really wants
-         * to quit the application.
-         */
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -180,37 +175,13 @@ public class Window extends JFrame {
             }
         });
 
-        /**
-         * This listener is called when the user clicks on the
-         * button to add a player to his friend list, prompting
-         * him to enter that player's name. If the player already
-         * is in the list, shows a dialog to the user.
-         */
         addNewPlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final String newPlayer = JOptionPane.showInputDialog("Enter the new player's name:");
-                if(newPlayer != null) {
-
-                    if(friendPlayerList.getList().get(newPlayer) == null) {
-                        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        friendListModel.addElement(addPlayer(newPlayer));
-                        setCursor(Cursor.getDefaultCursor());
-                    }
-                    else
-                        JOptionPane.showMessageDialog(null,
-                                "This player already exists in your Friend list!",
-                                "Player already exists",
-                                JOptionPane.ERROR_MESSAGE);
-                }
+                addNewPlayer();
             }
         });
 
-        /**
-         * This listener is called when the user wants to compare
-         * two player statistics by clicking on the 'Compare 2 players
-         * stats' button.
-         */
         compare2PlayersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -218,12 +189,6 @@ public class Window extends JFrame {
             }
         });
 
-        /**
-         * This listener is called when the user clicks on
-         * 'Look up one player stats' button. It sets back
-         * the panel on the right that is the one displayed
-         * when launching the application.
-         */
         onePlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -231,119 +196,150 @@ public class Window extends JFrame {
             }
         });
 
-        /**
-         * This listener is called when the user clicks on
-         * 'Display the statistics' button. This button is
-         * meant to be clicked when a player in the friend
-         * list is selected. If not, shows a dialog to the
-         * user, telling him to select a player to display
-         * the statistics of. Otherwise, gets the name of
-         * the player using the 'substring' method on the
-         * text of the player selected in the friend list,
-         * and asks the user if he wants to display the
-         * statistics of that said player. If the user
-         * answers 'Yes', the statistics are displayed,
-         * otherwise, does nothing.
-         */
         displayPlayerStatisticsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    if(friendList.getSelectedValue() == null)
-                        JOptionPane.showMessageDialog(null,
-                                "Please select a player to display the statistics of.",
-                                "Select a player", JOptionPane.INFORMATION_MESSAGE);
-
-                    else if(!friendList.getValueIsAdjusting()) {
-                        //Getting the name of the selected player to do a fetch with it afterward
-                        final String friendSelectedFullName = friendList.getSelectedValue();
-                        String friendNameSelected = "";
-                        final int startName = friendSelectedFullName.indexOf("-") + 1;
-                        //If there is the first dash in the name of the player in the friendList
-                        if (startName != -1) {
-                            final int endName = friendSelectedFullName.indexOf("-", startName + 1);
-                            //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
-                            if (endName != -1)
-                                //Extracting the name of the player
-                                friendNameSelected = friendSelectedFullName.substring(startName + 1, endName).trim();
-                            else
-                                friendNameSelected = friendSelectedFullName.substring(startName + 1).trim();
-                        }
-                        if(JOptionPane.showConfirmDialog(null,
-                                "Do you wish to display the statistics of " + friendNameSelected + " ?",
-                                "Displaying statistics",
-                                JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
-
-                            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            Player player = new Player(friendNameSelected);
-                            WindowPlayer windowPlayer = new WindowPlayer();
-                            setCursor(Cursor.getDefaultCursor());
-                            windowPlayer.displayAllStats(player);
-                            setPanelRight(windowPlayer.getMainPanel());
-                        }
-                    }
-                }
-                catch(IndexOutOfBoundsException exception) {
-                    exception.printStackTrace();
-                }
+                displayPlayerStatistics();
             }
         });
 
-        /**
-         * This listener is called when the user clicks on
-         * 'Remove a player' button. The user has to select
-         * a player from his friend list to be able to delete
-         * him, otherwise a popup appears, telling him to select
-         * a player to remove. Then, if the user answers 'Yes' to
-         * remove the selected player, the latter is removed from the
-         * list and from the 'FriendList' table of the database.
-         * Otherwise, does nothing.
-         */
         removePlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    if(friendList.getSelectedValue() == null)
-                        JOptionPane.showMessageDialog(null,
-                                "Please select a player to delete from your Friend List.",
-                                "Select a player", JOptionPane.INFORMATION_MESSAGE);
-                    else {
-                        final String friendSelectedFullName = friendList.getSelectedValue();
-                        String friendNameSelected = "";
-                        final int startName = friendSelectedFullName.indexOf("-") + 1;
-                        //If there is the first dash in the name of the player in the friendList
-                        if (startName != -1) {
-                            final int endName = friendSelectedFullName.indexOf("-", startName + 1);
-                            //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
-                            if (endName != -1) {
-                                //Extracting the name of the player
-                                friendNameSelected = friendSelectedFullName.substring(startName + 1, endName).trim();
-                            }
-                            else{
-                                friendNameSelected = friendSelectedFullName.substring(startName + 1).trim();
-                            }
-                        }
-                        if(JOptionPane.showConfirmDialog(null,
-                                "Do you really want to delete " + friendNameSelected + " from your Friend List?",
-                                "Delete " + friendNameSelected,
-                                JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
-
-                            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            Database database = new Database();
-                            friendPlayerList.removePlayer(friendNameSelected);
-                            friendListModel.removeElementAt(friendList.getSelectedIndex());
-                            friendList.revalidate();
-                            friendList.repaint();
-                            database.removeFriendPlayerFromDataBase(friendNameSelected);
-                            setCursor(Cursor.getDefaultCursor());
-                        }
-                    }
-                }
-                catch(Exception exception){
-                    exception.printStackTrace();
-                }
+                removePlayer();
             }
         });
+    }
+
+    /**
+     * This function is called when the user clicks on the
+     * button to add a player to his friend list, prompting
+     * him to enter that player's name. If the player already
+     * is in the list, shows a dialog to the user.
+     */
+    public void addNewPlayer(){
+        final String newPlayer = JOptionPane.showInputDialog("Enter the new player's name:");
+        if(newPlayer != null) {
+
+            if(friendPlayerList.getList().get(newPlayer) == null) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                friendListModel.addElement(addPlayer(newPlayer));
+                setCursor(Cursor.getDefaultCursor());
+            }
+            else
+                JOptionPane.showMessageDialog(null,
+                        "This player already exists in your Friend list!",
+                        "Player already exists",
+                        JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * This function is called when the user clicks on
+     * 'Display the statistics' button. This button is
+     * meant to be clicked when a player in the friend
+     * list is selected. If not, shows a dialog to the
+     * user, telling him to select a player to display
+     * the statistics of. Otherwise, gets the name of
+     * the player using the 'substring' method on the
+     * text of the player selected in the friend list,
+     * and asks the user if he wants to display the
+     * statistics of that said player. If the user
+     * answers 'Yes', the statistics are displayed,
+     * otherwise, does nothing.
+     */
+    public void displayPlayerStatistics(){
+        try {
+            if(friendList.getSelectedValue() == null)
+                JOptionPane.showMessageDialog(null,
+                        "Please select a player to display the statistics of.",
+                        "Select a player", JOptionPane.INFORMATION_MESSAGE);
+
+            else if(!friendList.getValueIsAdjusting()) {
+                //Getting the name of the selected player to do a fetch with it afterward
+                final String friendSelectedFullName = friendList.getSelectedValue();
+                String friendNameSelected = "";
+                final int startName = friendSelectedFullName.indexOf("-") + 1;
+                //If there is the first dash in the name of the player in the friendList
+                if (startName != -1) {
+                    final int endName = friendSelectedFullName.indexOf("-", startName + 1);
+                    //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
+                    if (endName != -1)
+                        //Extracting the name of the player
+                        friendNameSelected = friendSelectedFullName.substring(startName + 1, endName).trim();
+                    else
+                        friendNameSelected = friendSelectedFullName.substring(startName + 1).trim();
+                }
+                if(JOptionPane.showConfirmDialog(null,
+                        "Do you wish to display the statistics of " + friendNameSelected + " ?",
+                        "Displaying statistics",
+                        JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
+
+                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    Player player = new Player(friendNameSelected);
+                    WindowPlayer windowPlayer = new WindowPlayer();
+                    setCursor(Cursor.getDefaultCursor());
+                    windowPlayer.displayAllStats(player);
+                    setPanelRight(windowPlayer.getMainPanel());
+                }
+            }
+        }
+        catch(IndexOutOfBoundsException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    /**
+     * This function is called when the user clicks on
+     * 'Remove a player' button. The user has to select
+     * a player from his friend list to be able to delete
+     * him, otherwise a popup appears, telling him to select
+     * a player to remove. Then, if the user answers 'Yes' to
+     * remove the selected player, the latter is removed from the
+     * list and from the 'FriendList' table of the database.
+     * Otherwise, does nothing.
+     */
+    public void removePlayer(){
+        try {
+            if(friendList.getSelectedValue() == null)
+                JOptionPane.showMessageDialog(null,
+                        "Please select a player to delete from your Friend List.",
+                        "Select a player", JOptionPane.INFORMATION_MESSAGE);
+            else {
+                final String friendSelectedFullName = friendList.getSelectedValue();
+                String friendNameSelected = "";
+                final int startName = friendSelectedFullName.indexOf("-") + 1;
+                //If there is the first dash in the name of the player in the friendList
+                if (startName != -1) {
+                    final int endName = friendSelectedFullName.indexOf("-", startName + 1);
+                    //If the player is ONLINE and plays a specific mod, there is a second dash to handle to get only the name
+                    if (endName != -1) {
+                        //Extracting the name of the player
+                        friendNameSelected = friendSelectedFullName.substring(startName + 1, endName).trim();
+                    }
+                    else{
+                        friendNameSelected = friendSelectedFullName.substring(startName + 1).trim();
+                    }
+                }
+                if(JOptionPane.showConfirmDialog(null,
+                        "Do you really want to delete " + friendNameSelected + " from your Friend List?",
+                        "Delete " + friendNameSelected,
+                        JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
+
+                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    Database database = new Database();
+                    friendPlayerList.removePlayer(friendNameSelected);
+                    friendListModel.removeElementAt(friendList.getSelectedIndex());
+                    friendList.revalidate();
+                    friendList.repaint();
+                    database.removeFriendPlayerFromDataBase(friendNameSelected);
+                    setCursor(Cursor.getDefaultCursor());
+                }
+            }
+        }
+        catch(Exception exception){
+            exception.printStackTrace();
+        }
     }
 
     /**
