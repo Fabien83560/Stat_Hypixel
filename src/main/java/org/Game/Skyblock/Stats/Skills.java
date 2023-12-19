@@ -76,17 +76,22 @@ public class Skills {
      */
     public Double calculateLevel(String skill, Double exp) {
         try {
-            final JSONObject jsonSkillsInformation = fetchSkillsLevel(skill.substring(6));
-            int maxLevel = (int) jsonSkillsInformation.get("maxLevel");
-            final JSONArray jsonSkillsLists = jsonSkillsInformation.getJSONArray("levels");
+            if( ! skill.equals("SKILL_DUNGEONEERING")) {
+                final JSONObject jsonSkillsInformation = fetchSkillsLevel(skill.substring(6));
+                int maxLevel = (int) jsonSkillsInformation.get("maxLevel");
+                final JSONArray jsonSkillsLists = jsonSkillsInformation.getJSONArray("levels");
 
-            for(int level = 0 ; level < maxLevel ; level++) {
-                int xpRequired = ((BigDecimal) ((JSONObject) jsonSkillsLists.get(level)).get("totalExpRequired")).intValue();
-                if(!(xpRequired < exp))
-                    return Double.parseDouble(String.valueOf(level+1));
+                for (int level = 0; level < maxLevel; level++) {
+                    int xpRequired = ((BigDecimal) ((JSONObject) jsonSkillsLists.get(level)).get("totalExpRequired")).intValue();
+                    if (!(xpRequired < exp))
+                        return Double.parseDouble(String.valueOf(level + 1));
 
-                if((xpRequired < exp) || xpRequired == exp)
-                    return Double.parseDouble(String.valueOf(maxLevel));
+                    if ((xpRequired < exp) || xpRequired == exp)
+                        return Double.parseDouble(String.valueOf(maxLevel));
+                }
+            }
+            else {
+                return 0.0;
             }
         }
         catch (Exception e) {
