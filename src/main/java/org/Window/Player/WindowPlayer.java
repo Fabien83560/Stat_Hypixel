@@ -423,11 +423,15 @@ public class WindowPlayer extends JFrame {
         windowGlobalStats = new WindowGlobalStats(player);
         windowSkyWarsStats = new WindowSkyWarsStats(player);
         windowBedWarsStats = new WindowBedWarsStats(player);
+        int tmp = 0;
         if(player.getGames().getSkyblock() != null) {
             for (Map.Entry<String, String> entry : player.getGames().getSkyblock().getProfilesNames().entrySet()) {
                 String key = entry.getKey();
                 String name = entry.getValue();
-                windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
+                if(tmp <= Integer.valueOf(player.getGames().getSkyblock().getProfile(key).getLevel())) {
+                    windowSkyBlockStats = new WindowSkyBlockStats(player.getGames().getSkyblock().getProfile(key));
+                    tmp = Integer.valueOf(player.getGames().getSkyblock().getProfile(key).getLevel());
+                }
                 JButton button = new JButton(name);
                 button.addActionListener(new ActionListener() {
                     @Override
