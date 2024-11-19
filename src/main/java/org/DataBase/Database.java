@@ -17,17 +17,17 @@ public class Database {
     /**
      * The URL of the DataBase.
      */
-    final String url = "jdbc:mysql://mysql-iitzwolfyy.alwaysdata.net:3306/iitzwolfyy_stats_hypixel";
+    final String url = "database url";
 
     /**
      * The username of the DataBase.
      */
-    final String username = "333319";
+    final String username = "database username";
 
     /**
      * The password of the DataBase.
      */
-    final String password = "}ZVZe7tECD+h>_&";
+    final String password = "database password";
 
     /**
      * Constructor of the DataBase class. Connects the Database to the
